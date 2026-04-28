@@ -1,0 +1,302 @@
+/* assets/css/theme.css */
+/* 
+  Soft Redesign Theme
+  Premium, Light, Clean, Feminine, Modern
+*/
+
+:root {
+  /* Color Palette */
+  --theme-bg: #FCFAF8; /* Warm Beige / Sand */
+  --theme-bg-secondary: #F4F1ED; /* Slightly darker beige for cards/sections */
+  --theme-accent: #115E41; /* Deep Emerald */
+  --theme-accent-hover: #0C442E;
+  --theme-text: #2A2D2A; /* Dark Graphite */
+  --theme-text-light: #5B615E;
+  
+  --theme-border-radius: 16px;
+  --theme-shadow: 0 10px 40px -10px rgba(17, 94, 65, 0.08);
+  --theme-shadow-hover: 0 20px 40px -10px rgba(17, 94, 65, 0.15);
+}
+
+/* Global Overrides */
+body {
+  background-color: var(--theme-bg) !important;
+  color: var(--theme-text) !important;
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Headings Typography */
+h1, h2, h3, h4, h5, h6, .font-gropled {
+  font-family: var(--font-inter), sans-serif !important; /* Move away from heavy blocky font to elegant sans */
+  font-weight: 500 !important;
+  letter-spacing: -0.02em;
+  color: var(--theme-text) !important;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem) !important;
+  line-height: 1.1 !important;
+  font-weight: 400 !important;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  font-weight: 400 !important;
+}
+
+/* Buttons */
+.theme-btn {
+  background-color: var(--theme-accent) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 50px !important; /* Pill shape for feminine look */
+  padding: 14px 32px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  text-transform: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-btn:hover {
+  background-color: var(--theme-accent-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(17, 94, 65, 0.25) !important;
+}
+
+.theme-btn-outline {
+  background-color: transparent !important;
+  color: var(--theme-accent) !important;
+  border: 1px solid var(--theme-accent) !important;
+  border-radius: 50px !important;
+}
+
+.theme-btn-outline:hover {
+  background-color: var(--theme-accent) !important;
+  color: #fff !important;
+}
+
+/* Header Redesign */
+.theme-header {
+  background: rgb(235 227 218 / 90%) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(17, 94, 65, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 1rem 0 !important;
+}
+
+.theme-header nav ul li a {
+  font-weight: 400 !important;
+  color: var(--theme-text-light) !important;
+  position: relative;
+}
+
+.theme-header nav ul li a:hover,
+.theme-header nav ul li a.active {
+  color: var(--theme-accent) !important;
+}
+
+.theme-header nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--theme-accent);
+  transition: width 0.3s ease;
+}
+
+.theme-header nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.theme-hero {
+  padding: 8rem 0 6rem 0 !important;
+  background: radial-gradient(circle at 100% 0%, var(--theme-bg-secondary) 0%, var(--theme-bg) 70%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a soft decorative circle */
+.theme-hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(17, 94, 65, 0.03);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.theme-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-hero-img-wrapper {
+  border-radius: 200px 200px 20px 20px; /* Arch shape */
+  overflow: hidden;
+  box-shadow: var(--theme-shadow);
+  border: 8px solid #fff;
+}
+
+/* Service Cards */
+.theme-card {
+  background: #fff !important;
+  border-radius: var(--theme-border-radius) !important;
+  border: 1px solid rgba(17, 94, 65, 0.04) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+  transition: all 0.4s ease !important;
+  padding: 2.5rem !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--theme-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.theme-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: var(--theme-shadow-hover) !important;
+}
+
+.theme-card:hover::before {
+  transform: scaleX(1);
+}
+
+.theme-card h3 {
+  font-size: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.theme-card p {
+  color: var(--theme-text-light) !important;
+  line-height: 1.7 !important;
+}
+
+/* Contact Form */
+.theme-form {
+  background: #fff !important;
+  padding: 3rem !important;
+  border-radius: var(--theme-border-radius) !important;
+  box-shadow: var(--theme-shadow) !important;
+  border: 1px solid rgba(17, 94, 65, 0.05);
+}
+
+.theme-form input,
+.theme-form textarea {
+  background: var(--theme-bg) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  font-size: 1rem !important;
+  color: var(--theme-text) !important;
+  transition: all 0.3s ease !important;
+}
+
+.theme-form input:focus,
+.theme-form textarea:focus {
+  border-color: var(--theme-accent) !important;
+  box-shadow: 0 0 0 3px rgba(17, 94, 65, 0.1) !important;
+  outline: none !important;
+  background: #fff !important;
+}
+
+/* Custom Checkbox */
+.theme-form input[type="checkbox"] {
+  accent-color: var(--theme-accent) !important;
+}
+
+/* Footer */
+.theme-footer {
+  background: #1A1F1D !important; /* Very dark green/grey */
+  color: #fff !important;
+  padding: 5rem 0 3rem 0 !important;
+  border-top: none !important;
+}
+
+.theme-footer p,
+.theme-footer a {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.theme-footer a:hover {
+  color: #fff !important;
+}
+
+.theme-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(17, 94, 65, 0.1), transparent);
+  margin: 4rem 0;
+}
+
+/* Service Filter Buttons */
+button[data-filter] {
+  background-color: transparent !important;
+  color: var(--theme-text) !important;
+  border: 1px solid rgba(17, 94, 65, 0.1) !important;
+  border-radius: 50px !important;
+  padding: 10px 24px !important;
+  transition: all 0.3s ease !important;
+}
+
+button[data-filter][aria-pressed="true"] {
+  background-color: var(--theme-accent) !important;
+  color: #fff !important;
+  border-color: var(--theme-accent) !important;
+  box-shadow: 0 4px 15px rgba(17, 94, 65, 0.2) !important;
+}
+
+/* Service Price List Container styling */
+salon-island[component-export="Catalog"] {
+  background: #fff;
+  border-radius: var(--theme-border-radius);
+  box-shadow: 0 5px 30px rgba(17, 94, 65, 0.03);
+  padding: 2rem;
+  display: block;
+}
+
+/* Style the generated cards inside Catalog */
+[data-service-card="true"] > div {
+  background: var(--theme-bg-secondary) !important;
+  border-radius: 12px !important;
+  border: none !important;
+  transition: transform 0.3s ease !important;
+  padding: 1.5rem !important;
+}
+[data-service-card="true"] > div:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 20px rgba(17, 94, 65, 0.08) !important;
+}
+
+/* Fix Hero Layout Grid */
+@media (min-width: 1024px) {
+  [data-first-screen] {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-areas:
+      "intro slider"
+      "aboutus reviews" !important;
+    align-items: stretch !important;
+  }
+  [data-first-screen] > * {
+    height: 100% !important;
+  }
+}.custom-list li:before { mask-image: none !important; -webkit-mask-image: none !important; background-color: transparent !important; content: • !important; width: auto !important; height: auto !important; margin-right: 0.5rem !important; }
