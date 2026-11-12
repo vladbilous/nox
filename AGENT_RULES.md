@@ -61,7 +61,6 @@
 
 - Польська (default): /
 - Українська: /uk/
-- Російська: /ru/
 - Англійська: /en/
 
 ОБОВ’ЯЗКОВО:
@@ -72,7 +71,6 @@
 hreflang:
 - pl-PL (default)
 - uk-UA
-- ru-RU
 - en-US
 - x-default → польська
 

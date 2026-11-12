@@ -82,3 +82,32 @@
 - `/DB.php` — Клас для роботи з базою даних.
 - `/index.php` — Точка входу сайту, роутер.
 - `AGENT_RULES.md` — Внутрішні правила розробки (для ШІ).
+
+---
+
+## 🖤 NOX Beauty Space — редизайн (листопад 2026)
+
+Сайт переведено на бренд **NOX Beauty Space** (Warszawa Wola, ul. Ludwiki 4B/U1): чорний мармур + золото логотипу (`#CFB43A`), шрифти Cormorant Garamond + Montserrat.
+
+- Шаблони: `components/header.php`, `pages/home.php`, `components/footer.php`
+- Стилі та скрипти: `assets/css/nox.css`, `assets/js/nox.js` (без бібліотек)
+- Зображення: `assets/img/nox/` (логотип, іконки, фото робіт з Instagram/Booksy у WebP)
+- Контент (тексти 3 мовами (PL, UK, EN), прайс з Booksy, галерея, SEO): `database/seed_nox.php`. Після запуску все редагується в адмінці.
+
+### Локальний запуск на macOS (Homebrew PHP + MariaDB)
+
+```bash
+mariadb -e "CREATE DATABASE salon_cms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; CREATE USER IF NOT EXISTS 'nox'@'127.0.0.1' IDENTIFIED BY 'nox'; GRANT ALL ON salon_cms.* TO 'nox'@'127.0.0.1';"
+mariadb salon_cms < salon_cms.sql
+DB_HOST=127.0.0.1 DB_USER=nox DB_PASS=nox php database/seed_nox.php
+DB_HOST=127.0.0.1 DB_USER=nox DB_PASS=nox php database/seo_update.php   # FAQ, alt-тексти, політика приватності (безпечно для наявного сайту)
+DB_HOST=127.0.0.1 DB_USER=nox DB_PASS=nox php -S localhost:8080 router.php
+```
+
+Сайт: http://localhost:8080 · Адмінка: http://localhost:8080/admin
+
+Листи з форми відправляються, лише коли в `config.php` вказано SMTP-пароль. Без нього заявки все одно зберігаються й видні в адмінці («Contacts»).
+
+### SEO
+
+Усе про SEO, налаштування перед запуском (домен, телефон, Google Analytics, Search Console) і подальше просування — у файлі [`SEO_LAUNCH.md`](SEO_LAUNCH.md).

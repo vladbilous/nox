@@ -1,0 +1,33 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nox",
+      "runtimeExecutable": "env",
+      "runtimeArgs": [
+        "DB_HOST=127.0.0.1",
+        "DB_USER=nox",
+        "DB_PASS=nox",
+        "php",
+        "-S",
+        "localhost:8080",
+        "router.php"
+      ],
+      "port": 8080
+    },
+    {
+      "name": "nox-seo",
+      "runtimeExecutable": "env",
+      "runtimeArgs": [
+        "DB_HOST=127.0.0.1",
+        "DB_USER=nox",
+        "DB_PASS=nox",
+        "php",
+        "-S",
+        "localhost:8091",
+        "router.php"
+      ],
+      "port": 8091
+    }
+  ]
+}

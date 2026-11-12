@@ -8,7 +8,6 @@ DB::execute("CREATE TABLE IF NOT EXISTS service_categories (
     name_pl VARCHAR(255),
     name_uk VARCHAR(255),
     name_en VARCHAR(255),
-    name_ru VARCHAR(255),
     sort_order INT DEFAULT 0
 )");
 
@@ -18,7 +17,6 @@ DB::execute("CREATE TABLE IF NOT EXISTS service_subcategories (
     name_pl VARCHAR(255),
     name_uk VARCHAR(255),
     name_en VARCHAR(255),
-    name_ru VARCHAR(255),
     sort_order INT DEFAULT 0,
     FOREIGN KEY(category_id) REFERENCES service_categories(id) ON DELETE CASCADE
 )");
@@ -29,11 +27,9 @@ DB::execute("CREATE TABLE IF NOT EXISTS service_items (
     name_pl VARCHAR(255),
     name_uk VARCHAR(255),
     name_en VARCHAR(255),
-    name_ru VARCHAR(255),
     price_pl VARCHAR(255),
     price_uk VARCHAR(255),
     price_en VARCHAR(255),
-    price_ru VARCHAR(255),
     sort_order INT DEFAULT 0,
     FOREIGN KEY(subcategory_id) REFERENCES service_subcategories(id) ON DELETE CASCADE
 )");
@@ -44,68 +40,68 @@ DB::execute("DELETE FROM service_subcategories");
 DB::execute("DELETE FROM service_categories");
 
 // 2. Insert data
-function createCat($slug, $pl, $uk, $en, $ru, $order) {
-    DB::execute("INSERT INTO service_categories (slug, name_pl, name_uk, name_en, name_ru, sort_order) VALUES (?, ?, ?, ?, ?, ?)", [$slug, $pl, $uk, $en, $ru, $order]);
+function createCat($slug, $pl, $uk, $en, $order) {
+    DB::execute("INSERT INTO service_categories (slug, name_pl, name_uk, name_en, sort_order) VALUES (?, ?, ?, ?, ?)", [$slug, $pl, $uk, $en, $order]);
     return DB::getConnection()->lastInsertId();
 }
 
-function createSubcat($cat_id, $pl, $uk, $en, $ru, $order) {
-    DB::execute("INSERT INTO service_subcategories (category_id, name_pl, name_uk, name_en, name_ru, sort_order) VALUES (?, ?, ?, ?, ?, ?)", [$cat_id, $pl, $uk, $en, $ru, $order]);
+function createSubcat($cat_id, $pl, $uk, $en, $order) {
+    DB::execute("INSERT INTO service_subcategories (category_id, name_pl, name_uk, name_en, sort_order) VALUES (?, ?, ?, ?, ?)", [$cat_id, $pl, $uk, $en, $order]);
     return DB::getConnection()->lastInsertId();
 }
 
-function createItem($subcat_id, $pl, $uk, $en, $ru, $price, $order) {
-    DB::execute("INSERT INTO service_items (subcategory_id, name_pl, name_uk, name_en, name_ru, price_pl, price_uk, price_en, price_ru, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [$subcat_id, $pl, $uk, $en, $ru, $price, $price, $price, $price, $order]);
+function createItem($subcat_id, $pl, $uk, $en, $price, $order) {
+    DB::execute("INSERT INTO service_items (subcategory_id, name_pl, name_uk, name_en, price_pl, price_uk, price_en, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [$subcat_id, $pl, $uk, $en, $price, $price, $price, $order]);
 }
 
 // category nails
-$cNails = createCat('nails', 'Paznokcie', 'Нігті', 'Nails', 'Ногти', 10);
-$sNails1 = createSubcat($cNails, 'Manicure', 'Манікюр', 'Manicure', 'Маникюр', 10);
-createItem($sNails1, 'Manicure klasyczny', 'Класичний манікюр', 'Classic manicure', 'Классический маникюр', '80 zł', 10);
-createItem($sNails1, 'Manicure męski', 'Чоловічий манікюр', 'Men\'s manicure', 'Мужской маникюр', '100 zł', 20);
-createItem($sNails1, 'Manicure hybrydowy', 'Покриття гель-лаком', 'Hybrid manicure', 'Покрытие гель-лаком', '140 zł', 30);
-$sNails2 = createSubcat($cNails, 'Przedłużanie paznokci', 'Нарощування нігтів', 'Nail extensions', 'Наращивание ногтей', 20);
-createItem($sNails2, 'Krótkie', 'Короткі', 'Short', 'Короткие', '200 zł', 10);
-createItem($sNails2, 'Średnie', 'Середні', 'Medium', 'Средние', '220 zł', 20);
-createItem($sNails2, 'Długie', 'Довгі', 'Long', 'Длинные', '250 zł', 30);
+$cNails = createCat('nails', 'Paznokcie', 'Нігті', 'Nails', 10);
+$sNails1 = createSubcat($cNails, 'Manicure', 'Манікюр', 'Manicure', 10);
+createItem($sNails1, 'Manicure klasyczny', 'Класичний манікюр', 'Classic manicure', '80 zł', 10);
+createItem($sNails1, 'Manicure męski', 'Чоловічий манікюр', 'Men\'s manicure', '100 zł', 20);
+createItem($sNails1, 'Manicure hybrydowy', 'Покриття гель-лаком', 'Hybrid manicure', '140 zł', 30);
+$sNails2 = createSubcat($cNails, 'Przedłużanie paznokci', 'Нарощування нігтів', 'Nail extensions', 20);
+createItem($sNails2, 'Krótkie', 'Короткі', 'Short', '200 zł', 10);
+createItem($sNails2, 'Średnie', 'Середні', 'Medium', '220 zł', 20);
+createItem($sNails2, 'Długie', 'Довгі', 'Long', '250 zł', 30);
 
 // category visage
-$cVisage = createCat('visage', 'Wizaż', 'Візаж', 'Visage', 'Визаж', 20);
-$sVisage1 = createSubcat($cVisage, 'Brwi', 'Брови', 'Brows', 'Брови', 10);
-createItem($sVisage1, 'Regulacja brwi', 'Корекція форми', 'Brow shaping', 'Коррекция формы', '50 zł', 10);
-createItem($sVisage1, 'Farbowanie', 'Фарбування', 'Tinting', 'Окрашивание', '60 zł', 20);
-createItem($sVisage1, 'Laminowanie', 'Ламінування', 'Lamination', 'Ламинирование', '100 zł', 30);
-$sVisage2 = createSubcat($cVisage, 'Makijaż', 'Макіяж', 'Makeup', 'Макияж', 20);
-createItem($sVisage2, 'Makijaż dzienny', 'Денний макіяж', 'Day makeup', 'Дневной макияж', '170 zł', 10);
-createItem($sVisage2, 'Makijaż wieczorowy', 'Вечірній макіяж', 'Evening makeup', 'Вечерний макияж', '220 zł', 20);
+$cVisage = createCat('visage', 'Wizaż', 'Візаж', 'Visage', 20);
+$sVisage1 = createSubcat($cVisage, 'Brwi', 'Брови', 'Brows', 10);
+createItem($sVisage1, 'Regulacja brwi', 'Корекція форми', 'Brow shaping', '50 zł', 10);
+createItem($sVisage1, 'Farbowanie', 'Фарбування', 'Tinting', '60 zł', 20);
+createItem($sVisage1, 'Laminowanie', 'Ламінування', 'Lamination', '100 zł', 30);
+$sVisage2 = createSubcat($cVisage, 'Makijaż', 'Макіяж', 'Makeup', 20);
+createItem($sVisage2, 'Makijaż dzienny', 'Денний макіяж', 'Day makeup', '170 zł', 10);
+createItem($sVisage2, 'Makijaż wieczorowy', 'Вечірній макіяж', 'Evening makeup', '220 zł', 20);
 
 // category eyelashes
-$cEyelashes = createCat('eyelashes', 'Rzęsy', 'Вії', 'Eyelashes', 'Ресницы', 30);
-$sEyelashes1 = createSubcat($cEyelashes, 'Rzęsy', 'Вії', 'Eyelashes', 'Ресницы', 10);
-createItem($sEyelashes1, 'Farbowanie', 'Фарбування', 'Tinting', 'Окрашивание', '50 zł', 10);
-createItem($sEyelashes1, 'Laminowanie', 'Ламінування', 'Lamination', 'Ламинирование', '150 zł', 20);
-createItem($sEyelashes1, 'Przedłużanie 1:1', 'Нарощування 1:1', 'Extensions 1:1', 'Наращивание 1:1', '170 zł', 30);
-createItem($sEyelashes1, 'Przedłużanie 2:1', 'Нарощування 2:1', 'Extensions 2:1', 'Наращивание 2:1', '180 zł', 40);
+$cEyelashes = createCat('eyelashes', 'Rzęsy', 'Вії', 'Eyelashes', 30);
+$sEyelashes1 = createSubcat($cEyelashes, 'Rzęsy', 'Вії', 'Eyelashes', 10);
+createItem($sEyelashes1, 'Farbowanie', 'Фарбування', 'Tinting', '50 zł', 10);
+createItem($sEyelashes1, 'Laminowanie', 'Ламінування', 'Lamination', '150 zł', 20);
+createItem($sEyelashes1, 'Przedłużanie 1:1', 'Нарощування 1:1', 'Extensions 1:1', '170 zł', 30);
+createItem($sEyelashes1, 'Przedłużanie 2:1', 'Нарощування 2:1', 'Extensions 2:1', '180 zł', 40);
 
 // category massage
-$cMassage = createCat('massage', 'Masaż', 'Масаж', 'Massage', 'Массаж', 40);
-$sMassage1 = createSubcat($cMassage, 'Masaż klasyczny', 'Класичний масаж', 'Classic massage', 'Классический массаж', 10);
-createItem($sMassage1, '1 godzina', '1 година', '1 hour', '1 час', '180 zł', 10);
-createItem($sMassage1, '1.5 godziny', '1.5 години', '1.5 hours', '1.5 часа', '250 zł', 20);
-$sMassage2 = createSubcat($cMassage, 'Masaż sportowy', 'Спортивний масаж', 'Sports massage', 'Спортивный массаж', 20);
-createItem($sMassage2, '1 godzina', '1 година', '1 hour', '1 час', '220 zł', 10);
-createItem($sMassage2, '1.5 godziny', '1.5 години', '1.5 hours', '1.5 часа', '290 zł', 20);
+$cMassage = createCat('massage', 'Masaż', 'Масаж', 'Massage', 40);
+$sMassage1 = createSubcat($cMassage, 'Masaż klasyczny', 'Класичний масаж', 'Classic massage', 10);
+createItem($sMassage1, '1 godzina', '1 година', '1 hour', '180 zł', 10);
+createItem($sMassage1, '1.5 godziny', '1.5 години', '1.5 hours', '250 zł', 20);
+$sMassage2 = createSubcat($cMassage, 'Masaż sportowy', 'Спортивний масаж', 'Sports massage', 20);
+createItem($sMassage2, '1 godzina', '1 година', '1 hour', '220 zł', 10);
+createItem($sMassage2, '1.5 godziny', '1.5 години', '1.5 hours', '290 zł', 20);
 
 // category hair
-$cHair = createCat('hair', 'Włosy', 'Волосся', 'Hair', 'Волосы', 50);
-$sHair1 = createSubcat($cHair, 'Stylizacja i Strzyżenie', 'Укладка та Стрижка', 'Styling and Haircut', 'Укладка и Стрижка', 10);
-createItem($sHair1, 'Strzyżenie damskie', 'Стрижка жіноча', 'Women\'s haircut', 'Стрижка женская', '150 zł', 10);
-createItem($sHair1, 'Modelowanie', 'Укладка', 'Styling', 'Укладка', '90 zł', 20);
-createItem($sHair1, 'Loki', 'Локони', 'Curls', 'Локоны', '140 zł', 30);
-$sHair2 = createSubcat($cHair, 'Farbowanie', 'Фарбування', 'Coloring', 'Окрашивание', 20);
-createItem($sHair2, 'Farbowanie odrostów', 'Фарбування коренів', 'Root touch-up', 'Окрашивание корней', '250 zł', 10);
-createItem($sHair2, 'Tonowanie', 'Тонування', 'Toning', 'Тонирование', '260 zł', 20);
-createItem($sHair2, 'Airtouch', 'Airtouch', 'Airtouch', 'Airtouch', '800 zł', 30);
+$cHair = createCat('hair', 'Włosy', 'Волосся', 'Hair', 50);
+$sHair1 = createSubcat($cHair, 'Stylizacja i Strzyżenie', 'Укладка та Стрижка', 'Styling and Haircut', 10);
+createItem($sHair1, 'Strzyżenie damskie', 'Стрижка жіноча', 'Women\'s haircut', '150 zł', 10);
+createItem($sHair1, 'Modelowanie', 'Укладка', 'Styling', '90 zł', 20);
+createItem($sHair1, 'Loki', 'Локони', 'Curls', '140 zł', 30);
+$sHair2 = createSubcat($cHair, 'Farbowanie', 'Фарбування', 'Coloring', 20);
+createItem($sHair2, 'Farbowanie odrostów', 'Фарбування коренів', 'Root touch-up', '250 zł', 10);
+createItem($sHair2, 'Tonowanie', 'Тонування', 'Toning', '260 zł', 20);
+createItem($sHair2, 'Airtouch', 'Airtouch', 'Airtouch', '800 zł', 30);
 
 // 3. Populate content_blocks
 $blocks = [

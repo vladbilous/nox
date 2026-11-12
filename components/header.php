@@ -1,375 +1,337 @@
-<!doctype html>
-<html lang="<?= $currentLang ?>-<?= strtoupper($currentLang) ?>" class="min-h-full scroll-smooth">
-<head>
-    
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/assets/img/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/assets/img/apple-touch-icon.png"
-    />
-    <link rel="manifest" href="/assets/misc/manifest.webmanifest" />
-    <link rel="canonical" href="https://yoursite.com/uk/" />
-    <link rel="alternate" hreflang="pl" href="https://yoursite.com/" />
-    <link rel="alternate" hreflang="en" href="https://yoursite.com/en/" />
-    <link rel="alternate" hreflang="uk" href="https://yoursite.com/uk/" />
-    <link rel="alternate" hreflang="ru" href="https://yoursite.com/ru/" />
-    <link rel="alternate" hreflang="x-default" href="https://yoursite.com/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Салон Краси Варшава | Манікюр, педикюр і нігтьовий сервіс",
-        "url": "https://yoursite.com",
-        "description": "Наш Салон — салон краси у Варшаві, район Охота: манікюр, гібридний манікюр, педикюр, дизайн нігтів і ламінування брів з преміальним сервісом.",
-        "inLanguage": ["pl", "en", "uk", "ru"],
-        "publisher": {
-          "@type": "Organization",
-          "name": "Салон Краси Варшава | Манікюр, педикюр і нігтьовий сервіс",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://yoursite.com/Salon-logo-w220.svg"
-          },
-          "sameAs": [
-            "https://www.instagram.com/Salon.warsaw",
-            "https://www.facebook.com/share/18dnZPTrj1/?mibextid=wwXIfr",
-            "https://t.me/Salon_warsaw",
-            "https://api.whatsapp.com/send/?phone=48690647476&type=phone_number&app_absent=0",
-            "viber://chat?number=48690647476"
-          ]
-        }
-      }
-    </script>
-    <title><?= htmlspecialchars($seo["title"] ?? tr("seo_title", "Салон Краси Варшава | Манікюр, педикюр і нігтьовий сервіс")) ?></title>
-    <meta name="description" content="<?= htmlspecialchars($seo["description"] ?? tr("seo_desc", "Наш Салон — салон краси у Варшаві")) ?>" />
-    <meta property="og:url" content="https://yoursite.com/uk/" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Салон Краси Варшава | Манікюр, педикюр і нігтьовий сервіс"
-    />
-    <meta
-      property="og:description"
-      content="Наш Салон — салон краси у Варшаві, район Охота: манікюр, гібридний манікюр, педикюр, дизайн нігтів і ламінування брів з преміальним сервісом."
-    />
-    <meta property="og:image" content="<?= htmlspecialchars($seo["og_image"] ?? "/og-Salon-image.jpg") ?>" />
-    <meta property="og:site_name" content="Salon" />
-    <meta property="og:locale" content="uk-UA" />
-    <meta property="og:locale:alternate" content="pl-PL" />
-    <meta property="og:locale:alternate" content="en-US" />
-    <meta property="og:locale:alternate" content="ru-RU" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Салон Краси Варшава | Манікюр, педикюр і нігтьовий сервіс"
-    />
-    <meta
-      name="twitter:description"
-      content="Наш Салон — салон краси у Варшаві, район Охота: манікюр, гібридний манікюр, педикюр, дизайн нігтів і ламінування брів з преміальним сервісом."
-    />
-    <meta name="twitter:image" content="/og-Salon-image.jpg" />
-    
-    
-    
-    
-    
-    <style>
-      :root {
-        --font-inter: "Inter", sans-serif;
-        --font-gropled: "Inter", sans-serif;
-      }
-    </style>
-    <link rel="stylesheet" href="/assets/css/photoswipe.DZU1WGtr.css" />
-    <link rel="stylesheet" href="/assets/css/Layout.B5b12vDo.css" />
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <style>
-      salon-island,
-      salon-slot,
-      salon-static-slot {
-        display: contents;
-      }
-    </style>
-  
-</head>
-<body class="bg-shell-50 text-black-900 grid min-h-dvh min-w-90 grid-rows-[auto_1fr_auto] overflow-x-hidden font-sans" data-current-locale="<?= $currentLang ?>">
-    <header class="theme-header">
-      <div class="container">
-        <div class="flex items-center justify-between">
-          <div class="order-first lg:order-none lg:w-87.5 flex items-center">
-            <img
-              src="/assets/img/logo-w220.BCjd-2Q9_Z1SQT8.svg"
-              alt="Salon Logo"
-              loading="lazy"
-              decoding="async"
-              width="220"
-              height="61"
-              class="hidden h-auto w-45 sm:inline-flex xl:w-55"
-            />
-            <img
-              src="/assets/img/square-w96.DCoLLcl9_Z2nQbFQ.svg"
-              alt="Salon Logo"
-              loading="lazy"
-              decoding="async"
-              width="96"
-              height="96"
-              class="aspect-square w-20 sm:hidden"
-            />
-          </div>
-          <nav class="hidden lg:flex lg:grow lg:justify-center">
-            <ul class="hidden items-center gap-8 font-medium lg:flex">
-              <li>
-                <a
-                  class="text-black-900 hover:text-black-600 transition-[color] duration-200"
-                  href="/<?= $currentLang === $defaultLang ? '' : $currentLang . '/' ?>#services"
-                >
-                  Послуги
-                </a>
-              </li>
-              <li>
-                <a
-                  class="text-black-900 hover:text-black-600 transition-[color] duration-200"
-                  href="/<?= $currentLang === $defaultLang ? '' : $currentLang . '/' ?>#aboutUs"
-                >
-                  Про нас
-                </a>
-              </li>
-              <li>
-                <a
-                  class="text-black-900 hover:text-black-600 transition-[color] duration-200"
-                  href="/<?= $currentLang === $defaultLang ? '' : $currentLang . '/' ?>jobs/"
-                >
-                  Вакансії
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="order-last lg:hidden">
-            <div
-              class="starwind-dropdown relative"
-              data-close-delay="200"
-              data-slot="dropdown"
-            >
-              <div
-                class="starwind-dropdown-trigger"
-                data-slot="dropdown-trigger"
-                data-as-child
-              >
-                <button
-                  class="inline-flex items-center justify-center gap-1.5 rounded-lg font-medium whitespace-nowrap starwind-transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-error aria-invalid:focus-visible:ring-error/40 hover:bg-foreground/10 hover:text-foreground focus-visible:outline-outline bg-transparent size-11"
-                  data-slot="button"
-                  aria-label="Toggle Lang Menu"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                    class="lucide lucide-menu"
-                  >
-                    <path d="M4 5h16"></path>
-                    <path d="M4 12h16"></path>
-                    <path d="M4 19h16"></path>
-                  </svg>
-                </button>
-              </div>
-              <ul
-                class="starwind-dropdown-content bg-popover text-popover-foreground z-50 min-w-[9rem] overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md data-[state=open]:animate-in fade-in zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fill-mode-forwards fade-out zoom-out-95 absolute will-change-transform slide-in-from-top-2 slide-out-to-top-2 top-full slide-in-from-right-1 slide-out-to-right-1 right-0"
-                role="menu"
-                data-side="bottom"
-                data-align="end"
-                data-state="closed"
-                tabindex="-1"
-                aria-orientation="vertical"
-                style="
-                  display: none;
-                  animation-duration: 150ms;
-                  margin-top: 4px;
-                "
-                data-slot="dropdown-content"
-              >
-                <li
-                  class="focus:bg-accent focus:text-accent-foreground relative flex items-center gap-2 rounded-sm transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 group/dropdown-item [&#38;>svg]:size-4 [&#38;>svg]:shrink-0 cursor-pointer p-0 text-sm font-medium"
-                  role="menuitem"
-                  tabindex="0"
-                  data-slot="dropdown-item"
-                >
-                  <a
-                    class="flex w-full p-1.5"
-                    href="/<?= $currentLang === $defaultLang ? '' : $currentLang . '/' ?>#services"
-                    title="Послуги"
-                  >
-                    Послуги
-                  </a>
-                </li>
-                <li
-                  class="focus:bg-accent focus:text-accent-foreground relative flex items-center gap-2 rounded-sm transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 group/dropdown-item [&#38;>svg]:size-4 [&#38;>svg]:shrink-0 cursor-pointer p-0 text-sm font-medium"
-                  role="menuitem"
-                  tabindex="0"
-                  data-slot="dropdown-item"
-                >
-                  <a
-                    class="flex w-full p-1.5"
-                    href="/<?= $currentLang === $defaultLang ? '' : $currentLang . '/' ?>#aboutUs"
-                    title="Про нас"
-                  >
-                    Про нас
-                  </a>
-                </li>
-                <li
-                  class="focus:bg-accent focus:text-accent-foreground relative flex items-center gap-2 rounded-sm transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 group/dropdown-item [&#38;>svg]:size-4 [&#38;>svg]:shrink-0 cursor-pointer p-0 text-sm font-medium"
-                  role="menuitem"
-                  tabindex="0"
-                  data-slot="dropdown-item"
-                >
-                  <a
-                    class="flex w-full p-1.5"
-                    href="/<?= $currentLang === $defaultLang ? '' : $currentLang . '/' ?>jobs/"
-                    title="Вакансії"
-                  >
-                    Вакансії
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <script
-              type="module"
-              src="/assets/js/Dropdown.js"
-            ></script>
-          </div>
-          <!-- Logo moved to the top -->
-          <div class="contents items-center justify-end md:w-87.5 lg:flex gap-4">
-            <a
-              class="theme-btn md:hidden"
-              data-slot="button"
-              href="https://booksy.com/pl-pl/dl/show-business/296324"
-              target="_blank"
-              rel="noopener"
-            >
-              <span class="sr-only"><?= tr("book_btn", "Записатись") ?></span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                class="lucide lucide-calendar"
-              >
-                <path d="M8 2v4"></path>
-                <path d="M16 2v4"></path>
-                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                <path d="M3 10h18"></path>
-              </svg>
-            </a>
-            <a
-              class="theme-btn hidden md:inline-flex"
-              data-slot="button"
-              href="https://booksy.com/pl-pl/dl/show-business/296324"
-              target="_blank"
-              rel="noopener"
-            >
-              <span><?= tr("book_btn", "Записатись") ?></span>
-            </a>
-            
 <?php
-            $flags = [
-                'pl' => '<svg viewBox="0 0 64 64" width="20" height="20" class="rounded-full shadow-sm"><path fill="#fff" d="M0 0h64v32H0z"/><path fill="#dc143c" d="M0 32h64v32H0z"/></svg>',
-                'en' => '<svg viewBox="0 0 64 64" width="20" height="20" class="rounded-full shadow-sm"><path fill="#012169" d="M0 0h64v64H0z"/><path fill="#FFF" d="M0 0l64 64M64 0L0 64" stroke="#FFF" stroke-width="14"/><path fill="#C8102E" d="M0 0l64 64M64 0L0 64" stroke="#C8102E" stroke-width="6"/><path fill="#FFF" d="M25 0h14v64H25zM0 25h64v14H0z"/><path fill="#C8102E" d="M28 0h8v64h-8zM0 28h64v8H0z"/></svg>',
-                'ru' => '<svg viewBox="0 0 64 64" width="20" height="20" class="rounded-full shadow-sm"><path fill="#fff" d="M0 0h64v21.3H0z"/><path fill="#0039a6" d="M0 21.3h64v21.3H0z"/><path fill="#d52b1e" d="M0 42.6h64v21.4H0z"/></svg>',
-                'uk' => '<svg viewBox="0 0 64 64" width="20" height="20" class="rounded-full shadow-sm"><path fill="#0057b7" d="M0 0h64v32H0z"/><path fill="#ffd700" d="M0 32h64v32H0z"/></svg>',
-                'cs' => '<svg viewBox="0 0 64 64" width="20" height="20" class="rounded-full shadow-sm"><path fill="#fff" d="M0 0h64v32H0z"/><path fill="#d7141a" d="M0 32h64v32H0z"/><path fill="#11457e" d="M0 0l32 32L0 64z"/></svg>',
-            ];
-            $fallbackFlag = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>';
-            ?>
-            <div
-              class="starwind-dropdown relative"
-              data-close-delay="200"
-              data-slot="dropdown"
-            >
-              <div
-                class="starwind-dropdown-trigger"
-                data-slot="dropdown-trigger"
-                data-as-child
-              >
-                <button
-                  class="inline-flex items-center justify-center gap-1.5 rounded-lg font-medium whitespace-nowrap starwind-transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-error aria-invalid:focus-visible:ring-error/40 hover:bg-foreground/10 hover:text-foreground focus-visible:outline-outline bg-transparent size-11"
-                  data-slot="button"
-                  aria-label="Toggle Lang Menu"
-                >
-                  <?= $flags[$currentLang] ?? $fallbackFlag ?>
+// components/header.php — <head>, SEO and the site header.
+$localeMap = ['pl' => 'pl_PL', 'uk' => 'uk_UA', 'en' => 'en_US'];
+$langLabels = ['pl' => 'Polski', 'uk' => 'Українська', 'en' => 'English'];
+$langOrder = ['pl', 'uk', 'en'];
+
+$pageTitle = $seo['title'] ?? tr('seo_title', 'NOX Beauty Space — manicure, pedicure, brwi i fryzjer | Warszawa Wola');
+$pageDesc = $seo['description'] ?? tr('seo_desc', 'Salon kosmetyczny NOX Beauty Space na Woli, blisko metra Płocka.');
+$ogTitle = $seo['og_title'] ?? $pageTitle;
+$ogDesc = $seo['og_description'] ?? $pageDesc;
+$ogImage = $seo['og_image'] ?? '/assets/img/nox/og-image.jpg';
+if (strpos($ogImage, 'http') !== 0) {
+    $ogImage = $siteUrl . $ogImage;
+}
+
+$booksyUrl = tr('link_booksy', 'https://booksy.com/pl-pl/340508_nox-beauty-space-manicure-pedicure-fryzjer_paznokcie_3_warszawa');
+$instagramUrl = tr('link_instagram', 'https://www.instagram.com/nox.beauty.space/');
+$directUrl = tr('link_direct', 'https://ig.me/m/nox.beauty.space');
+
+$navItems = [
+    'services' => tr('nav_services', 'Usługi'),
+    'about'    => tr('nav_about', 'O nas'),
+    'prices'   => tr('nav_prices', 'Cennik'),
+    'gallery'  => tr('nav_gallery', 'Galeria'),
+    'reviews'  => tr('nav_reviews', 'Opinie'),
+    'contact'  => tr('nav_contact', 'Kontakt'),
+];
+
+$phone = trim($siteConfig['phone'] ?? '');
+$phoneHref = $phone !== '' ? 'tel:' . preg_replace('/[^0-9+]/', '', $phone) : '';
+$isNotFound = $isNotFound ?? false;
+$isPrivacy = ($pageSlug ?? '') === 'polityka-prywatnosci';
+$pagePath = in_array($pageSlug ?? 'home', ['home', '404'], true) ? '' : $pageSlug;
+$noIndex = $isNotFound || $isPrivacy;
+if ($isNotFound) {
+    $pageTitle = tr('404_title', 'Nie znaleziono strony') . ' — NOX Beauty Space';
+} elseif (!empty($service)) {
+    $sk = $service['key'];
+    $pageTitle = tr("svcpage_{$sk}_title", $pageTitle);
+    $pageDesc = tr("svcpage_{$sk}_desc", $pageDesc);
+    $ogTitle = $pageTitle;
+    $ogDesc = $pageDesc;
+} elseif ($isPrivacy) {
+    $pageTitle = tr('privacy_title', 'Polityka prywatności') . ' — NOX Beauty Space';
+    $pageDesc = tr('privacy_desc', $pageDesc);
+    $ogTitle = $pageTitle;
+    $ogDesc = $pageDesc;
+}
+$canonicalUrl = $siteUrl . $homeUrl . $pagePath;
+
+// Main first-screen photo (the largest element, Google's LCP): preload it, with a lighter phone version if present
+$heroRow = DB::fetch("SELECT image_path FROM slider_images WHERE slider_type = 'hero' ORDER BY sort_order ASC LIMIT 1");
+$heroPreload = !empty($service) ? $service['image'] : ($heroRow['image_path'] ?? '/assets/img/nox/hero-chrome.webp');
+$heroSmall = preg_replace('/\.webp$/', '-600.webp', $heroPreload);
+$heroSrcset = is_file(__DIR__ . '/..' . $heroSmall) ? $heroSmall . ' 600w, ' . $heroPreload . ' 1200w' : '';
+$ogImageAlt = tr('og_image_alt', 'NOX Beauty Space — salon beauty na Woli w Warszawie');
+
+// ---------- Structured data (schema.org) for Google: business, website, price list, FAQ ----------
+$salonId = $siteUrl . '/#salon';
+$offerCatalog = [];
+foreach (DB::fetchAll("SELECT * FROM service_categories ORDER BY sort_order ASC") as $cat) {
+    $catItems = DB::fetchAll("SELECT i.* FROM service_items i JOIN service_subcategories s ON s.id = i.subcategory_id WHERE s.category_id = ? ORDER BY s.sort_order, i.sort_order", [$cat['id']]);
+    $offers = [];
+    foreach ($catItems as $item) {
+        $name = $item['name_' . $currentLang] ?: $item['name_pl'];
+        $priceRaw = $item['price_' . $currentLang] ?: $item['price_pl'];
+        $offer = ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => $name]];
+        if (preg_match('/^\s*(\d+(?:[.,]\d+)?)\s*zł\s*$/u', $priceRaw, $m)) {
+            $offer['price'] = str_replace(',', '.', $m[1]);
+            $offer['priceCurrency'] = 'PLN';
+        }
+        $offers[] = $offer;
+    }
+    if ($offers) {
+        $offerCatalog[] = ['@type' => 'OfferCatalog', 'name' => $cat['name_' . $currentLang] ?: $cat['name_pl'], 'itemListElement' => $offers];
+    }
+}
+
+$salon = [
+    '@type' => ['BeautySalon', 'NailSalon', 'HairSalon'],
+    '@id' => $salonId,
+    'name' => 'NOX Beauty Space',
+    'url' => $canonicalUrl,
+    'image' => [
+        $siteUrl . '/assets/img/nox/og-image.jpg',
+        $siteUrl . '/assets/img/nox/salon-interior.webp',
+        $siteUrl . '/assets/img/nox/hero-chrome.webp',
+    ],
+    'logo' => $siteUrl . '/assets/img/nox/logo-round.png',
+    'description' => $pageDesc,
+    'priceRange' => '30–350 PLN',
+    'currenciesAccepted' => 'PLN',
+    'paymentAccepted' => 'Credit Card',
+    'address' => [
+        '@type' => 'PostalAddress',
+        'streetAddress' => 'ul. Ludwiki 4B/U1',
+        'postalCode' => '01-226',
+        'addressLocality' => 'Warszawa',
+        'addressRegion' => 'Mazowieckie',
+        'addressCountry' => 'PL',
+    ],
+    'geo' => ['@type' => 'GeoCoordinates', 'latitude' => 52.2312653, 'longitude' => 20.9641617],
+    'hasMap' => 'https://www.google.com/maps/search/?api=1&query=NOX+Beauty+Space+Ludwiki+4B+Warszawa',
+    'areaServed' => [
+        ['@type' => 'City', 'name' => 'Warszawa'],
+        ['@type' => 'AdministrativeArea', 'name' => 'Wola'],
+    ],
+    'knowsLanguage' => ['pl', 'uk', 'en'],
+    'openingHoursSpecification' => [[
+        '@type' => 'OpeningHoursSpecification',
+        'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        'opens' => '10:00',
+        'closes' => '20:00',
+    ]],
+    'amenityFeature' => [
+        ['@type' => 'LocationFeatureSpecification', 'name' => 'Parking', 'value' => true],
+        ['@type' => 'LocationFeatureSpecification', 'name' => 'Wi-Fi', 'value' => true],
+        ['@type' => 'LocationFeatureSpecification', 'name' => 'Card payments', 'value' => true],
+        ['@type' => 'LocationFeatureSpecification', 'name' => 'Pets allowed', 'value' => true],
+    ],
+    'potentialAction' => [
+        '@type' => 'ReserveAction',
+        'target' => ['@type' => 'EntryPoint', 'urlTemplate' => $booksyUrl, 'actionPlatform' => ['http://schema.org/DesktopWebPlatform', 'http://schema.org/MobileWebPlatform']],
+        'result' => ['@type' => 'Reservation', 'name' => tr('book_btn', 'Umów wizytę')],
+    ],
+    'sameAs' => [$instagramUrl, $booksyUrl],
+];
+if ($phone !== '') {
+    $salon['telephone'] = $phone;
+}
+if ($offerCatalog) {
+    $salon['hasOfferCatalog'] = ['@type' => 'OfferCatalog', 'name' => tr('prices_eyebrow', 'Cennik'), 'itemListElement' => $offerCatalog];
+}
+
+$graph = [
+    [
+        '@type' => 'WebSite',
+        '@id' => $siteUrl . '/#website',
+        'url' => $siteUrl . '/',
+        'name' => 'NOX Beauty Space',
+        'inLanguage' => ['pl', 'uk', 'en'],
+        'publisher' => ['@id' => $salonId],
+    ],
+    [
+        '@type' => 'WebPage',
+        '@id' => $canonicalUrl . '#webpage',
+        'url' => $canonicalUrl,
+        'name' => $pageTitle,
+        'description' => $pageDesc,
+        'inLanguage' => $currentLang,
+        'isPartOf' => ['@id' => $siteUrl . '/#website'],
+        'about' => ['@id' => $salonId],
+        'primaryImageOfPage' => $siteUrl . '/assets/img/nox/og-image.jpg',
+    ],
+    $salon,
+];
+
+// FAQ (same questions as the visible FAQ section on the page)
+$faqItems = [];
+$faqPrefix = !empty($service) ? "svcpage_{$service['key']}_faq_" : 'faq_';
+for ($i = 1; $i <= 8; $i++) {
+    $q = tr("{$faqPrefix}{$i}_q");
+    $a = tr("{$faqPrefix}{$i}_a");
+    if ($q !== '' && $a !== '') {
+        $faqItems[] = ['q' => $q, 'a' => $a];
+    }
+}
+if (!empty($service)) {
+    // The service itself + breadcrumbs (shown in Google results instead of the bare URL)
+    $sk = $service['key'];
+    $graph[1]['breadcrumb'] = ['@id' => $canonicalUrl . '#breadcrumb'];
+    $graph[] = [
+        '@type' => 'BreadcrumbList',
+        '@id' => $canonicalUrl . '#breadcrumb',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => tr('svcpage_breadcrumb_home', 'Strona główna'), 'item' => $siteUrl . $homeUrl],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => tr("svc_{$sk}_title"), 'item' => $canonicalUrl],
+        ],
+    ];
+    $graph[] = [
+        '@type' => 'Service',
+        '@id' => $canonicalUrl . '#service',
+        'name' => tr("svc_{$sk}_title"),
+        'serviceType' => tr("svc_{$sk}_title"),
+        'description' => $pageDesc,
+        'url' => $canonicalUrl,
+        'image' => $siteUrl . $service['image'],
+        'provider' => ['@id' => $salonId],
+        'areaServed' => ['@type' => 'City', 'name' => 'Warszawa'],
+        'availableLanguage' => ['pl', 'uk', 'en'],
+    ];
+}
+if ($faqItems && ($pagePath === '' || !empty($service)) && !$isNotFound) {
+    $graph[] = [
+        '@type' => 'FAQPage',
+        '@id' => $canonicalUrl . '#faq',
+        'inLanguage' => $currentLang,
+        'mainEntity' => array_map(fn($f) => [
+            '@type' => 'Question',
+            'name' => $f['q'],
+            'acceptedAnswer' => ['@type' => 'Answer', 'text' => strip_tags($f['a'])],
+        ], $faqItems),
+    ];
+}
+$jsonLd = ['@context' => 'https://schema.org', '@graph' => $graph];
+?>
+<!doctype html>
+<html lang="<?= $currentLang ?>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.classList.add('js');</script>
+    <title><?= htmlspecialchars($pageTitle) ?></title>
+    <meta name="description" content="<?= htmlspecialchars($pageDesc) ?>">
+<?php if ($noIndex): ?>
+    <meta name="robots" content="noindex, follow">
+<?php else: ?>
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<?php endif; ?>
+    <meta name="theme-color" content="#0b0a09">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="geo.region" content="PL-14">
+    <meta name="geo.placename" content="Warszawa">
+    <meta name="geo.position" content="52.2312653;20.9641617">
+    <meta name="ICBM" content="52.2312653, 20.9641617">
+<?php if (!empty($siteConfig['google_verification'])): ?>
+    <meta name="google-site-verification" content="<?= htmlspecialchars($siteConfig['google_verification']) ?>">
+<?php endif; ?>
+<?php if (!empty($siteConfig['bing_verification'])): ?>
+    <meta name="msvalidate.01" content="<?= htmlspecialchars($siteConfig['bing_verification']) ?>">
+<?php endif; ?>
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/nox/favicon-96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/nox/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/nox/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+<?php if (!$isNotFound): ?>
+    <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl) ?>">
+<?php foreach ($langOrder as $code): if (!in_array($code, $langCodes)) continue; ?>
+    <link rel="alternate" hreflang="<?= $code ?>" href="<?= htmlspecialchars($siteUrl . lang_url($code) . $pagePath) ?>">
+<?php endforeach; ?>
+    <link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars($siteUrl . '/' . $pagePath) ?>">
+<?php endif; ?>
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="NOX Beauty Space">
+    <meta property="og:url" content="<?= htmlspecialchars($canonicalUrl) ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($ogTitle) ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <meta property="og:image" content="<?= htmlspecialchars($ogImage) ?>">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="<?= htmlspecialchars($ogImageAlt) ?>">
+    <meta property="og:locale" content="<?= $localeMap[$currentLang] ?? 'pl_PL' ?>">
+<?php foreach ($langOrder as $code): if ($code === $currentLang || !in_array($code, $langCodes)) continue; ?>
+    <meta property="og:locale:alternate" content="<?= $localeMap[$code] ?>">
+<?php endforeach; ?>
+    <meta property="business:contact_data:street_address" content="ul. Ludwiki 4B/U1">
+    <meta property="business:contact_data:locality" content="Warszawa">
+    <meta property="business:contact_data:postal_code" content="01-226">
+    <meta property="business:contact_data:country_name" content="Poland">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= htmlspecialchars($ogTitle) ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
+    <meta name="twitter:image:alt" content="<?= htmlspecialchars($ogImageAlt) ?>">
+
+<?php if (!$isNotFound): ?>
+    <script type="application/ld+json"><?= json_encode($jsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) ?></script>
+<?php endif; ?>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap">
+<?php if (($pagePath === '' || !empty($service)) && !$isNotFound): ?>
+    <link rel="preload" as="image" href="<?= htmlspecialchars($heroPreload) ?>"<?php if ($heroSrcset): ?> imagesrcset="<?= htmlspecialchars($heroSrcset) ?>" imagesizes="(max-width: 1024px) 92vw, 46vw"<?php endif; ?> fetchpriority="high">
+<?php endif; ?>
+    <link rel="stylesheet" href="/assets/css/nox.css?v=<?= filemtime(__DIR__ . '/../assets/css/nox.css') ?>">
+<?php require __DIR__ . '/analytics.php'; ?>
+</head>
+<body data-lang="<?= $currentLang ?>">
+<a class="skip-link" href="#main"><?= tre('skip_link', 'Przejdź do treści') ?></a>
+
+<header class="site-header" data-header>
+    <div class="container header-inner">
+        <a class="brand" href="<?= $homeUrl ?>" aria-label="NOX Beauty Space">
+            <img src="/assets/img/nox/logo-96.webp" alt="NOX Beauty Space" width="48" height="48" class="brand-badge">
+            <span class="brand-text">
+                <span class="brand-name">NOX</span>
+                <span class="brand-sub">beauty space</span>
+            </span>
+        </a>
+
+        <nav class="main-nav" aria-label="<?= tre('nav_label', 'Menu główne') ?>">
+            <ul>
+<?php foreach ($navItems as $anchor => $label): ?>
+                <li><a href="<?= $homeUrl ?>#<?= $anchor ?>"><?= htmlspecialchars($label) ?></a></li>
+<?php endforeach; ?>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <div class="lang-switch" data-dropdown>
+                <button type="button" class="lang-current" aria-haspopup="true" aria-expanded="false" data-dropdown-toggle>
+                    <?= strtoupper($currentLang) ?>
+                    <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
                 </button>
-              </div>
-              <ul
-                class="starwind-dropdown-content bg-popover text-popover-foreground z-50 min-w-[9rem] overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md data-[state=open]:animate-in fade-in zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fill-mode-forwards fade-out zoom-out-95 absolute will-change-transform slide-in-from-top-2 slide-out-to-top-2 top-full slide-in-from-right-1 slide-out-to-right-1 right-0"
-                role="menu"
-                data-side="bottom"
-                data-align="end"
-                data-state="closed"
-                tabindex="-1"
-                aria-orientation="vertical"
-                style="
-                  display: none;
-                  animation-duration: 150ms;
-                  margin-top: 4px;
-                "
-                data-slot="dropdown-content"
-              >
-                <?php foreach ($langs as $l): 
-                    $code = $l['code'];
-                    $name = $l['name'] ?? strtoupper($code);
-                    $url = $code === $defaultLang ? '/' : '/' . $code . '/';
-                ?>
-                <li
-                  class="focus:bg-accent focus:text-accent-foreground relative flex items-center gap-2 rounded-sm transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 group/dropdown-item cursor-pointer p-0 text-sm font-medium"
-                  role="menuitem"
-                  tabindex="0"
-                  data-slot="dropdown-item"
-                >
-                  <a class="flex w-full items-center gap-2 p-2 hover:bg-black-100 rounded-md transition-colors" href="<?= $url ?>" title="<?= htmlspecialchars($name) ?>">
-                    <?= $flags[$code] ?? $fallbackFlag ?>
-                    <span><?= htmlspecialchars($name) ?></span>
-                  </a>
-                </li>
-                <?php endforeach; ?>
-              </ul>
+                <ul class="lang-menu" role="menu">
+<?php foreach ($langOrder as $code): if (!in_array($code, $langCodes)) continue; ?>
+                    <li role="none"><a role="menuitem" hreflang="<?= $code ?>" href="<?= lang_url($code) . $pagePath ?>"<?= $code === $currentLang ? ' aria-current="true"' : '' ?>><?= $langLabels[$code] ?></a></li>
+<?php endforeach; ?>
+                </ul>
             </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-              class="lucide lucide-minus text-black-900 rotate-90 opacity-25 lg:hidden"
-            >
-              <path d="M5 12h14"></path>
-            </svg>
-          </div>
+            <a class="btn btn-gold btn-sm header-cta" href="<?= htmlspecialchars($booksyUrl) ?>" target="_blank" rel="noopener"><?= tre('book_btn', 'Umów wizytę') ?></a>
+            <button type="button" class="burger" aria-label="<?= tre('menu_open', 'Otwórz menu') ?>" aria-expanded="false" data-burger>
+                <span></span><span></span>
+            </button>
         </div>
-      </div>
-    </header>
+    </div>
+
+    <div class="mobile-menu" data-mobile-menu hidden>
+        <ul>
+<?php foreach ($navItems as $anchor => $label): ?>
+            <li><a href="<?= $homeUrl ?>#<?= $anchor ?>" data-close-menu><?= htmlspecialchars($label) ?></a></li>
+<?php endforeach; ?>
+        </ul>
+        <div class="mobile-langs">
+<?php foreach ($langOrder as $code): if (!in_array($code, $langCodes)) continue; ?>
+            <a href="<?= lang_url($code) . $pagePath ?>" hreflang="<?= $code ?>"<?= $code === $currentLang ? ' aria-current="true"' : '' ?>><?= strtoupper($code) ?></a>
+<?php endforeach; ?>
+        </div>
+        <a class="btn btn-gold" href="<?= htmlspecialchars($booksyUrl) ?>" target="_blank" rel="noopener"><?= tre('book_btn', 'Umów wizytę') ?></a>
+    </div>
+</header>

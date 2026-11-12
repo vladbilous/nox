@@ -1,619 +1,2175 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.20-13.0.2-MariaDB, for osx10.21 (arm64)
 --
--- Хост: MariaDB-11.2
--- Час створення: Квт 28 2026 р., 20:22
--- Версія сервера: 11.2.2-MariaDB
--- Версія PHP: 7.4.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: 127.0.0.1    Database: salon_cms
+-- ------------------------------------------------------
+-- Server version	13.0.2-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 --
--- База даних: `salon_cms`
+-- Table structure for table `contacts`
 --
 
--- --------------------------------------------------------
-
---
--- Структура таблиці `contacts`
---
-
+DROP TABLE IF EXISTS `contacts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contacts` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `message` text DEFAULT NULL,
   `status` enum('new','read','archived') DEFAULT 'new',
-  `created_at` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Структура таблиці `content_blocks`
+-- Dumping data for table `contacts`
 --
 
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `contacts` WRITE;
+/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
+-- Table structure for table `content_blocks`
+--
+
+DROP TABLE IF EXISTS `content_blocks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `content_blocks` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `key_name` varchar(100) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `type` varchar(50) DEFAULT 'text'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `type` varchar(50) DEFAULT 'text',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key_name` (`key_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=430 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `content_blocks`
+-- Dumping data for table `content_blocks`
 --
 
-INSERT INTO `content_blocks` (`id`, `key_name`, `description`, `type`) VALUES
-(1, 'hero_title', NULL, 'text'),
-(2, 'hero_desc', NULL, 'html'),
-(3, 'hero_button', NULL, 'text'),
-(4, 'hero_small_text', NULL, 'text'),
-(5, 'about_title', NULL, 'text'),
-(6, 'about_text_1', NULL, 'html'),
-(7, 'about_text_2', NULL, 'html'),
-(8, 'about_ig_link', NULL, 'text'),
-(9, 'about_socials_title', NULL, 'text'),
-(10, 'reviews_title', NULL, 'text'),
-(11, 'reviews_text', NULL, 'html'),
-(12, 'reviews_link', NULL, 'text'),
-(13, 'gallery_title', NULL, 'text'),
-(14, 'gallery_text_1', NULL, 'html'),
-(15, 'gallery_text_2', NULL, 'html'),
-(16, 'services_title', NULL, 'text'),
-(17, 'services_desc', NULL, 'html'),
-(18, 'contact_title', NULL, 'text'),
-(19, 'contact_desc_1', NULL, 'html'),
-(20, 'contact_desc_2', NULL, 'html'),
-(21, 'form_name', NULL, 'text'),
-(22, 'form_email', NULL, 'text'),
-(23, 'form_message', NULL, 'text'),
-(24, 'form_submit', NULL, 'text'),
-(25, 'rodo_consent', NULL, 'text'),
-(26, 'btn_book', NULL, 'text');
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `content_blocks` WRITE;
+/*!40000 ALTER TABLE `content_blocks` DISABLE KEYS */;
+INSERT INTO `content_blocks` VALUES
+(1,'hero_title',NULL,'html'),
+(2,'hero_desc',NULL,'text'),
+(3,'hero_button',NULL,'text'),
+(4,'hero_small_text',NULL,'text'),
+(5,'about_title',NULL,'html'),
+(6,'about_text_1',NULL,'text'),
+(7,'about_text_2',NULL,'text'),
+(8,'about_ig_link',NULL,'text'),
+(9,'about_socials_title',NULL,'text'),
+(10,'reviews_title',NULL,'html'),
+(11,'reviews_text',NULL,'text'),
+(12,'reviews_link',NULL,'text'),
+(13,'gallery_title',NULL,'html'),
+(14,'gallery_text_1',NULL,'html'),
+(15,'gallery_text_2',NULL,'html'),
+(16,'services_title',NULL,'html'),
+(17,'services_desc',NULL,'text'),
+(18,'contact_title',NULL,'html'),
+(19,'contact_desc_1',NULL,'html'),
+(20,'contact_desc_2',NULL,'html'),
+(21,'form_name',NULL,'text'),
+(22,'form_email',NULL,'text'),
+(23,'form_message',NULL,'text'),
+(24,'form_submit',NULL,'text'),
+(25,'rodo_consent',NULL,'text'),
+(26,'btn_book',NULL,'text'),
+(27,'link_booksy','link_booksy','text'),
+(28,'link_instagram','link_instagram','text'),
+(29,'link_direct','link_direct','text'),
+(30,'seo_title','seo_title','text'),
+(31,'seo_desc','seo_desc','text'),
+(32,'skip_link','skip_link','text'),
+(33,'nav_label','nav_label','text'),
+(34,'nav_services','nav_services','text'),
+(35,'nav_about','nav_about','text'),
+(36,'nav_prices','nav_prices','text'),
+(37,'nav_gallery','nav_gallery','text'),
+(38,'nav_reviews','nav_reviews','text'),
+(39,'nav_contact','nav_contact','text'),
+(40,'book_btn','book_btn','text'),
+(41,'menu_open','menu_open','text'),
+(42,'close','close','text'),
+(43,'back_to_top','back_to_top','text'),
+(44,'hero_eyebrow','hero_eyebrow','text'),
+(45,'hero_button_ig','hero_button_ig','text'),
+(46,'hero_rating_label','hero_rating_label','text'),
+(47,'hero_promo','hero_promo','text'),
+(48,'hero_img_alt','hero_img_alt','text'),
+(49,'hero_img2_alt','hero_img2_alt','text'),
+(50,'perk_1_title','perk_1_title','text'),
+(51,'perk_1_text','perk_1_text','text'),
+(52,'perk_2_title','perk_2_title','text'),
+(53,'perk_2_text','perk_2_text','text'),
+(54,'perk_3_title','perk_3_title','text'),
+(55,'perk_3_text','perk_3_text','text'),
+(56,'perk_4_title','perk_4_title','text'),
+(57,'perk_4_text','perk_4_text','text'),
+(58,'services_eyebrow','services_eyebrow','text'),
+(59,'svc_manicure_title','svc_manicure_title','text'),
+(60,'svc_manicure_text','svc_manicure_text','text'),
+(61,'svc_manicure_price','svc_manicure_price','text'),
+(62,'svc_extensions_title','svc_extensions_title','text'),
+(63,'svc_extensions_text','svc_extensions_text','text'),
+(64,'svc_extensions_price','svc_extensions_price','text'),
+(65,'svc_pedicure_title','svc_pedicure_title','text'),
+(66,'svc_pedicure_text','svc_pedicure_text','text'),
+(67,'svc_pedicure_price','svc_pedicure_price','text'),
+(68,'svc_brows_title','svc_brows_title','text'),
+(69,'svc_brows_text','svc_brows_text','text'),
+(70,'svc_brows_price','svc_brows_price','text'),
+(71,'svc_hair_title','svc_hair_title','text'),
+(72,'svc_hair_text','svc_hair_text','text'),
+(73,'svc_hair_price','svc_hair_price','text'),
+(74,'svc_barber_title','svc_barber_title','text'),
+(75,'svc_barber_text','svc_barber_text','text'),
+(76,'svc_barber_price','svc_barber_price','text'),
+(77,'about_eyebrow','about_eyebrow','text'),
+(78,'about_img_alt','about_img_alt','text'),
+(79,'about_badge','about_badge','text'),
+(80,'team_title','team_title','text'),
+(81,'team_role_nataliia','team_role_nataliia','text'),
+(82,'team_role_taya','team_role_taya','text'),
+(83,'team_role_alina','team_role_alina','text'),
+(84,'team_role_vadzim','team_role_vadzim','text'),
+(85,'prices_eyebrow','prices_eyebrow','text'),
+(86,'prices_title','prices_title','html'),
+(87,'prices_desc','prices_desc','text'),
+(88,'prices_note','prices_note','text'),
+(89,'gallery_eyebrow','gallery_eyebrow','text'),
+(90,'gallery_text','gallery_text','text'),
+(91,'gallery_alt','gallery_alt','text'),
+(92,'gallery_more','gallery_more','text'),
+(93,'reviews_eyebrow','reviews_eyebrow','text'),
+(94,'review_1_text','review_1_text','text'),
+(95,'review_1_author','review_1_author','text'),
+(96,'review_1_service','review_1_service','text'),
+(97,'review_2_text','review_2_text','text'),
+(98,'review_2_author','review_2_author','text'),
+(99,'review_2_service','review_2_service','text'),
+(100,'review_3_text','review_3_text','text'),
+(101,'review_3_author','review_3_author','text'),
+(102,'review_3_service','review_3_service','text'),
+(103,'review_4_text','review_4_text','text'),
+(104,'review_4_author','review_4_author','text'),
+(105,'review_4_service','review_4_service','text'),
+(106,'contact_eyebrow','contact_eyebrow','text'),
+(107,'contact_desc','contact_desc','text'),
+(108,'contact_address_label','contact_address_label','text'),
+(109,'contact_metro','contact_metro','text'),
+(110,'contact_hours_label','contact_hours_label','text'),
+(111,'contact_hours_value','contact_hours_value','text'),
+(112,'contact_booking_label','contact_booking_label','text'),
+(113,'contact_amenities_label','contact_amenities_label','text'),
+(114,'contact_amenities_value','contact_amenities_value','text'),
+(115,'map_title','map_title','text'),
+(116,'form_title','form_title','text'),
+(117,'form_phone','form_phone','text'),
+(118,'form_sending','form_sending','text'),
+(119,'form_required','form_required','text'),
+(120,'form_error','form_error','text'),
+(121,'footer_tagline','footer_tagline','text'),
+(122,'footer_nav_title','footer_nav_title','text'),
+(123,'footer_lang_title','footer_lang_title','text'),
+(124,'footer_rights','footer_rights','text'),
+(125,'promo_value','promo_value','text'),
+(126,'promo_title','promo_title','text'),
+(127,'promo_sub','promo_sub','text'),
+(128,'promo_ring','promo_ring','text'),
+(129,'og_image_alt','og_image_alt','text'),
+(130,'contact_phone_label','contact_phone_label','text'),
+(131,'map_link','map_link','text'),
+(132,'faq_eyebrow','faq_eyebrow','text'),
+(133,'faq_title','faq_title','html'),
+(134,'faq_1_q','faq_1_q','text'),
+(135,'faq_1_a','faq_1_a','text'),
+(136,'faq_2_q','faq_2_q','text'),
+(137,'faq_2_a','faq_2_a','text'),
+(138,'faq_3_q','faq_3_q','text'),
+(139,'faq_3_a','faq_3_a','text'),
+(140,'faq_4_q','faq_4_q','text'),
+(141,'faq_4_a','faq_4_a','text'),
+(142,'faq_5_q','faq_5_q','text'),
+(143,'faq_5_a','faq_5_a','text'),
+(144,'faq_6_q','faq_6_q','text'),
+(145,'faq_6_a','faq_6_a','text'),
+(146,'faq_7_q','faq_7_q','text'),
+(147,'faq_7_a','faq_7_a','text'),
+(148,'faq_8_q','faq_8_q','text'),
+(149,'faq_8_a','faq_8_a','text'),
+(150,'alt_service_suffix','alt_service_suffix','text'),
+(151,'alt_work-cherry','alt_work-cherry','text'),
+(152,'alt_work-clean-pink','alt_work-clean-pink','text'),
+(153,'alt_work-plum-matte','alt_work-plum-matte','text'),
+(154,'alt_work-lash-lamination','alt_work-lash-lamination','text'),
+(155,'alt_work-hair-brunette','alt_work-hair-brunette','text'),
+(156,'alt_work-french-square','alt_work-french-square','text'),
+(157,'alt_work-nude-art','alt_work-nude-art','text'),
+(158,'alt_work-pedicure-red','alt_work-pedicure-red','text'),
+(159,'alt_work-halloween','alt_work-halloween','text'),
+(160,'alt_work-hair-blonde','alt_work-hair-blonde','text'),
+(161,'alt_work-plum-french','alt_work-plum-french','text'),
+(162,'alt_work-lash-before-after','alt_work-lash-before-after','text'),
+(163,'alt_work-milky-nude','alt_work-milky-nude','text'),
+(164,'alt_work-barber-fade','alt_work-barber-fade','text'),
+(165,'alt_work-pink-nude','alt_work-pink-nude','text'),
+(166,'alt_hero-ring','alt_hero-ring','text'),
+(167,'404_title','404_title','text'),
+(168,'404_text','404_text','text'),
+(169,'404_button','404_button','text'),
+(170,'privacy_link','privacy_link','text'),
+(171,'privacy_title','privacy_title','text'),
+(172,'privacy_desc','privacy_desc','text'),
+(173,'privacy_body','privacy_body','html'),
+(174,'cookie_text','cookie_text','text'),
+(175,'cookie_accept','cookie_accept','text'),
+(176,'cookie_decline','cookie_decline','text'),
+(177,'svcpage_breadcrumb_home','svcpage_breadcrumb_home','text'),
+(178,'svcpage_breadcrumb_services','svcpage_breadcrumb_services','text'),
+(179,'svcpage_why_eyebrow','svcpage_why_eyebrow','text'),
+(180,'svcpage_prices_eyebrow','svcpage_prices_eyebrow','text'),
+(181,'svcpage_prices_title','svcpage_prices_title','html'),
+(182,'svcpage_gallery_eyebrow','svcpage_gallery_eyebrow','text'),
+(183,'svcpage_gallery_title','svcpage_gallery_title','html'),
+(184,'svcpage_faq_title','svcpage_faq_title','html'),
+(185,'svcpage_other_eyebrow','svcpage_other_eyebrow','text'),
+(186,'svcpage_other_title','svcpage_other_title','html'),
+(187,'svcpage_more','svcpage_more','text'),
+(188,'footer_services_title','footer_services_title','text'),
+(189,'svcpage_manicure_title','svcpage_manicure_title','text'),
+(190,'svcpage_manicure_desc','svcpage_manicure_desc','text'),
+(191,'svcpage_manicure_eyebrow','svcpage_manicure_eyebrow','text'),
+(192,'svcpage_manicure_h1','svcpage_manicure_h1','html'),
+(193,'svcpage_manicure_lead','svcpage_manicure_lead','text'),
+(194,'svcpage_manicure_about_title','svcpage_manicure_about_title','html'),
+(195,'svcpage_manicure_about_1','svcpage_manicure_about_1','text'),
+(196,'svcpage_manicure_about_2','svcpage_manicure_about_2','text'),
+(197,'svcpage_manicure_b1_t','svcpage_manicure_b1_t','text'),
+(198,'svcpage_manicure_b1_x','svcpage_manicure_b1_x','text'),
+(199,'svcpage_manicure_b2_t','svcpage_manicure_b2_t','text'),
+(200,'svcpage_manicure_b2_x','svcpage_manicure_b2_x','text'),
+(201,'svcpage_manicure_b3_t','svcpage_manicure_b3_t','text'),
+(202,'svcpage_manicure_b3_x','svcpage_manicure_b3_x','text'),
+(203,'svcpage_manicure_b4_t','svcpage_manicure_b4_t','text'),
+(204,'svcpage_manicure_b4_x','svcpage_manicure_b4_x','text'),
+(205,'svcpage_manicure_faq_1_q','svcpage_manicure_faq_1_q','text'),
+(206,'svcpage_manicure_faq_1_a','svcpage_manicure_faq_1_a','text'),
+(207,'svcpage_manicure_faq_2_q','svcpage_manicure_faq_2_q','text'),
+(208,'svcpage_manicure_faq_2_a','svcpage_manicure_faq_2_a','text'),
+(209,'svcpage_manicure_faq_3_q','svcpage_manicure_faq_3_q','text'),
+(210,'svcpage_manicure_faq_3_a','svcpage_manicure_faq_3_a','text'),
+(211,'svcpage_extensions_title','svcpage_extensions_title','text'),
+(212,'svcpage_extensions_desc','svcpage_extensions_desc','text'),
+(213,'svcpage_extensions_eyebrow','svcpage_extensions_eyebrow','text'),
+(214,'svcpage_extensions_h1','svcpage_extensions_h1','html'),
+(215,'svcpage_extensions_lead','svcpage_extensions_lead','text'),
+(216,'svcpage_extensions_about_title','svcpage_extensions_about_title','html'),
+(217,'svcpage_extensions_about_1','svcpage_extensions_about_1','text'),
+(218,'svcpage_extensions_about_2','svcpage_extensions_about_2','text'),
+(219,'svcpage_extensions_b1_t','svcpage_extensions_b1_t','text'),
+(220,'svcpage_extensions_b1_x','svcpage_extensions_b1_x','text'),
+(221,'svcpage_extensions_b2_t','svcpage_extensions_b2_t','text'),
+(222,'svcpage_extensions_b2_x','svcpage_extensions_b2_x','text'),
+(223,'svcpage_extensions_b3_t','svcpage_extensions_b3_t','text'),
+(224,'svcpage_extensions_b3_x','svcpage_extensions_b3_x','text'),
+(225,'svcpage_extensions_b4_t','svcpage_extensions_b4_t','text'),
+(226,'svcpage_extensions_b4_x','svcpage_extensions_b4_x','text'),
+(227,'svcpage_extensions_faq_1_q','svcpage_extensions_faq_1_q','text'),
+(228,'svcpage_extensions_faq_1_a','svcpage_extensions_faq_1_a','text'),
+(229,'svcpage_extensions_faq_2_q','svcpage_extensions_faq_2_q','text'),
+(230,'svcpage_extensions_faq_2_a','svcpage_extensions_faq_2_a','text'),
+(231,'svcpage_extensions_faq_3_q','svcpage_extensions_faq_3_q','text'),
+(232,'svcpage_extensions_faq_3_a','svcpage_extensions_faq_3_a','text'),
+(233,'svcpage_pedicure_title','svcpage_pedicure_title','text'),
+(234,'svcpage_pedicure_desc','svcpage_pedicure_desc','text'),
+(235,'svcpage_pedicure_eyebrow','svcpage_pedicure_eyebrow','text'),
+(236,'svcpage_pedicure_h1','svcpage_pedicure_h1','html'),
+(237,'svcpage_pedicure_lead','svcpage_pedicure_lead','text'),
+(238,'svcpage_pedicure_about_title','svcpage_pedicure_about_title','html'),
+(239,'svcpage_pedicure_about_1','svcpage_pedicure_about_1','text'),
+(240,'svcpage_pedicure_about_2','svcpage_pedicure_about_2','text'),
+(241,'svcpage_pedicure_b1_t','svcpage_pedicure_b1_t','text'),
+(242,'svcpage_pedicure_b1_x','svcpage_pedicure_b1_x','text'),
+(243,'svcpage_pedicure_b2_t','svcpage_pedicure_b2_t','text'),
+(244,'svcpage_pedicure_b2_x','svcpage_pedicure_b2_x','text'),
+(245,'svcpage_pedicure_b3_t','svcpage_pedicure_b3_t','text'),
+(246,'svcpage_pedicure_b3_x','svcpage_pedicure_b3_x','text'),
+(247,'svcpage_pedicure_b4_t','svcpage_pedicure_b4_t','text'),
+(248,'svcpage_pedicure_b4_x','svcpage_pedicure_b4_x','text'),
+(249,'svcpage_pedicure_faq_1_q','svcpage_pedicure_faq_1_q','text'),
+(250,'svcpage_pedicure_faq_1_a','svcpage_pedicure_faq_1_a','text'),
+(251,'svcpage_pedicure_faq_2_q','svcpage_pedicure_faq_2_q','text'),
+(252,'svcpage_pedicure_faq_2_a','svcpage_pedicure_faq_2_a','text'),
+(253,'svcpage_pedicure_faq_3_q','svcpage_pedicure_faq_3_q','text'),
+(254,'svcpage_pedicure_faq_3_a','svcpage_pedicure_faq_3_a','text'),
+(255,'svcpage_brows_title','svcpage_brows_title','text'),
+(256,'svcpage_brows_desc','svcpage_brows_desc','text'),
+(257,'svcpage_brows_eyebrow','svcpage_brows_eyebrow','text'),
+(258,'svcpage_brows_h1','svcpage_brows_h1','html'),
+(259,'svcpage_brows_lead','svcpage_brows_lead','text'),
+(260,'svcpage_brows_about_title','svcpage_brows_about_title','html'),
+(261,'svcpage_brows_about_1','svcpage_brows_about_1','text'),
+(262,'svcpage_brows_about_2','svcpage_brows_about_2','text'),
+(263,'svcpage_brows_b1_t','svcpage_brows_b1_t','text'),
+(264,'svcpage_brows_b1_x','svcpage_brows_b1_x','text'),
+(265,'svcpage_brows_b2_t','svcpage_brows_b2_t','text'),
+(266,'svcpage_brows_b2_x','svcpage_brows_b2_x','text'),
+(267,'svcpage_brows_b3_t','svcpage_brows_b3_t','text'),
+(268,'svcpage_brows_b3_x','svcpage_brows_b3_x','text'),
+(269,'svcpage_brows_b4_t','svcpage_brows_b4_t','text'),
+(270,'svcpage_brows_b4_x','svcpage_brows_b4_x','text'),
+(271,'svcpage_brows_faq_1_q','svcpage_brows_faq_1_q','text'),
+(272,'svcpage_brows_faq_1_a','svcpage_brows_faq_1_a','text'),
+(273,'svcpage_brows_faq_2_q','svcpage_brows_faq_2_q','text'),
+(274,'svcpage_brows_faq_2_a','svcpage_brows_faq_2_a','text'),
+(275,'svcpage_brows_faq_3_q','svcpage_brows_faq_3_q','text'),
+(276,'svcpage_brows_faq_3_a','svcpage_brows_faq_3_a','text'),
+(277,'svcpage_hair_title','svcpage_hair_title','text'),
+(278,'svcpage_hair_desc','svcpage_hair_desc','text'),
+(279,'svcpage_hair_eyebrow','svcpage_hair_eyebrow','text'),
+(280,'svcpage_hair_h1','svcpage_hair_h1','html'),
+(281,'svcpage_hair_lead','svcpage_hair_lead','text'),
+(282,'svcpage_hair_about_title','svcpage_hair_about_title','html'),
+(283,'svcpage_hair_about_1','svcpage_hair_about_1','text'),
+(284,'svcpage_hair_about_2','svcpage_hair_about_2','text'),
+(285,'svcpage_hair_b1_t','svcpage_hair_b1_t','text'),
+(286,'svcpage_hair_b1_x','svcpage_hair_b1_x','text'),
+(287,'svcpage_hair_b2_t','svcpage_hair_b2_t','text'),
+(288,'svcpage_hair_b2_x','svcpage_hair_b2_x','text'),
+(289,'svcpage_hair_b3_t','svcpage_hair_b3_t','text'),
+(290,'svcpage_hair_b3_x','svcpage_hair_b3_x','text'),
+(291,'svcpage_hair_b4_t','svcpage_hair_b4_t','text'),
+(292,'svcpage_hair_b4_x','svcpage_hair_b4_x','text'),
+(293,'svcpage_hair_faq_1_q','svcpage_hair_faq_1_q','text'),
+(294,'svcpage_hair_faq_1_a','svcpage_hair_faq_1_a','text'),
+(295,'svcpage_hair_faq_2_q','svcpage_hair_faq_2_q','text'),
+(296,'svcpage_hair_faq_2_a','svcpage_hair_faq_2_a','text'),
+(297,'svcpage_hair_faq_3_q','svcpage_hair_faq_3_q','text'),
+(298,'svcpage_hair_faq_3_a','svcpage_hair_faq_3_a','text'),
+(299,'svcpage_barber_title','svcpage_barber_title','text'),
+(300,'svcpage_barber_desc','svcpage_barber_desc','text'),
+(301,'svcpage_barber_eyebrow','svcpage_barber_eyebrow','text'),
+(302,'svcpage_barber_h1','svcpage_barber_h1','html'),
+(303,'svcpage_barber_lead','svcpage_barber_lead','text'),
+(304,'svcpage_barber_about_title','svcpage_barber_about_title','html'),
+(305,'svcpage_barber_about_1','svcpage_barber_about_1','text'),
+(306,'svcpage_barber_about_2','svcpage_barber_about_2','text'),
+(307,'svcpage_barber_b1_t','svcpage_barber_b1_t','text'),
+(308,'svcpage_barber_b1_x','svcpage_barber_b1_x','text'),
+(309,'svcpage_barber_b2_t','svcpage_barber_b2_t','text'),
+(310,'svcpage_barber_b2_x','svcpage_barber_b2_x','text'),
+(311,'svcpage_barber_b3_t','svcpage_barber_b3_t','text'),
+(312,'svcpage_barber_b3_x','svcpage_barber_b3_x','text'),
+(313,'svcpage_barber_b4_t','svcpage_barber_b4_t','text'),
+(314,'svcpage_barber_b4_x','svcpage_barber_b4_x','text'),
+(315,'svcpage_barber_faq_1_q','svcpage_barber_faq_1_q','text'),
+(316,'svcpage_barber_faq_1_a','svcpage_barber_faq_1_a','text'),
+(317,'svcpage_barber_faq_2_q','svcpage_barber_faq_2_q','text'),
+(318,'svcpage_barber_faq_2_a','svcpage_barber_faq_2_a','text'),
+(319,'svcpage_barber_faq_3_q','svcpage_barber_faq_3_q','text'),
+(320,'svcpage_barber_faq_3_a','svcpage_barber_faq_3_a','text'),
+(321,'alt_work-french-almond','alt_work-french-almond','text'),
+(322,'alt_work-lash-lift','alt_work-lash-lift','text'),
+(323,'alt_work-barber-classic','alt_work-barber-classic','text'),
+(324,'svcpage_steps_eyebrow','svcpage_steps_eyebrow','text'),
+(325,'svcpage_steps_title','svcpage_steps_title','html'),
+(326,'svcpage_manicure_s1_t','svcpage_manicure_s1_t','text'),
+(327,'svcpage_manicure_s1_x','svcpage_manicure_s1_x','text'),
+(328,'svcpage_manicure_s2_t','svcpage_manicure_s2_t','text'),
+(329,'svcpage_manicure_s2_x','svcpage_manicure_s2_x','text'),
+(330,'svcpage_manicure_s3_t','svcpage_manicure_s3_t','text'),
+(331,'svcpage_manicure_s3_x','svcpage_manicure_s3_x','text'),
+(332,'svcpage_manicure_s4_t','svcpage_manicure_s4_t','text'),
+(333,'svcpage_manicure_s4_x','svcpage_manicure_s4_x','text'),
+(334,'svcpage_manicure_faq_4_q','svcpage_manicure_faq_4_q','text'),
+(335,'svcpage_manicure_faq_4_a','svcpage_manicure_faq_4_a','text'),
+(336,'svcpage_manicure_faq_5_q','svcpage_manicure_faq_5_q','text'),
+(337,'svcpage_manicure_faq_5_a','svcpage_manicure_faq_5_a','text'),
+(338,'svcpage_extensions_s1_t','svcpage_extensions_s1_t','text'),
+(339,'svcpage_extensions_s1_x','svcpage_extensions_s1_x','text'),
+(340,'svcpage_extensions_s2_t','svcpage_extensions_s2_t','text'),
+(341,'svcpage_extensions_s2_x','svcpage_extensions_s2_x','text'),
+(342,'svcpage_extensions_s3_t','svcpage_extensions_s3_t','text'),
+(343,'svcpage_extensions_s3_x','svcpage_extensions_s3_x','text'),
+(344,'svcpage_extensions_s4_t','svcpage_extensions_s4_t','text'),
+(345,'svcpage_extensions_s4_x','svcpage_extensions_s4_x','text'),
+(346,'svcpage_extensions_faq_4_q','svcpage_extensions_faq_4_q','text'),
+(347,'svcpage_extensions_faq_4_a','svcpage_extensions_faq_4_a','text'),
+(348,'svcpage_extensions_faq_5_q','svcpage_extensions_faq_5_q','text'),
+(349,'svcpage_extensions_faq_5_a','svcpage_extensions_faq_5_a','text'),
+(350,'svcpage_pedicure_s1_t','svcpage_pedicure_s1_t','text'),
+(351,'svcpage_pedicure_s1_x','svcpage_pedicure_s1_x','text'),
+(352,'svcpage_pedicure_s2_t','svcpage_pedicure_s2_t','text'),
+(353,'svcpage_pedicure_s2_x','svcpage_pedicure_s2_x','text'),
+(354,'svcpage_pedicure_s3_t','svcpage_pedicure_s3_t','text'),
+(355,'svcpage_pedicure_s3_x','svcpage_pedicure_s3_x','text'),
+(356,'svcpage_pedicure_s4_t','svcpage_pedicure_s4_t','text'),
+(357,'svcpage_pedicure_s4_x','svcpage_pedicure_s4_x','text'),
+(358,'svcpage_pedicure_faq_4_q','svcpage_pedicure_faq_4_q','text'),
+(359,'svcpage_pedicure_faq_4_a','svcpage_pedicure_faq_4_a','text'),
+(360,'svcpage_pedicure_faq_5_q','svcpage_pedicure_faq_5_q','text'),
+(361,'svcpage_pedicure_faq_5_a','svcpage_pedicure_faq_5_a','text'),
+(362,'svcpage_brows_s1_t','svcpage_brows_s1_t','text'),
+(363,'svcpage_brows_s1_x','svcpage_brows_s1_x','text'),
+(364,'svcpage_brows_s2_t','svcpage_brows_s2_t','text'),
+(365,'svcpage_brows_s2_x','svcpage_brows_s2_x','text'),
+(366,'svcpage_brows_s3_t','svcpage_brows_s3_t','text'),
+(367,'svcpage_brows_s3_x','svcpage_brows_s3_x','text'),
+(368,'svcpage_brows_s4_t','svcpage_brows_s4_t','text'),
+(369,'svcpage_brows_s4_x','svcpage_brows_s4_x','text'),
+(370,'svcpage_brows_faq_4_q','svcpage_brows_faq_4_q','text'),
+(371,'svcpage_brows_faq_4_a','svcpage_brows_faq_4_a','text'),
+(372,'svcpage_brows_faq_5_q','svcpage_brows_faq_5_q','text'),
+(373,'svcpage_brows_faq_5_a','svcpage_brows_faq_5_a','text'),
+(374,'svcpage_hair_s1_t','svcpage_hair_s1_t','text'),
+(375,'svcpage_hair_s1_x','svcpage_hair_s1_x','text'),
+(376,'svcpage_hair_s2_t','svcpage_hair_s2_t','text'),
+(377,'svcpage_hair_s2_x','svcpage_hair_s2_x','text'),
+(378,'svcpage_hair_s3_t','svcpage_hair_s3_t','text'),
+(379,'svcpage_hair_s3_x','svcpage_hair_s3_x','text'),
+(380,'svcpage_hair_s4_t','svcpage_hair_s4_t','text'),
+(381,'svcpage_hair_s4_x','svcpage_hair_s4_x','text'),
+(382,'svcpage_hair_faq_4_q','svcpage_hair_faq_4_q','text'),
+(383,'svcpage_hair_faq_4_a','svcpage_hair_faq_4_a','text'),
+(384,'svcpage_hair_faq_5_q','svcpage_hair_faq_5_q','text'),
+(385,'svcpage_hair_faq_5_a','svcpage_hair_faq_5_a','text'),
+(386,'svcpage_barber_s1_t','svcpage_barber_s1_t','text'),
+(387,'svcpage_barber_s1_x','svcpage_barber_s1_x','text'),
+(388,'svcpage_barber_s2_t','svcpage_barber_s2_t','text'),
+(389,'svcpage_barber_s2_x','svcpage_barber_s2_x','text'),
+(390,'svcpage_barber_s3_t','svcpage_barber_s3_t','text'),
+(391,'svcpage_barber_s3_x','svcpage_barber_s3_x','text'),
+(392,'svcpage_barber_s4_t','svcpage_barber_s4_t','text'),
+(393,'svcpage_barber_s4_x','svcpage_barber_s4_x','text'),
+(394,'svcpage_barber_faq_4_q','svcpage_barber_faq_4_q','text'),
+(395,'svcpage_barber_faq_4_a','svcpage_barber_faq_4_a','text'),
+(396,'svcpage_barber_faq_5_q','svcpage_barber_faq_5_q','text'),
+(397,'svcpage_barber_faq_5_a','svcpage_barber_faq_5_a','text'),
+(398,'alt_manicure-hybrydowy-bordowy','alt_manicure-hybrydowy-bordowy','text'),
+(399,'alt_manicure-czerwony-klasyczny','alt_manicure-czerwony-klasyczny','text'),
+(400,'alt_manicure-french-sliwkowy-matowy','alt_manicure-french-sliwkowy-matowy','text'),
+(401,'alt_manicure-clean-pink-nude','alt_manicure-clean-pink-nude','text'),
+(402,'alt_manicure-mleczny','alt_manicure-mleczny','text'),
+(403,'alt_manicure-matowy-szalwia','alt_manicure-matowy-szalwia','text'),
+(404,'alt_manicure-nude-zdobienie','alt_manicure-nude-zdobienie','text'),
+(405,'alt_manicure-kocie-oko-szmaragd','alt_manicure-kocie-oko-szmaragd','text'),
+(406,'alt_manicure-japonski-pasta','alt_manicure-japonski-pasta','text'),
+(407,'alt_przedluzanie-paznokci-migdal-mleczny','alt_przedluzanie-paznokci-migdal-mleczny','text'),
+(408,'alt_przedluzanie-paznokci-dlugie-biale','alt_przedluzanie-paznokci-dlugie-biale','text'),
+(409,'alt_przedluzanie-paznokci-kwadrat-nude','alt_przedluzanie-paznokci-kwadrat-nude','text'),
+(410,'alt_przedluzanie-paznokci-migdal-nude','alt_przedluzanie-paznokci-migdal-nude','text'),
+(411,'alt_przedluzanie-paznokci-french','alt_przedluzanie-paznokci-french','text'),
+(412,'alt_paznokcie-zdobienia-3d','alt_paznokcie-zdobienia-3d','text'),
+(413,'alt_paznokcie-zdobienie-morskie','alt_paznokcie-zdobienie-morskie','text'),
+(414,'alt_pedicure-hybrydowy-czerwony','alt_pedicure-hybrydowy-czerwony','text'),
+(415,'alt_pedicure-bordowy','alt_pedicure-bordowy','text'),
+(416,'alt_pedicure-wisniowy','alt_pedicure-wisniowy','text'),
+(417,'alt_pedicure-czerwony-klasyczny','alt_pedicure-czerwony-klasyczny','text'),
+(418,'alt_pedicure-burgund','alt_pedicure-burgund','text'),
+(419,'alt_pedicure-nude','alt_pedicure-nude','text'),
+(420,'alt_laminowanie-rzes-efekt','alt_laminowanie-rzes-efekt','text'),
+(421,'alt_laminowanie-farbowanie-rzes-przed-po','alt_laminowanie-farbowanie-rzes-przed-po','text'),
+(422,'alt_elektroepilacja-zabieg','alt_elektroepilacja-zabieg','text'),
+(423,'alt_elektroepilacja-gabinet','alt_elektroepilacja-gabinet','text'),
+(424,'alt_fryzjer-bob','alt_fryzjer-bob','text'),
+(425,'alt_fryzjer-balayage','alt_fryzjer-balayage','text'),
+(426,'alt_fryzjer-dlugie-proste-wlosy','alt_fryzjer-dlugie-proste-wlosy','text'),
+(427,'alt_fryzjer-stylizacja-wlosow','alt_fryzjer-stylizacja-wlosow','text'),
+(428,'alt_barber-strzyzenie-meskie','alt_barber-strzyzenie-meskie','text'),
+(429,'alt_fryzjer-barber-vadzim','alt_fryzjer-barber-vadzim','text');
+/*!40000 ALTER TABLE `content_blocks` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `languages`
+-- Table structure for table `languages`
 --
 
+DROP TABLE IF EXISTS `languages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `languages` (
   `code` varchar(5) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `is_default` tinyint(1) DEFAULT 0
+  `is_default` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `languages`
+-- Dumping data for table `languages`
 --
 
-INSERT INTO `languages` (`code`, `name`, `is_default`) VALUES
-('en', 'English', 0),
-('pl', 'Polski', 1),
-('ru', 'Русский', 0),
-('uk', 'Українська', 0);
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `languages` WRITE;
+/*!40000 ALTER TABLE `languages` DISABLE KEYS */;
+INSERT INTO `languages` VALUES
+('en','English',0),
+('pl','Polski',1),
+('uk','Українська',0);
+/*!40000 ALTER TABLE `languages` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `pages`
+-- Table structure for table `pages`
 --
 
+DROP TABLE IF EXISTS `pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pages` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `slug` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `pages`
+-- Dumping data for table `pages`
 --
 
-INSERT INTO `pages` (`id`, `slug`, `name`) VALUES
-(1, 'home', 'Головна сторінка');
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `pages` WRITE;
+/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+INSERT INTO `pages` VALUES
+(1,'home','Головна сторінка'),
+(2,'polityka-prywatnosci','Політика конфіденційності'),
+(3,'manicure-warszawa-wola','Послуга: Манікюр · Варшава, Воля'),
+(4,'przedluzanie-paznokci-warszawa-wola','Послуга: Нарощування нігтів · Воля'),
+(5,'pedicure-warszawa-wola','Послуга: Педикюр · Варшава, Воля'),
+(6,'brwi-rzesy-warszawa-wola','Послуга: Брови та вії · Варшава, Воля'),
+(7,'fryzjer-warszawa-wola','Послуга: Перукар · Варшава, Воля'),
+(8,'barber-warszawa-wola','Послуга: Барбер · Варшава, Воля');
+/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `seo_metadata`
+-- Table structure for table `seo_metadata`
 --
 
+DROP TABLE IF EXISTS `seo_metadata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `seo_metadata` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page_id` int(11) NOT NULL,
   `lang_code` varchar(5) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `og_title` varchar(255) DEFAULT NULL,
   `og_description` text DEFAULT NULL,
-  `og_image` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `og_image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `page_id` (`page_id`,`lang_code`),
+  KEY `lang_code` (`lang_code`),
+  CONSTRAINT `seo_metadata_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `seo_metadata_ibfk_2` FOREIGN KEY (`lang_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `seo_metadata`
+-- Dumping data for table `seo_metadata`
 --
 
-INSERT INTO `seo_metadata` (`id`, `page_id`, `lang_code`, `title`, `description`, `og_title`, `og_description`, `og_image`) VALUES
-(1, 1, 'pl', 'Salon | Manicure i Pedicure', 'Nasz salon oferuje najlepsze usługi 1...', 'Salon | Manicure i Pedicure', 'Nasz salon oferuje najlepsze usługi...', '/assets/img/og-image.jpg'),
-(2, 1, 'uk', 'Салон Краси Варшава', 'Наш салон пропонує найкращі послуги...', 'Салон Краси Варшава', 'Наш салон пропонує найкращі послуги...', '/assets/img/og-image.jpg'),
-(3, 1, 'en', 'Salon | Manicure i Pedicure', '', 'Salon | Manicure i Pedicure', '', '/assets/img/og-image.jpg'),
-(4, 1, 'ru', 'Салон Красоты Варшава', 'Наш салон предлагает лучшие услуги...', 'Салон Красоты Варшава', 'Наш салон предлагает лучшие услуги...', '/assets/img/og-image.jpg');
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `seo_metadata` WRITE;
+/*!40000 ALTER TABLE `seo_metadata` DISABLE KEYS */;
+INSERT INTO `seo_metadata` VALUES
+(5,1,'pl','Manicure i pedicure Warszawa Wola — salon NOX Beauty Space','Manicure hybrydowy, pedicure SPA, brwi, rzęsy i fryzjer na Woli, blisko metra Płocka. Sterylizacja w autoklawie, ocena 5.0. −10% na pierwszą wizytę.','Manicure i pedicure Warszawa Wola — salon NOX Beauty Space','Manicure hybrydowy, pedicure SPA, brwi, rzęsy i fryzjer na Woli, blisko metra Płocka. Sterylizacja w autoklawie, ocena 5.0. −10% na pierwszą wizytę.','/assets/img/nox/og-image.jpg'),
+(6,1,'uk','Манікюр і педикюр Варшава, Воля — салон NOX Beauty Space','Гібридний манікюр, SPA-педикюр, брови, вії та перукар на Волі біля метро Płocka. Стерилізація в автоклаві, рейтинг 5.0. −10% на перший візит.','Манікюр і педикюр Варшава, Воля — салон NOX Beauty Space','Гібридний манікюр, SPA-педикюр, брови, вії та перукар на Волі біля метро Płocka. Стерилізація в автоклаві, рейтинг 5.0. −10% на перший візит.','/assets/img/nox/og-image.jpg'),
+(7,1,'en','Manicure & Pedicure in Warsaw (Wola) — NOX Beauty Space','Gel manicure, SPA pedicure, brows, lashes and hair in Wola, near Płocka metro. Autoclave sterilisation, 5.0 rating. −10% off your first visit.','Manicure & Pedicure in Warsaw (Wola) — NOX Beauty Space','Gel manicure, SPA pedicure, brows, lashes and hair in Wola, near Płocka metro. Autoclave sterilisation, 5.0 rating. −10% off your first visit.','/assets/img/nox/og-image.jpg');
+/*!40000 ALTER TABLE `seo_metadata` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `service_categories`
+-- Table structure for table `service_categories`
 --
 
+DROP TABLE IF EXISTS `service_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service_categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `slug` varchar(255) NOT NULL,
   `name_pl` varchar(255) DEFAULT NULL,
   `name_uk` varchar(255) DEFAULT NULL,
   `name_en` varchar(255) DEFAULT NULL,
-  `name_ru` varchar(255) DEFAULT NULL,
-  `sort_order` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `sort_order` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `service_categories`
+-- Dumping data for table `service_categories`
 --
 
-INSERT INTO `service_categories` (`id`, `slug`, `name_pl`, `name_uk`, `name_en`, `name_ru`, `sort_order`) VALUES
-(7, 'nails', 'Paznokcie', 'Нігті', 'Nails', 'Ногти', 10),
-(8, 'visage', 'Wizaż', 'Візаж', 'Visage', 'Визаж', 20),
-(9, 'eyelashes', 'Rzęsy', 'Вії', 'Eyelashes', 'Ресницы', 30),
-(10, 'massage', 'Masaż', 'Масаж', 'Massage', 'Массаж', 40),
-(11, 'hair', 'Włosy', 'Волосся', 'Hair', 'Волосы', 50);
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `service_categories` WRITE;
+/*!40000 ALTER TABLE `service_categories` DISABLE KEYS */;
+INSERT INTO `service_categories` VALUES
+(13,'manicure','Manicure','Манікюр','Manicure',10),
+(14,'pedicure','Pedicure','Педикюр','Pedicure',20),
+(15,'brows','Brwi i rzęsy','Брови та вії','Brows & lashes',30),
+(16,'hair','Fryzjer','Перукар','Hair',40);
+/*!40000 ALTER TABLE `service_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `service_items`
+-- Table structure for table `service_items`
 --
 
+DROP TABLE IF EXISTS `service_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service_items` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `subcategory_id` int(11) DEFAULT NULL,
   `name_pl` varchar(255) DEFAULT NULL,
   `name_uk` varchar(255) DEFAULT NULL,
   `name_en` varchar(255) DEFAULT NULL,
-  `name_ru` varchar(255) DEFAULT NULL,
   `price_pl` varchar(255) DEFAULT NULL,
   `price_uk` varchar(255) DEFAULT NULL,
   `price_en` varchar(255) DEFAULT NULL,
-  `price_ru` varchar(255) DEFAULT NULL,
-  `sort_order` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `sort_order` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `subcategory_id` (`subcategory_id`),
+  CONSTRAINT `service_items_ibfk_1` FOREIGN KEY (`subcategory_id`) REFERENCES `service_subcategories` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `service_items`
+-- Dumping data for table `service_items`
 --
 
-INSERT INTO `service_items` (`id`, `subcategory_id`, `name_pl`, `name_uk`, `name_en`, `name_ru`, `price_pl`, `price_uk`, `price_en`, `price_ru`, `sort_order`) VALUES
-(26, 10, 'Manicure klasyczny', 'Класичний манікюр', 'Classic manicure', 'Классический маникюр', '80 zł', '80 zł', '80 zł', '80 zł', 10),
-(27, 10, 'Manicure męski', 'Чоловічий манікюр', 'Men\'s manicure', 'Мужской маникюр', '100 zł', '100 zł', '100 zł', '100 zł', 20),
-(28, 10, 'Manicure hybrydowy', 'Покриття гель-лаком', 'Hybrid manicure', 'Покрытие гель-лаком', '140 zł', '140 zł', '140 zł', '140 zł', 30),
-(29, 11, 'Krótkie', 'Короткі', 'Short', 'Короткие', '200 zł', '200 zł', '200 zł', '200 zł', 10),
-(30, 11, 'Średnie', 'Середні', 'Medium', 'Средние', '220 zł', '220 zł', '220 zł', '220 zł', 20),
-(31, 11, 'Długie', 'Довгі', 'Long', 'Длинные', '250 zł', '250 zł', '250 zł', '250 zł', 30),
-(32, 12, 'Regulacja brwi', 'Корекція форми', 'Brow shaping', 'Коррекция формы', '50 zł', '50 zł', '50 zł', '50 zł', 10),
-(33, 12, 'Farbowanie', 'Фарбування', 'Tinting', 'Окрашивание', '60 zł', '60 zł', '60 zł', '60 zł', 20),
-(34, 12, 'Laminowanie', 'Ламінування', 'Lamination', 'Ламинирование', '100 zł', '100 zł', '100 zł', '100 zł', 30),
-(35, 13, 'Makijaż dzienny', 'Денний макіяж', 'Day makeup', 'Дневной макияж', '170 zł', '170 zł', '170 zł', '170 zł', 10),
-(36, 13, 'Makijaż wieczorowy', 'Вечірній макіяж', 'Evening makeup', 'Вечерний макияж', '220 zł', '220 zł', '220 zł', '220 zł', 20),
-(37, 14, 'Farbowanie', 'Фарбування', 'Tinting', 'Окрашивание', '50 zł', '50 zł', '50 zł', '50 zł', 10),
-(38, 14, 'Laminowanie', 'Ламінування', 'Lamination', 'Ламинирование', '150 zł', '150 zł', '150 zł', '150 zł', 20),
-(39, 14, 'Przedłużanie 1:1', 'Нарощування 1:1', 'Extensions 1:1', 'Наращивание 1:1', '170 zł', '170 zł', '170 zł', '170 zł', 30),
-(40, 14, 'Przedłużanie 2:1', 'Нарощування 2:1', 'Extensions 2:1', 'Наращивание 2:1', '180 zł', '180 zł', '180 zł', '180 zł', 40),
-(41, 15, '1 godzina', '1 година', '1 hour', '1 час', '180 zł', '180 zł', '180 zł', '180 zł', 10),
-(42, 15, '1.5 godziny', '1.5 години', '1.5 hours', '1.5 часа', '250 zł', '250 zł', '250 zł', '250 zł', 20),
-(43, 16, '1 godzina', '1 година', '1 hour', '1 час', '220 zł', '220 zł', '220 zł', '220 zł', 10),
-(44, 16, '1.5 godziny', '1.5 години', '1.5 hours', '1.5 часа', '290 zł', '290 zł', '290 zł', '290 zł', 20),
-(45, 17, 'Strzyżenie damskie', 'Стрижка жіноча', 'Women\'s haircut', 'Стрижка женская', '150 zł', '150 zł', '150 zł', '150 zł', 10),
-(46, 17, 'Modelowanie', 'Укладка', 'Styling', 'Укладка', '90 zł', '90 zł', '90 zł', '90 zł', 20),
-(47, 17, 'Loki', 'Локони', 'Curls', 'Локоны', '140 zł', '140 zł', '140 zł', '140 zł', 30),
-(48, 18, 'Farbowanie odrostów', 'Фарбування коренів', 'Root touch-up', 'Окрашивание корней', '250 zł', '250 zł', '250 zł', '250 zł', 10),
-(49, 18, 'Tonowanie', 'Тонування', 'Toning', 'Тонирование', '260 zł', '260 zł', '260 zł', '260 zł', 20),
-(50, 18, 'Airtouch', 'Airtouch', 'Airtouch', 'Airtouch', '800 zł', '800 zł', '800 zł', '800 zł', 30),
-(51, 10, 'тест пл', 'тест ук', 'тест ет', ' тест ру', 'тест ціна зл', 'тест ціна ук', 'тест ціна ен', 'тест ціна гу', 0);
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `service_items` WRITE;
+/*!40000 ALTER TABLE `service_items` DISABLE KEYS */;
+INSERT INTO `service_items` VALUES
+(52,20,'Manicure hybrydowy','Гібридний манікюр','Gel manicure','160 zł','160 zł','160 zł',10),
+(53,20,'Manicure klasyczny (bez hybrydy)','Класичний манікюр (без покриття)','Classic manicure (no gel)','110 zł','110 zł','110 zł',20),
+(54,20,'Manicure japoński','Японський манікюр','Japanese manicure','130 zł','130 zł','130 zł',30),
+(55,20,'Manicure męski','Чоловічий манікюр','Men’s manicure','110 zł','110 zł','110 zł',40),
+(56,21,'Przedłużanie paznokci — długość 1','Нарощування нігтів — довжина 1','Nail extensions — length 1','240 zł','240 zł','240 zł',10),
+(57,21,'Przedłużanie paznokci — długość 2','Нарощування нігтів — довжина 2','Nail extensions — length 2','260 zł','260 zł','260 zł',20),
+(58,21,'Przedłużanie paznokci — długość 3–4','Нарощування нігтів — довжина 3–4','Nail extensions — length 3–4','280 zł','280 zł','280 zł',30),
+(59,21,'Uzupełnienie żelem/akrylożelem — długość 1','Корекція гелем/акригелем — довжина 1','Gel/polygel refill — length 1','200 zł','200 zł','200 zł',40),
+(60,21,'Uzupełnienie żelem/akrylożelem — długość 2','Корекція гелем/акригелем — довжина 2','Gel/polygel refill — length 2','220 zł','220 zł','220 zł',50),
+(61,21,'Uzupełnienie żelem/akrylożelem — długość 3–4','Корекція гелем/акригелем — довжина 3–4','Gel/polygel refill — length 3–4','240 zł','240 zł','240 zł',60),
+(62,21,'Usunięcie poprzedniej stylizacji żelowej','Зняття попереднього гелевого покриття','Removal of previous gel','+40 zł','+40 zł','+40 zł',70),
+(63,22,'Pedicure hybrydowy','Гібридний педикюр','Gel pedicure','190 zł','190 zł','190 zł',10),
+(64,22,'Pedicure hybrydowy częściowy','Гібридний педикюр частковий (без стопи)','Partial gel pedicure (toes only)','160 zł','160 zł','160 zł',20),
+(65,22,'Pedicure hybrydowy SPA','Гібридний SPA-педикюр','SPA gel pedicure','205 zł','205 zł','205 zł',30),
+(66,22,'Pedicure klasyczny','Класичний педикюр','Classic pedicure','150 zł','150 zł','150 zł',40),
+(67,22,'Pedicure klasyczny SPA','Класичний SPA-педикюр','Classic SPA pedicure','165 zł','165 zł','165 zł',50),
+(68,22,'Pedicure męski SPA','Чоловічий SPA-педикюр','Men’s SPA pedicure','180 zł','180 zł','180 zł',60),
+(69,23,'Regulacja brwi','Корекція брів','Brow shaping','50 zł','50 zł','50 zł',10),
+(70,23,'Regulacja i farbowanie brwi','Корекція та фарбування брів','Brow shaping & tint','80 zł','80 zł','80 zł',20),
+(71,23,'Laminowanie brwi + regulacja','Ламінування брів + корекція','Brow lamination + shaping','130 zł','130 zł','130 zł',30),
+(72,23,'Laminowanie brwi + regulacja + farbowanie','Ламінування брів + корекція + фарбування','Brow lamination + shaping + tint','150 zł','150 zł','150 zł',40),
+(73,24,'Laminowanie rzęs','Ламінування вій','Lash lift','160 zł','160 zł','160 zł',10),
+(74,24,'Farbowanie rzęs','Фарбування вій','Lash tint','40 zł','40 zł','40 zł',20),
+(75,24,'PROMO: laminowanie brwi i rzęs','PROMO: ламінування брів і вій','PROMO: brow & lash lamination','270 zł','270 zł','270 zł',30),
+(76,25,'Depilacja wąsika','Депіляція над губою','Upper lip wax','30 zł','30 zł','30 zł',10),
+(77,25,'Elektroepilacja — zapisy przez Direct','Електроепіляція — запис через Direct','Electrolysis — book via Instagram','—','—','—',20),
+(78,26,'Mycie + strzyżenie + czesanie — włosy krótkie','Миття + стрижка + укладка — коротке волосся','Wash + cut + style — short hair','100 zł','100 zł','100 zł',10),
+(79,26,'Mycie + strzyżenie + czesanie — włosy średnie','Миття + стрижка + укладка — середнє волосся','Wash + cut + style — medium hair','120 zł','120 zł','120 zł',20),
+(80,26,'Mycie + strzyżenie + czesanie — włosy długie','Миття + стрижка + укладка — довге волосся','Wash + cut + style — long hair','140 zł','140 zł','140 zł',30),
+(81,26,'Strzyżenie końcówek (bez mycia)','Підрізання кінчиків (без миття)','Trim (no wash)','80 zł','80 zł','80 zł',40),
+(82,26,'Strzyżenie grzywki','Стрижка чубчика','Fringe trim','40 zł','40 zł','40 zł',50),
+(83,27,'Strzyżenie męskie (mycie + strzyżenie)','Чоловіча стрижка (миття + стрижка)','Men’s haircut (wash + cut)','70 zł','70 zł','70 zł',10),
+(84,27,'Strzyżenie męskie nożyczkami','Чоловіча стрижка ножицями','Men’s scissor cut','90 zł','90 zł','90 zł',20),
+(85,27,'Strzyżenie dziecięce (do 10 lat)','Дитяча стрижка (до 10 років)','Kids’ haircut (up to 10)','50 zł','50 zł','50 zł',30),
+(86,28,'Konsultacja przed farbowaniem','Консультація перед фарбуванням','Colour consultation','gratis','безкоштовно','free',10),
+(87,28,'Koloryzacja jednolita — włosy krótkie','Однотонне фарбування — коротке волосся','Single-colour — short hair','280 zł','280 zł','280 zł',20),
+(88,28,'Koloryzacja jednolita — włosy średnie','Однотонне фарбування — середнє волосся','Single-colour — medium hair','310 zł','310 zł','310 zł',30),
+(89,28,'Koloryzacja jednolita — włosy długie','Однотонне фарбування — довге волосся','Single-colour — long hair','350 zł','350 zł','350 zł',40),
+(90,28,'PROMO: tonowanie + strzyżenie','PROMO: тонування + стрижка','PROMO: toning + haircut','300 zł','300 zł','300 zł',50);
+/*!40000 ALTER TABLE `service_items` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `service_subcategories`
+-- Table structure for table `service_subcategories`
 --
 
+DROP TABLE IF EXISTS `service_subcategories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `service_subcategories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_id` int(11) DEFAULT NULL,
   `name_pl` varchar(255) DEFAULT NULL,
   `name_uk` varchar(255) DEFAULT NULL,
   `name_en` varchar(255) DEFAULT NULL,
-  `name_ru` varchar(255) DEFAULT NULL,
-  `sort_order` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `sort_order` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `service_subcategories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `service_categories` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `service_subcategories`
+-- Dumping data for table `service_subcategories`
 --
 
-INSERT INTO `service_subcategories` (`id`, `category_id`, `name_pl`, `name_uk`, `name_en`, `name_ru`, `sort_order`) VALUES
-(10, 7, 'Manicure', 'Манікюр', 'Manicure', 'Маникюр', 10),
-(11, 7, 'Przedłużanie paznokci', 'Нарощування нігтів', 'Nail extensions', 'Наращивание ногтей', 20),
-(12, 8, 'Brwi', 'Брови', 'Brows', 'Брови', 10),
-(13, 8, 'Makijaż', 'Макіяж', 'Makeup', 'Макияж', 20),
-(14, 9, 'Rzęsy', 'Вії', 'Eyelashes', 'Ресницы', 10),
-(15, 10, 'Masaż klasyczny', 'Класичний масаж', 'Classic massage', 'Классический массаж', 10),
-(16, 10, 'Masaż sportowy', 'Спортивний масаж', 'Sports massage', 'Спортивный массаж', 20),
-(17, 11, 'Stylizacja i Strzyżenie', 'Укладка та Стрижка', 'Styling and Haircut', 'Укладка и Стрижка', 10),
-(18, 11, 'Farbowanie', 'Фарбування', 'Coloring', 'Окрашивание', 20);
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `service_subcategories` WRITE;
+/*!40000 ALTER TABLE `service_subcategories` DISABLE KEYS */;
+INSERT INTO `service_subcategories` VALUES
+(20,13,'Manicure','Манікюр','Manicure',10),
+(21,13,'Przedłużanie i uzupełnianie','Нарощування та корекція','Extensions & refills',20),
+(22,14,'Pedicure','Педикюр','Pedicure',10),
+(23,15,'Brwi','Брови','Brows',10),
+(24,15,'Rzęsy','Вії','Lashes',20),
+(25,15,'Depilacja i elektroepilacja','Депіляція та електроепіляція','Waxing & electrolysis',30),
+(26,16,'Strzyżenie damskie','Жіноча стрижка','Women’s haircuts',10),
+(27,16,'Strzyżenie męskie i dziecięce','Чоловіча та дитяча стрижка','Men’s & kids’ cuts',20),
+(28,16,'Koloryzacja','Фарбування','Colouring',30);
+/*!40000 ALTER TABLE `service_subcategories` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `slider_images`
+-- Table structure for table `slider_images`
 --
 
+DROP TABLE IF EXISTS `slider_images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `slider_images` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `slider_type` varchar(50) NOT NULL,
   `image_path` varchar(255) NOT NULL,
-  `sort_order` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `sort_order` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `slider_images`
+-- Dumping data for table `slider_images`
 --
 
-INSERT INTO `slider_images` (`id`, `slider_type`, `image_path`, `sort_order`) VALUES
-(27, 'hero', '/assets/img/slider-image-01.BLjGY7Tt_1ggL5J.webp', 0),
-(28, 'hero', '/assets/img/slider-image-02.B6QS6ABQ_NaqWT.webp', 10),
-(29, 'hero', '/assets/img/slider-image-03.uxZQsQSE_Z1f55u.webp', 20),
-(30, 'hero', '/assets/img/slider-image-04.DIgV1dWw_1CSoJW.webp', 30),
-(31, 'hero', '/assets/img/slider-image-05.DK2cK-Is_1Tm2o4.webp', 40),
-(32, 'hero', '/assets/img/slider-image-06.BHFJqsXQ_2ggQVj.webp', 50),
-(33, 'hero', '/assets/img/slider-image-07.CI7nJox7_ZH3xHp.webp', 60),
-(34, 'hero', '/assets/img/slider-image-08.r1yclwGx_ZKRrAg.webp', 70),
-(35, 'hero', '/assets/img/slider-image-09.B6vK9DYb_ZWa1pX.webp', 80),
-(36, 'hero', '/assets/img/slider-image-10.CCWLUVQQ_ZB6MGz.webp', 90),
-(37, 'hero', '/assets/img/slider-image-11.BCUSUzih_ZMSBoh.webp', 100),
-(38, 'hero', '/assets/img/slider-image-12.D91Ql-NB_2d7X3R.webp', 110),
-(39, 'gallery', '/assets/img/example-1.BWNU52GE_Z1qlEN2.webp', 0),
-(40, 'gallery', '/assets/img/example-2.DQc_ouVF_1FGO0o.webp', 10),
-(41, 'gallery', '/assets/img/example-3.BseZE_hV_O3FO8.webp', 20),
-(42, 'gallery', '/assets/img/example-10.B65sMmJg_ZXRNiA.webp', 30),
-(43, 'gallery', '/assets/img/example-11.CAxC705y_2d68Gd.webp', 40),
-(44, 'gallery', '/assets/img/example-27.BV35obP6_Zls9eL.webp', 50),
-(45, 'gallery', '/assets/img/example-28.DYgT3cm6_2iHFrH.webp', 60),
-(46, 'gallery', '/assets/img/example-29.BuB576S__Z1o1uzo.webp', 70),
-(47, 'gallery', '/assets/img/example-30.CjA5y-N9_NqyYH.webp', 80),
-(48, 'gallery', '/assets/img/example-31.TdQY_Cei_2pFcXm.webp', 90),
-(49, 'gallery', '/assets/img/example-32.B1zUkhor_1PFp0q.webp', 100);
-
--- --------------------------------------------------------
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `slider_images` WRITE;
+/*!40000 ALTER TABLE `slider_images` DISABLE KEYS */;
+INSERT INTO `slider_images` VALUES
+(50,'hero','/assets/img/nox/hero-chrome.webp',0),
+(51,'hero','/assets/img/nox/salon-interior.webp',10),
+(52,'gallery','/assets/img/nox/work-cherry.webp',0),
+(53,'gallery','/assets/img/nox/work-clean-pink.webp',10),
+(54,'gallery','/assets/img/nox/work-plum-matte.webp',20),
+(55,'gallery','/assets/img/nox/work-lash-lamination.webp',30),
+(56,'gallery','/assets/img/nox/work-hair-brunette.webp',40),
+(57,'gallery','/assets/img/nox/work-french-square.webp',50),
+(58,'gallery','/assets/img/nox/work-nude-art.webp',60),
+(59,'gallery','/assets/img/nox/work-pedicure-red.webp',70),
+(60,'gallery','/assets/img/nox/work-halloween.webp',80),
+(61,'gallery','/assets/img/nox/work-hair-blonde.webp',90),
+(62,'gallery','/assets/img/nox/work-plum-french.webp',100),
+(63,'gallery','/assets/img/nox/work-lash-before-after.webp',110),
+(64,'gallery','/assets/img/nox/work-milky-nude.webp',120),
+(65,'gallery','/assets/img/nox/work-barber-fade.webp',130),
+(66,'gallery','/assets/img/nox/work-pink-nude.webp',140),
+(67,'gallery','/assets/img/nox/hero-ring.webp',150);
+/*!40000 ALTER TABLE `slider_images` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
--- Структура таблиці `translations`
+-- Table structure for table `translations`
 --
 
+DROP TABLE IF EXISTS `translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `translations` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `block_id` int(11) NOT NULL,
   `lang_code` varchar(5) NOT NULL,
-  `value` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `value` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `block_id` (`block_id`,`lang_code`),
+  KEY `lang_code` (`lang_code`),
+  CONSTRAINT `translations_ibfk_1` FOREIGN KEY (`block_id`) REFERENCES `content_blocks` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `translations_ibfk_2` FOREIGN KEY (`lang_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1488 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп даних таблиці `translations`
+-- Dumping data for table `translations`
 --
 
-INSERT INTO `translations` (`id`, `block_id`, `lang_code`, `value`) VALUES
-(1, 1, 'uk', 'У Salon ми втілюємо не лише мрії, а й стильні фантазії!'),
-(2, 2, 'uk', 'Професійний манікюр і педикюр, гібридний манікюр, моделювання нігтів та догляд за бровами у Варшаві - все, щоб ви почувалися впевнено та особливо. Наші фахівці подбають про кожну деталь, а ви можете просто... бути собою.'),
-(3, 3, 'uk', 'Забронювати час'),
-(4, 4, 'uk', 'Salon - краса починається саме тут. Запишіться на прийом сьогодні!'),
-(5, 5, 'uk', 'Трохи про нас'),
-(6, 6, 'uk', 'Наша студія — це більше, ніж просто місце для косметичних послуг у Варшаві. Це простір, де мистецтво зустрічається з пристрастю. Ми створюємо манікюр, дизайн нігтів і педикюр, а також дбаємо про брови та повний beauty-образ. Наші досвідчені професіонали використовують високоякісні продукти та сучасні інновації у сфері краси.'),
-(7, 7, 'uk', 'Залишайтеся на зв&#39;язку з нами в соціальних мережах! Слідкуйте за нами, щоб отримувати останні оновлення, спеціальні пропозиції та натхнення. Дізнайтеся про закулісні моменти та подивіться, чому наші клієнти нас люблять. Приєднуйтесь до нашої зростаючої спільноти сьогодні!'),
-(8, 8, 'uk', 'Підпишіться на наш Instagram'),
-(9, 9, 'uk', 'Інші наші соціальні мережі:'),
-(10, 10, 'uk', 'Щось пішло не за планом? Ми все виправимо!'),
-(11, 11, 'uk', 'У нашому салоні ваше задоволення є нашим головним пріоритетом. Наші кваліфіковані фахівці використовують лише преміальні продукти та дотримуються найвищих стандартів, щоб щоразу забезпечувати виняткові результати.'),
-(12, 12, 'uk', 'Перегляньте наші останні відгуки'),
-(13, 13, 'uk', 'Галерея наших робіт'),
-(14, 14, 'uk', 'Від тонких вдосконалень до сміливих фірмових образів, наше портфоліо демонструє широту нашого ремесла: дбайливий стиль, майстерність кольору та всебічний догляд за зовнішністю, який підкреслює унікальну красу та впевненість кожного клієнта.'),
-(15, 15, 'uk', 'Хочете більше? <a class=\"text-black-900 inline-flex cursor-pointer items-center gap-1 font-semibold underline hover:no-underline\" href=\"https://www.instagram.com/Salon.warsaw\" target=\"_blank\" rel=\"noopener\"><span>Перегляньте наш Instagram</span></a>, щоб побачити останні оновлення, прев’ю та трансформації клієнтів.'),
-(16, 16, 'uk', 'Прайс-лист послуг'),
-(17, 17, 'uk', 'Відкрийте всі наші послуги: нігті, класичний і гібридний манікюр, педикюр, стилізація брів та інші beauty-процедури у Варшаві. Інтерактивні картки категорій дозволяють фільтрувати перегляд та зосередитись на тому, що вас цікавить.'),
-(18, 26, 'uk', 'Записатись'),
-(19, 18, 'uk', 'Зв&#39;яжіться з Нами Легко всього за Два Кроки'),
-(20, 19, 'uk', 'Маєте запитання або хочете зв&#39;язатися? Наша проста форма полегшує зв&#39;язок з нами. Просто заповніть деталі, а ми подбаємо про решту!'),
-(21, 20, 'uk', 'Хочете швидшої відповіді? Напишіть нам у <a href=\"https://ig.me/m/Salon.warsaw\" target=\"_blank\" rel=\"noopener\" class=\"hover:text-cove-600 font-medium underline transition-[color] duration-200\">Instagram Direct</a> і ми швидко вам відповімо!'),
-(22, 21, 'uk', 'Введіть ваше імʼя'),
-(23, 22, 'uk', 'Введіть вашу пошту'),
-(24, 23, 'uk', 'Введіть ваше повідомлення'),
-(25, 25, 'uk', 'Wyrażam zgodę na przetwarzanie moich danych osobowych w celu kontaktu zgodnie z polityką prywatności.'),
-(26, 24, 'uk', 'Надіслати'),
-(27, 8, 'en', 'Subscribe to our Instagram'),
-(28, 9, 'en', 'Our other social networks:'),
-(29, 6, 'en', 'Our studio is more than just a place for beauty services in Warsaw. It\'s a space where art meets passion. We create manicures, nail designs, and pedicures, and also take care of your eyebrows and complete beauty look. Our experienced professionals use high-quality products and modern innovations in the beauty industry.'),
-(30, 7, 'en', 'Stay in touch with us on social media! Follow us to get the latest updates, special offers, and inspiration. Learn about behind-the-scenes moments and see why our clients love us. Join our growing community today!'),
-(31, 5, 'en', 'A little about us'),
-(32, 26, 'en', 'Book Now'),
-(33, 19, 'en', 'Have questions or want to get in touch? Our simple form makes contacting us easy. Just fill in the details, and we\'ll take care of the rest!'),
-(34, 20, 'en', 'Want a faster response? Write to us on <a href=\"https://ig.me/m/Salon.warsaw\" target=\"_blank\" rel=\"noopener\" class=\"hover:text-cove-600 font-medium underline transition-[color] duration-200\">Instagram Direct</a> and we will reply quickly!'),
-(35, 18, 'en', 'Contact Us Easily in Just Two Steps'),
-(36, 22, 'en', ''),
-(37, 23, 'en', ''),
-(38, 21, 'en', 'Enter your name'),
-(39, 24, 'en', 'Submit'),
-(40, 14, 'en', 'From subtle enhancements to bold signature looks, our portfolio showcases the breadth of our craft: careful styling, color mastery, and comprehensive appearance care that emphasizes the unique beauty and confidence of every client.'),
-(41, 15, 'en', 'Want more? <a class=\"text-black-900 inline-flex cursor-pointer items-center gap-1 font-semibold underline hover:no-underline\" href=\"https://www.instagram.com/Salon.warsaw\" target=\"_blank\" rel=\"noopener\"><span>Check out our Instagram</span></a> to see the latest updates, sneak peeks, and client transformations.'),
-(42, 13, 'en', 'Gallery of our works'),
-(43, 3, 'en', 'Book an appointment'),
-(44, 2, 'en', 'Professional manicure and pedicure, hybrid manicure, nail styling, and eyebrow care in Warsaw - everything to make you feel confident and special. Our experts will take care of every detail, while you can just... be yourself.'),
-(45, 4, 'en', 'Salon - beauty begins right here. Book your appointment today!'),
-(46, 1, 'en', 'At Salon, we make not only dreams come true, but also stylish fantasies!'),
-(47, 12, 'en', 'Check out our latest reviews'),
-(48, 11, 'en', 'At our salon, your satisfaction is our top priority. Our qualified specialists use only premium products and adhere to the highest standards to ensure exceptional results every time.'),
-(49, 10, 'en', 'Did something not go as planned? We will fix everything!'),
-(50, 25, 'en', 'I consent to the processing of my personal data for contact purposes in accordance with the privacy policy.'),
-(51, 17, 'en', 'Discover all our services: nails, classic and hybrid manicure, pedicure, eyebrow styling, and other beauty treatments in Warsaw. Interactive category cards allow you to filter the view and focus on what interests you.'),
-(52, 16, 'en', 'Services Price List'),
-(53, 1, 'pl', 'W Salon spełniamy nie tylko marzenia, ale i stylowe fantazje!'),
-(54, 1, 'ru', 'В Salon мы воплощаем не только мечты, но и стильные фантазии!'),
-(55, 2, 'pl', 'Profesjonalny manicure i pedicure, manicure hybrydowy, stylizacja paznokci i pielęgnacja brwi w Warszawie - wszystko, abyś czuła się pewnie i wyjątkowo. Nasi specjaliści zadbają o każdy szczegół, a Ty możesz po prostu... być sobą.'),
-(56, 2, 'ru', 'Профессиональный маникюр и педикюр, гибридный маникюр, моделирование ногтей и уход за бровями в Варшаве - все, чтобы вы чувствовали себя уверенно и по-особенному. Наши специалисты позаботятся о каждой детали, а вы можете просто... быть собой.'),
-(57, 3, 'pl', 'Zarezerwuj wizytę'),
-(58, 3, 'ru', 'Забронировать время'),
-(59, 4, 'pl', 'Salon - piękno zaczyna się właśnie tutaj. Zarezerwuj wizytę już dziś!'),
-(60, 4, 'ru', 'Salon - красота начинается именно здесь. Запишитесь на прием сегодня!'),
-(61, 5, 'pl', 'Trochę o nas'),
-(62, 5, 'ru', 'Немного о нас'),
-(63, 6, 'pl', 'Nasze studio to więcej niż tylko miejsce na usługi kosmetyczne w Warszawie. To przestrzeń, w której sztuka spotyka się z pasją. Tworzymy manicure, stylizację paznokci i pedicure, a także dbamy o brwi i kompletny wizerunek beauty. Nasi doświadczeni profesjonaliści korzystają z wysokiej jakości produktów i nowoczesnych innowacji w branży beauty.'),
-(64, 6, 'ru', 'Наша студия — это больше, чем просто место для косметических услуг в Варшаве. Это пространство, где искусство встречается со страстью. Мы создаем маникюр, дизайн ногтей и педикюр, а также заботимся о бровях и полном beauty-образе. Наши опытные профессионалы используют высококачественные продукты и современные инновации в сфере красоты.'),
-(65, 7, 'pl', 'Bądź z nami w kontakcie w mediach społecznościowych! Śledź nas, aby otrzymywać najnowsze informacje, specjalne oferty i inspiracje. Poznaj kulisy naszej pracy i zobacz, dlaczego nasi klienci nas kochają. Dołącz do naszej rosnącej społeczności już dziś!'),
-(66, 7, 'ru', 'Оставайтесь на связи с нами в социальных сетях! Следите за нами, чтобы получать последние обновления, специальные предложения и вдохновение. Узнайте о закулисных моментах и посмотрите, почему наши клиенты нас любят. Присоединяйтесь к нашему растущему сообществу сегодня!'),
-(67, 8, 'pl', 'Zasubskrybuj nasz Instagram'),
-(68, 8, 'ru', 'Подпишитесь на наш Instagram'),
-(69, 9, 'pl', 'Nasze inne sieci społecznościowe:'),
-(70, 9, 'ru', 'Наши другие социальные сети:'),
-(71, 10, 'pl', 'Coś poszło nie tak? Naprawimy wszystko!'),
-(72, 10, 'ru', 'Что-то пошло не по плану? Мы все исправим!'),
-(73, 11, 'pl', 'W naszym salonie Twoje zadowolenie jest dla nas najwyższym priorytetem. Nasi wykwalifikowani specjaliści używają wyłącznie produktów premium i przestrzegają najwyższych standardów, aby za każdym razem zapewnić wyjątkowe rezultaty.'),
-(74, 11, 'ru', 'В нашем салоне ваше удовлетворение является нашим главным приоритетом. Наши квалифицированные специалисты используют только премиальные продукты и придерживаются самых высоких стандартов, чтобы каждый раз обеспечивать исключительные результаты.'),
-(75, 12, 'pl', 'Sprawdź nasze najnowsze opinie'),
-(76, 12, 'ru', 'Посмотрите наши последние отзывы'),
-(77, 13, 'pl', 'Galeria naszych prac'),
-(78, 13, 'ru', 'Галерея наших работ'),
-(79, 14, 'pl', 'Od subtelnych ulepszeń po odważne, autorskie looki – nasze portfolio ukazuje wszechstronność naszego rzemiosła: staranną stylizację, mistrzostwo w doborze kolorów oraz kompleksową pielęgnację wyglądu, która podkreśla wyjątkowe piękno i pewność siebie każdego klienta.'),
-(80, 14, 'ru', 'От тонких улучшений до смелых фирменных образов, наше портфолио демонстрирует широту нашего ремесла: бережный стиль, мастерство цвета и всесторонний уход за внешностью, который подчеркивает уникальную красоту и уверенность каждого клиента.'),
-(81, 15, 'pl', 'Chcesz więcej? <a class=\"text-black-900 inline-flex cursor-pointer items-center gap-1 font-semibold underline hover:no-underline\" href=\"https://www.instagram.com/Salon.warsaw\" target=\"_blank\" rel=\"noopener\"><span>Sprawdź nasz Instagram</span></a>, aby zobaczyć najnowsze aktualizacje, zapowiedzi i metamorfozy klientów.'),
-(82, 15, 'ru', 'Хотите больше? <a class=\"text-black-900 inline-flex cursor-pointer items-center gap-1 font-semibold underline hover:no-underline\" href=\"https://www.instagram.com/Salon.warsaw\" target=\"_blank\" rel=\"noopener\"><span>Посмотрите наш Instagram</span></a>, чтобы увидеть последние обновления, превью и трансформации клиентов.'),
-(83, 16, 'pl', 'Cennik usług'),
-(84, 16, 'ru', 'Прайс-лист услуг'),
-(85, 17, 'pl', 'Odkryj wszystkie nasze usługi: paznokcie, klasyczny i hybrydowy manicure, pedicure, stylizacja brwi oraz inne zabiegi beauty w Warszawie. Interaktywne karty kategorii pozwalają na filtrowanie widoku i skupienie się na tym, co Cię interesuje.'),
-(86, 17, 'ru', 'Откройте все наши услуги: ногти, классический и гибридный маникюр, педикюр, стилизация бровей и другие beauty-процедуры в Варшаве. Интерактивные карточки категорий позволяют фильтровать просмотр и сосредоточиться на том, что вас интересует.'),
-(87, 26, 'pl', 'Zapisz się'),
-(88, 26, 'ru', 'Записаться'),
-(89, 18, 'pl', 'Skontaktuj się z nami łatwo w zaledwie dwa kroki'),
-(90, 18, 'ru', 'Свяжитесь с нами легко всего за два шага'),
-(91, 19, 'pl', 'Masz pytania lub chcesz się z nami skontaktować? Nasz prosty formularz ułatwia kontakt z nami. Wystarczy wypełnić dane, a my zajmiemy się resztą!'),
-(92, 19, 'ru', 'У вас есть вопросы или хотите связаться с нами? Наша простая форма облегчает связь с нами. Просто заполните данные, а мы позаботимся об остальном!'),
-(93, 20, 'pl', 'Chcesz szybszej odpowiedzi? Napisz do nas na <a href=\"https://ig.me/m/Salon.warsaw\" target=\"_blank\" rel=\"noopener\" class=\"hover:text-cove-600 font-medium underline transition-[color] duration-200\">Instagram Direct</a>, a my szybko odpowiemy!'),
-(94, 20, 'ru', 'Хотите более быстрого ответа? Напишите нам в <a href=\"https://ig.me/m/Salon.warsaw\" target=\"_blank\" rel=\"noopener\" class=\"hover:text-cove-600 font-medium underline transition-[color] duration-200\">Instagram Direct</a> и мы быстро вам ответим!'),
-(95, 21, 'pl', 'Wpisz swoje imię'),
-(96, 21, 'ru', 'Введите ваше имя'),
-(97, 25, 'pl', 'Wyrażam zgodę na przetwarzanie moich danych osobowych w celu kontaktu zgodnie z polityką prywatności.'),
-(98, 25, 'ru', 'Я соглашаюсь на обработку моих персональных данных с целью обратной связи согласно политике конфиденциальности.'),
-(99, 24, 'pl', 'Wyślij'),
-(100, 24, 'ru', 'Отправить');
-
--- --------------------------------------------------------
-
---
--- Структура таблиці `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password_hash` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп даних таблиці `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password_hash`) VALUES
-(1, 'admin', '$2y$10$eb0PPozs1ninn5sY/vljYO6VQIC0cGXHa5uisq6YAfvFBQ7ztTI2S');
-
---
--- Індекси збережених таблиць
---
-
---
--- Індекси таблиці `contacts`
---
-ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `content_blocks`
---
-ALTER TABLE `content_blocks`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `key_name` (`key_name`);
-
---
--- Індекси таблиці `languages`
---
-ALTER TABLE `languages`
-  ADD PRIMARY KEY (`code`);
-
---
--- Індекси таблиці `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `slug` (`slug`);
-
---
--- Індекси таблиці `seo_metadata`
---
-ALTER TABLE `seo_metadata`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `page_id` (`page_id`,`lang_code`),
-  ADD KEY `lang_code` (`lang_code`);
-
---
--- Індекси таблиці `service_categories`
---
-ALTER TABLE `service_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `service_items`
---
-ALTER TABLE `service_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `subcategory_id` (`subcategory_id`);
-
---
--- Індекси таблиці `service_subcategories`
---
-ALTER TABLE `service_subcategories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
-
---
--- Індекси таблиці `slider_images`
---
-ALTER TABLE `slider_images`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `translations`
---
-ALTER TABLE `translations`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `block_id` (`block_id`,`lang_code`),
-  ADD KEY `lang_code` (`lang_code`);
-
---
--- Індекси таблиці `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT для збережених таблиць
---
-
---
--- AUTO_INCREMENT для таблиці `contacts`
---
-ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблиці `content_blocks`
---
-ALTER TABLE `content_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT для таблиці `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT для таблиці `seo_metadata`
---
-ALTER TABLE `seo_metadata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT для таблиці `service_categories`
---
-ALTER TABLE `service_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT для таблиці `service_items`
---
-ALTER TABLE `service_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
---
--- AUTO_INCREMENT для таблиці `service_subcategories`
---
-ALTER TABLE `service_subcategories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT для таблиці `slider_images`
---
-ALTER TABLE `slider_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
-
---
--- AUTO_INCREMENT для таблиці `translations`
---
-ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
-
---
--- AUTO_INCREMENT для таблиці `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Обмеження зовнішнього ключа збережених таблиць
---
-
---
--- Обмеження зовнішнього ключа таблиці `seo_metadata`
---
-ALTER TABLE `seo_metadata`
-  ADD CONSTRAINT `seo_metadata_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `seo_metadata_ibfk_2` FOREIGN KEY (`lang_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE;
-
---
--- Обмеження зовнішнього ключа таблиці `service_items`
---
-ALTER TABLE `service_items`
-  ADD CONSTRAINT `service_items_ibfk_1` FOREIGN KEY (`subcategory_id`) REFERENCES `service_subcategories` (`id`) ON DELETE CASCADE;
-
---
--- Обмеження зовнішнього ключа таблиці `service_subcategories`
---
-ALTER TABLE `service_subcategories`
-  ADD CONSTRAINT `service_subcategories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `service_categories` (`id`) ON DELETE CASCADE;
-
---
--- Обмеження зовнішнього ключа таблиці `translations`
---
-ALTER TABLE `translations`
-  ADD CONSTRAINT `translations_ibfk_1` FOREIGN KEY (`block_id`) REFERENCES `content_blocks` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `translations_ibfk_2` FOREIGN KEY (`lang_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE;
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `translations` WRITE;
+/*!40000 ALTER TABLE `translations` DISABLE KEYS */;
+INSERT INTO `translations` VALUES
+(4,4,'uk','Salon - краса починається саме тут. Запишіться на прийом сьогодні!'),
+(8,8,'uk','Підпишіться на наш Instagram'),
+(9,9,'uk','Інші наші соціальні мережі:'),
+(14,14,'uk','Від тонких вдосконалень до сміливих фірмових образів, наше портфоліо демонструє широту нашого ремесла: дбайливий стиль, майстерність кольору та всебічний догляд за зовнішністю, який підкреслює унікальну красу та впевненість кожного клієнта.'),
+(15,15,'uk','Хочете більше? <a class=\"text-black-900 inline-flex cursor-pointer items-center gap-1 font-semibold underline hover:no-underline\" href=\"https://www.instagram.com/Salon.warsaw\" target=\"_blank\" rel=\"noopener\"><span>Перегляньте наш Instagram</span></a>, щоб побачити останні оновлення, прев’ю та трансформації клієнтів.'),
+(20,19,'uk','Маєте запитання або хочете зв&#39;язатися? Наша проста форма полегшує зв&#39;язок з нами. Просто заповніть деталі, а ми подбаємо про решту!'),
+(21,20,'uk','Хочете швидшої відповіді? Напишіть нам у <a href=\"https://ig.me/m/Salon.warsaw\" target=\"_blank\" rel=\"noopener\" class=\"hover:text-cove-600 font-medium underline transition-[color] duration-200\">Instagram Direct</a> і ми швидко вам відповімо!'),
+(27,8,'en','Subscribe to our Instagram'),
+(28,9,'en','Our other social networks:'),
+(33,19,'en','Have questions or want to get in touch? Our simple form makes contacting us easy. Just fill in the details, and we\'ll take care of the rest!'),
+(34,20,'en','Want a faster response? Write to us on <a href=\"https://ig.me/m/Salon.warsaw\" target=\"_blank\" rel=\"noopener\" class=\"hover:text-cove-600 font-medium underline transition-[color] duration-200\">Instagram Direct</a> and we will reply quickly!'),
+(40,14,'en','From subtle enhancements to bold signature looks, our portfolio showcases the breadth of our craft: careful styling, color mastery, and comprehensive appearance care that emphasizes the unique beauty and confidence of every client.'),
+(41,15,'en','Want more? <a class=\"text-black-900 inline-flex cursor-pointer items-center gap-1 font-semibold underline hover:no-underline\" href=\"https://www.instagram.com/Salon.warsaw\" target=\"_blank\" rel=\"noopener\"><span>Check out our Instagram</span></a> to see the latest updates, sneak peeks, and client transformations.'),
+(45,4,'en','Salon - beauty begins right here. Book your appointment today!'),
+(59,4,'pl','Salon - piękno zaczyna się właśnie tutaj. Zarezerwuj wizytę już dziś!'),
+(67,8,'pl','Zasubskrybuj nasz Instagram'),
+(69,9,'pl','Nasze inne sieci społecznościowe:'),
+(79,14,'pl','Od subtelnych ulepszeń po odważne, autorskie looki – nasze portfolio ukazuje wszechstronność naszego rzemiosła: staranną stylizację, mistrzostwo w doborze kolorów oraz kompleksową pielęgnację wyglądu, która podkreśla wyjątkowe piękno i pewność siebie każdego klienta.'),
+(81,15,'pl','Chcesz więcej? <a class=\"text-black-900 inline-flex cursor-pointer items-center gap-1 font-semibold underline hover:no-underline\" href=\"https://www.instagram.com/Salon.warsaw\" target=\"_blank\" rel=\"noopener\"><span>Sprawdź nasz Instagram</span></a>, aby zobaczyć najnowsze aktualizacje, zapowiedzi i metamorfozy klientów.'),
+(91,19,'pl','Masz pytania lub chcesz się z nami skontaktować? Nasz prosty formularz ułatwia kontakt z nami. Wystarczy wypełnić dane, a my zajmiemy się resztą!'),
+(93,20,'pl','Chcesz szybszej odpowiedzi? Napisz do nas na <a href=\"https://ig.me/m/Salon.warsaw\" target=\"_blank\" rel=\"noopener\" class=\"hover:text-cove-600 font-medium underline transition-[color] duration-200\">Instagram Direct</a>, a my szybko odpowiemy!'),
+(101,27,'pl','https://booksy.com/pl-pl/340508_nox-beauty-space-manicure-pedicure-fryzjer_paznokcie_3_warszawa'),
+(102,27,'uk','https://booksy.com/pl-pl/340508_nox-beauty-space-manicure-pedicure-fryzjer_paznokcie_3_warszawa'),
+(103,27,'en','https://booksy.com/pl-pl/340508_nox-beauty-space-manicure-pedicure-fryzjer_paznokcie_3_warszawa'),
+(105,28,'pl','https://www.instagram.com/nox.beauty.space/'),
+(106,28,'uk','https://www.instagram.com/nox.beauty.space/'),
+(107,28,'en','https://www.instagram.com/nox.beauty.space/'),
+(109,29,'pl','https://ig.me/m/nox.beauty.space'),
+(110,29,'uk','https://ig.me/m/nox.beauty.space'),
+(111,29,'en','https://ig.me/m/nox.beauty.space'),
+(113,30,'pl','Manicure i pedicure Warszawa Wola — salon NOX Beauty Space'),
+(114,30,'uk','Манікюр і педикюр Варшава, Воля — салон NOX Beauty Space'),
+(115,30,'en','Manicure & Pedicure in Warsaw (Wola) — NOX Beauty Space'),
+(117,31,'pl','Manicure hybrydowy, pedicure SPA, brwi, rzęsy i fryzjer na Woli, blisko metra Płocka. Sterylizacja w autoklawie, ocena 5.0. −10% na pierwszą wizytę.'),
+(118,31,'uk','Гібридний манікюр, SPA-педикюр, брови, вії та перукар на Волі біля метро Płocka. Стерилізація в автоклаві, рейтинг 5.0. −10% на перший візит.'),
+(119,31,'en','Gel manicure, SPA pedicure, brows, lashes and hair in Wola, near Płocka metro. Autoclave sterilisation, 5.0 rating. −10% off your first visit.'),
+(121,32,'pl','Przejdź do treści'),
+(122,32,'uk','Перейти до змісту'),
+(123,32,'en','Skip to content'),
+(125,33,'pl','Menu główne'),
+(126,33,'uk','Головне меню'),
+(127,33,'en','Main menu'),
+(129,34,'pl','Usługi'),
+(130,34,'uk','Послуги'),
+(131,34,'en','Services'),
+(133,35,'pl','O nas'),
+(134,35,'uk','Про нас'),
+(135,35,'en','About'),
+(137,36,'pl','Cennik'),
+(138,36,'uk','Ціни'),
+(139,36,'en','Prices'),
+(141,37,'pl','Galeria'),
+(142,37,'uk','Галерея'),
+(143,37,'en','Gallery'),
+(145,38,'pl','Opinie'),
+(146,38,'uk','Відгуки'),
+(147,38,'en','Reviews'),
+(149,39,'pl','Kontakt'),
+(150,39,'uk','Контакти'),
+(151,39,'en','Contact'),
+(153,40,'pl','Umów wizytę'),
+(154,40,'uk','Записатися'),
+(155,40,'en','Book now'),
+(157,41,'pl','Otwórz menu'),
+(158,41,'uk','Відкрити меню'),
+(159,41,'en','Open menu'),
+(161,42,'pl','Zamknij'),
+(162,42,'uk','Закрити'),
+(163,42,'en','Close'),
+(165,43,'pl','Do góry'),
+(166,43,'uk','Нагору'),
+(167,43,'en','Back to top'),
+(169,44,'pl','Salon beauty · Warszawa Wola'),
+(170,44,'uk','Салон краси · Варшава, Воля'),
+(171,44,'en','Beauty salon · Warsaw, Wola'),
+(173,1,'pl','Piękno <em>dopracowane</em> w&nbsp;każdym detalu'),
+(174,1,'uk','Краса, <em>досконала</em> в&nbsp;кожній деталі'),
+(175,1,'en','Beauty <em>perfected</em> in every detail'),
+(177,2,'pl','Manicure, pedicure, brwi, rzęsy i fryzjer w jednym miejscu — z najwyższą sterylnością i stylistkami, którym ufają setki klientek z Woli.'),
+(178,2,'uk','Манікюр, педикюр, брови, вії та перукар в одному місці — з найвищою стерильністю та майстрами, яким довіряють сотні клієнток на Волі.'),
+(179,2,'en','Manicure, pedicure, brows, lashes and hair under one roof — with the highest sterility standards and stylists hundreds of Wola clients trust.'),
+(181,3,'pl','Zarezerwuj w Booksy'),
+(182,3,'uk','Записатися в Booksy'),
+(183,3,'en','Book on Booksy'),
+(185,45,'pl','Napisz w Direct'),
+(186,45,'uk','Написати в Direct'),
+(187,45,'en','Message us on Instagram'),
+(189,46,'pl','143 opinie w Booksy'),
+(190,46,'uk','143 відгуки в Booksy'),
+(191,46,'en','143 reviews on Booksy'),
+(193,47,'pl','−10% na pierwszą wizytę'),
+(194,47,'uk','−10% на перший візит'),
+(195,47,'en','−10% on your first visit'),
+(197,48,'pl','Manicure hybrydowy w odcieniu wiśni ze złotym pierścionkiem'),
+(198,48,'uk','Гібридний манікюр вишневого відтінку із золотим перснем'),
+(199,48,'en','Cherry gel manicure with a gold ring'),
+(201,49,'pl','Recepcja salonu NOX Beauty Space'),
+(202,49,'uk','Рецепція салону NOX Beauty Space'),
+(203,49,'en','NOX Beauty Space reception'),
+(205,50,'pl','Najwyższa sterylność'),
+(206,50,'uk','Найвища стерильність'),
+(207,50,'en','Highest sterility'),
+(209,51,'pl','3-etapowa sterylizacja narzędzi, autoklaw i pakiety otwierane przy Tobie.'),
+(210,51,'uk','3-етапна стерилізація інструментів, крафт-пакет відкриваємо при вас.'),
+(211,51,'en','3-step tool sterilisation, autoclave, pouches opened in front of you.'),
+(213,52,'pl','Top stylistki'),
+(214,52,'uk','Топ-майстри'),
+(215,52,'en','Top stylists'),
+(217,53,'pl','Średnia ocena 5.0 na podstawie 143 opinii.'),
+(218,53,'uk','Середня оцінка 5.0 за 143 відгуками.'),
+(219,53,'en','An average rating of 5.0 from 143 reviews.'),
+(221,54,'pl','Blisko metra Płocka'),
+(222,54,'uk','Поруч із метро Płocka'),
+(223,54,'en','Near Płocka metro'),
+(225,55,'pl','ul. Ludwiki 4B/U1, Wola. Otwarte codziennie 10–20.'),
+(226,55,'uk','вул. Ludwiki 4B/U1, Воля. Щодня 10–20.'),
+(227,55,'en','Ludwiki 4B/U1, Wola. Open daily 10am–8pm.'),
+(229,56,'pl','−10% na start'),
+(230,56,'uk','−10% на старт'),
+(231,56,'en','−10% to start'),
+(233,57,'pl','Rabat na pierwszą wizytę przy rezerwacji przez Booksy lub Direct.'),
+(234,57,'uk','Знижка на перший візит при записі через Booksy або Direct.'),
+(235,57,'en','First-visit discount when you book via Booksy or Instagram.'),
+(237,58,'pl','Usługi'),
+(238,58,'uk','Послуги'),
+(239,58,'en','Services'),
+(241,16,'pl','Wszystko dla Twojego <em>piękna</em>'),
+(242,16,'uk','Усе для вашої <em>краси</em>'),
+(243,16,'en','Everything for your <em>beauty</em>'),
+(245,17,'pl','Od perfekcyjnego manicure po nowe cięcie — wybierz zabieg, a my zadbamy o resztę.'),
+(246,17,'uk','Від бездоганного манікюру до нової стрижки — оберіть процедуру, а про решту подбаємо ми.'),
+(247,17,'en','From a flawless manicure to a fresh cut — pick a treatment and we will take care of the rest.'),
+(249,59,'pl','Manicure'),
+(250,59,'uk','Манікюр'),
+(251,59,'en','Manicure'),
+(253,60,'pl','Hybrydowy, klasyczny, japoński i męski. Czyste skórki, idealny kształt i lustrzany połysk.'),
+(254,60,'uk','Гібридний, класичний, японський і чоловічий. Ідеальна кутикула, форма та дзеркальний блиск.'),
+(255,60,'en','Gel, classic, Japanese and men’s. Clean cuticles, perfect shape and a mirror shine.'),
+(257,61,'pl','od 110 zł'),
+(258,61,'uk','від 110 zł'),
+(259,61,'en','from 110 zł'),
+(261,62,'pl','Przedłużanie paznokci'),
+(262,62,'uk','Нарощування нігтів'),
+(263,62,'en','Nail extensions'),
+(265,63,'pl','Żel i akrylożel na górnych formach — delikatny french, migdał lub kwadrat w wymarzonej długości.'),
+(266,63,'uk','Гель і акригель на верхніх формах — ніжний френч, мигдаль або квадрат потрібної довжини.'),
+(267,63,'en','Gel and polygel on top forms — soft French, almond or square in the length you love.'),
+(269,64,'pl','od 240 zł'),
+(270,64,'uk','від 240 zł'),
+(271,64,'en','from 240 zł'),
+(273,65,'pl','Pedicure'),
+(274,65,'uk','Педикюр'),
+(275,65,'en','Pedicure'),
+(277,66,'pl','Klasyczny, hybrydowy i SPA z kąpielą w soli i peelingiem. Gładkie stopy i trwały kolor.'),
+(278,66,'uk','Класичний, гібридний і SPA з ванночкою із сіллю та пілінгом. Гладенькі стопи й стійкий колір.'),
+(279,66,'en','Classic, gel and SPA with a salt soak and scrub. Smooth feet and long-lasting colour.'),
+(281,67,'pl','od 150 zł'),
+(282,67,'uk','від 150 zł'),
+(283,67,'en','from 150 zł'),
+(285,68,'pl','Brwi, rzęsy i epilacja'),
+(286,68,'uk','Брови, вії та епіляція'),
+(287,68,'en','Brows, lashes & hair removal'),
+(289,69,'pl','Laminowanie brwi i rzęs, regulacja, farbowanie oraz elektroepilacja — trwałe usuwanie każdego rodzaju włosa.'),
+(290,69,'uk','Ламінування брів і вій, корекція, фарбування та електроепіляція — назавжди для будь-якого типу волосся.'),
+(291,69,'en','Brow and lash lamination, shaping, tinting and electrolysis — permanent removal of any hair type.'),
+(293,70,'pl','od 30 zł'),
+(294,70,'uk','від 30 zł'),
+(295,70,'en','from 30 zł'),
+(297,71,'pl','Fryzjer'),
+(298,71,'uk','Перукар'),
+(299,71,'en','Hair'),
+(301,72,'pl','Strzyżenie, koloryzacja, tonowanie i balayage. Bezpłatna konsultacja przed farbowaniem.'),
+(302,72,'uk','Стрижка, фарбування, тонування та балаяж. Безкоштовна консультація перед фарбуванням.'),
+(303,72,'en','Cuts, colouring, toning and balayage. Free consultation before colouring.'),
+(305,73,'pl','od 40 zł'),
+(306,73,'uk','від 40 zł'),
+(307,73,'en','from 40 zł'),
+(309,74,'pl','Barber'),
+(310,74,'uk','Барбер'),
+(311,74,'en','Barber'),
+(313,75,'pl','Męskie strzyżenie maszynką i nożyczkami, fade oraz strzyżenie dziecięce.'),
+(314,75,'uk','Чоловіча стрижка машинкою та ножицями, фейд і дитяча стрижка.'),
+(315,75,'en','Men’s clipper and scissor cuts, fades and kids’ haircuts.'),
+(317,76,'pl','od 50 zł'),
+(318,76,'uk','від 50 zł'),
+(319,76,'en','from 50 zł'),
+(321,77,'pl','O nas'),
+(322,77,'uk','Про нас'),
+(323,77,'en','About us'),
+(325,5,'pl','Miejsce, w którym <em>czas zwalnia</em>'),
+(326,5,'uk','Місце, де <em>час сповільнюється</em>'),
+(327,5,'en','A place where <em>time slows down</em>'),
+(329,6,'pl','NOX Beauty Space to kameralny salon na warszawskiej Woli, kilka kroków od metra Płocka. Łączymy precyzyjną technikę, sprawdzone materiały i spokojną atmosferę, w której możesz naprawdę odpocząć.'),
+(330,6,'uk','NOX Beauty Space — затишний салон на варшавській Волі, за кілька кроків від метро Płocka. Ми поєднуємо точну техніку, перевірені матеріали та спокійну атмосферу, в якій можна по-справжньому відпочити.'),
+(331,6,'en','NOX Beauty Space is an intimate salon in Warsaw’s Wola district, a short walk from Płocka metro. We combine precise technique, proven products and a calm atmosphere where you can truly unwind.'),
+(333,7,'pl','Bezpieczeństwo to dla nas podstawa: każde narzędzie przechodzi dezynfekcję, czyszczenie ultradźwiękowe i sterylizację w autoklawie, a pakiet otwieramy przy Tobie. Mówimy po polsku, ukraińsku i angielsku.'),
+(334,7,'uk','Безпека для нас — основа: кожен інструмент проходить дезінфекцію, ультразвукове очищення та стерилізацію в автоклаві, а пакет ми відкриваємо при вас. Говоримо польською, українською та англійською.'),
+(335,7,'en','Safety comes first: every tool is disinfected, ultrasonically cleaned and sterilised in an autoclave, and the pouch is opened in front of you. We speak Polish, Ukrainian and English.'),
+(337,78,'pl','Recepcja salonu NOX Beauty Space z podświetlanym logo'),
+(338,78,'uk','Рецепція салону NOX Beauty Space з підсвіченим логотипом'),
+(339,78,'en','NOX Beauty Space reception with an illuminated logo'),
+(341,79,'pl','średnia ocena klientów'),
+(342,79,'uk','середня оцінка клієнтів'),
+(343,79,'en','average client rating'),
+(345,80,'pl','Nasz zespół'),
+(346,80,'uk','Наша команда'),
+(347,80,'en','Our team'),
+(349,81,'pl','Manicure i pedicure'),
+(350,81,'uk','Манікюр і педикюр'),
+(351,81,'en','Manicure & pedicure'),
+(353,82,'pl','Manicure i stylizacja paznokci'),
+(354,82,'uk','Манікюр і дизайн нігтів'),
+(355,82,'en','Manicure & nail design'),
+(357,83,'pl','Stylistka brwi i rzęs'),
+(358,83,'uk','Майстриня брів і вій'),
+(359,83,'en','Brow & lash stylist'),
+(361,84,'pl','Fryzjer i barber'),
+(362,84,'uk','Перукар і барбер'),
+(363,84,'en','Hairdresser & barber'),
+(365,85,'pl','Cennik'),
+(366,85,'uk','Ціни'),
+(367,85,'en','Prices'),
+(369,86,'pl','Przejrzyste <em>ceny</em>'),
+(370,86,'uk','Прозорі <em>ціни</em>'),
+(371,86,'en','Clear <em>prices</em>'),
+(373,87,'pl','Aktualny cennik naszych usług. Wybierz kategorię, aby zobaczyć szczegóły.'),
+(374,87,'uk','Актуальні ціни на наші послуги. Оберіть категорію, щоб побачити деталі.'),
+(375,87,'en','Our current price list. Choose a category to see the details.'),
+(377,88,'pl','Ceny mogą się różnić w zależności od długości i stanu paznokci lub włosów. Wolne terminy i aktualne promocje znajdziesz w Booksy.'),
+(378,88,'uk','Вартість може залежати від довжини та стану нігтів або волосся. Вільні віконця й актуальні акції — у Booksy.'),
+(379,88,'en','Prices may vary with the length and condition of nails or hair. See free slots and current offers on Booksy.'),
+(381,26,'pl','Wybierz termin w Booksy'),
+(382,26,'uk','Обрати час у Booksy'),
+(383,26,'en','Pick a time on Booksy'),
+(385,89,'pl','Portfolio'),
+(386,89,'uk','Портфоліо'),
+(387,89,'en','Portfolio'),
+(389,13,'pl','Nasze <em>prace</em>'),
+(390,13,'uk','Наші <em>роботи</em>'),
+(391,13,'en','Our <em>work</em>'),
+(393,90,'pl','Prawdziwe efekty naszych stylistek — od clean pink nude po głęboką wiśnię i chrom. Codziennie nowe prace na Instagramie.'),
+(394,90,'uk','Справжні роботи наших майстрів — від clean pink nude до глибокої вишні та хрому. Щодня нові роботи в Instagram.'),
+(395,90,'en','Real results by our stylists — from clean pink nude to deep cherry and chrome. New work on Instagram every day.'),
+(397,91,'pl','Praca NOX Beauty Space'),
+(398,91,'uk','Робота NOX Beauty Space'),
+(399,91,'en','NOX Beauty Space work'),
+(401,92,'pl','Więcej na Instagramie'),
+(402,92,'uk','Більше в Instagram'),
+(403,92,'en','More on Instagram'),
+(405,93,'pl','Opinie'),
+(406,93,'uk','Відгуки'),
+(407,93,'en','Reviews'),
+(409,10,'pl','Co mówią nasze <em>klientki</em>'),
+(410,10,'uk','Що кажуть наші <em>клієнтки</em>'),
+(411,10,'en','What our <em>clients</em> say'),
+(413,11,'pl','143 opinie zweryfikowanych klientów w Booksy'),
+(414,11,'uk','143 відгуки перевірених клієнтів у Booksy'),
+(415,11,'en','143 reviews from verified Booksy clients'),
+(417,12,'pl','Zobacz wszystkie opinie'),
+(418,12,'uk','Усі відгуки'),
+(419,12,'en','See all reviews'),
+(421,94,'pl','Bardzo dziękuję Pani Natalii. Jestem bardzo zadowolona z manicure — paznokcie są pięknie wykonane i starannie dopracowane.'),
+(422,94,'uk','Bardzo dziękuję Pani Natalii. Jestem bardzo zadowolona z manicure — paznokcie są pięknie wykonane i starannie dopracowane.'),
+(423,94,'en','Bardzo dziękuję Pani Natalii. Jestem bardzo zadowolona z manicure — paznokcie są pięknie wykonane i starannie dopracowane.'),
+(425,95,'pl','Iryna'),
+(426,95,'uk','Iryna'),
+(427,95,'en','Iryna'),
+(429,96,'pl','Manicure klasyczny · Booksy'),
+(430,96,'uk','Класичний манікюр · Booksy'),
+(431,96,'en','Classic manicure · Booksy'),
+(433,97,'pl','Vadzim is a perfectionist! Listens carefully, very gentle and a lot of attention to details. I will be back for sure.'),
+(434,97,'uk','Vadzim is a perfectionist! Listens carefully, very gentle and a lot of attention to details. I will be back for sure.'),
+(435,97,'en','Vadzim is a perfectionist! Listens carefully, very gentle and a lot of attention to details. I will be back for sure.'),
+(437,98,'pl','Agata'),
+(438,98,'uk','Agata'),
+(439,98,'en','Agata'),
+(441,99,'pl','Strzyżenie damskie · Booksy'),
+(442,99,'uk','Жіноча стрижка · Booksy'),
+(443,99,'en','Women’s haircut · Booksy'),
+(445,100,'pl','Super ❤️😍'),
+(446,100,'uk','Super ❤️😍'),
+(447,100,'en','Super ❤️😍'),
+(449,101,'pl','Alisa'),
+(450,101,'uk','Alisa'),
+(451,101,'en','Alisa'),
+(453,102,'pl','Manicure hybrydowy · Booksy'),
+(454,102,'uk','Гібридний манікюр · Booksy'),
+(455,102,'en','Gel manicure · Booksy'),
+(457,103,'pl','Тотальний кайф перед моїм весіллям — час, проведений у NOX. Саме їм я довірила свій весільний образ.'),
+(458,103,'uk','Тотальний кайф перед моїм весіллям — час, проведений у NOX. Саме їм я довірила свій весільний образ.'),
+(459,103,'en','Тотальний кайф перед моїм весіллям — час, проведений у NOX. Саме їм я довірила свій весільний образ.'),
+(461,104,'pl','Klientka NOX'),
+(462,104,'uk','Klientka NOX'),
+(463,104,'en','Klientka NOX'),
+(465,105,'pl','Stylizacja ślubna · Instagram'),
+(466,105,'uk','Весільний образ · Instagram'),
+(467,105,'en','Bridal look · Instagram'),
+(469,106,'pl','Kontakt'),
+(470,106,'uk','Контакти'),
+(471,106,'en','Contact'),
+(473,18,'pl','Zapraszamy do <em>NOX</em>'),
+(474,18,'uk','Чекаємо вас у <em>NOX</em>'),
+(475,18,'en','Welcome to <em>NOX</em>'),
+(477,107,'pl','Najszybciej zarezerwujesz wizytę w Booksy lub przez Instagram Direct. Masz pytanie? Zostaw wiadomość — odpowiemy tego samego dnia.'),
+(478,107,'uk','Найшвидше записатися можна в Booksy або через Instagram Direct. Маєте запитання? Залиште повідомлення — відповімо того ж дня.'),
+(479,107,'en','The fastest way to book is Booksy or Instagram Direct. Got a question? Leave a message and we will reply the same day.'),
+(481,108,'pl','Adres'),
+(482,108,'uk','Адреса'),
+(483,108,'en','Address'),
+(485,109,'pl','Wola, blisko stacji metra Płocka (M2)'),
+(486,109,'uk','Воля, поруч зі станцією метро Płocka (M2)'),
+(487,109,'en','Wola, near Płocka metro station (M2)'),
+(489,110,'pl','Godziny otwarcia'),
+(490,110,'uk','Години роботи'),
+(491,110,'en','Opening hours'),
+(493,111,'pl','Codziennie 10:00–20:00'),
+(494,111,'uk','Щодня 10:00–20:00'),
+(495,111,'en','Daily 10:00–20:00'),
+(497,112,'pl','Rezerwacja'),
+(498,112,'uk','Запис'),
+(499,112,'en','Booking'),
+(501,113,'pl','Udogodnienia'),
+(502,113,'uk','Зручності'),
+(503,113,'en','Amenities'),
+(505,114,'pl','Parking · płatność kartą · Wi-Fi · program lojalnościowy'),
+(506,114,'uk','Паркінг · оплата карткою · Wi-Fi · програма лояльності'),
+(507,114,'en','Parking · card payments · Wi-Fi · loyalty programme'),
+(509,115,'pl','Mapa dojazdu do NOX Beauty Space'),
+(510,115,'uk','Мапа проїзду до NOX Beauty Space'),
+(511,115,'en','Map to NOX Beauty Space'),
+(513,116,'pl','Masz pytanie? Napisz do nas'),
+(514,116,'uk','Маєте запитання? Напишіть нам'),
+(515,116,'en','Got a question? Write to us'),
+(517,21,'pl','Imię'),
+(518,21,'uk','Ім’я'),
+(519,21,'en','Name'),
+(521,117,'pl','Telefon'),
+(522,117,'uk','Телефон'),
+(523,117,'en','Phone'),
+(525,22,'pl','E-mail'),
+(526,22,'uk','E-mail'),
+(527,22,'en','Email'),
+(529,23,'pl','Wiadomość'),
+(530,23,'uk','Повідомлення'),
+(531,23,'en','Message'),
+(533,24,'pl','Wyślij wiadomość'),
+(534,24,'uk','Надіслати'),
+(535,24,'en','Send message'),
+(537,118,'pl','Wysyłanie…'),
+(538,118,'uk','Надсилаємо…'),
+(539,118,'en','Sending…'),
+(541,119,'pl','Uzupełnij wymagane pola i zaznacz zgodę.'),
+(542,119,'uk','Заповніть обов’язкові поля та позначте згоду.'),
+(543,119,'en','Please fill in the required fields and tick the consent box.'),
+(545,120,'pl','Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz do nas na Instagramie.'),
+(546,120,'uk','Не вдалося надіслати повідомлення. Спробуйте ще раз або напишіть нам в Instagram.'),
+(547,120,'en','We could not send your message. Please try again or message us on Instagram.'),
+(549,25,'pl','Wyrażam zgodę na przetwarzanie moich danych osobowych przez NOX Beauty Space w celu odpowiedzi na wiadomość (RODO).'),
+(550,25,'uk','Я погоджуюся на обробку моїх персональних даних NOX Beauty Space для відповіді на повідомлення (RODO/GDPR).'),
+(551,25,'en','I agree to NOX Beauty Space processing my personal data to reply to my message (GDPR).'),
+(553,121,'pl','Manicure, pedicure, brwi, rzęsy i fryzjer na warszawskiej Woli.'),
+(554,121,'uk','Манікюр, педикюр, брови, вії та перукар на варшавській Волі.'),
+(555,121,'en','Manicure, pedicure, brows, lashes and hair in Warsaw’s Wola.'),
+(557,122,'pl','Menu'),
+(558,122,'uk','Меню'),
+(559,122,'en','Menu'),
+(561,123,'pl','Język'),
+(562,123,'uk','Мова'),
+(563,123,'en','Language'),
+(565,124,'pl','Wszelkie prawa zastrzeżone.'),
+(566,124,'uk','Усі права захищено.'),
+(567,124,'en','All rights reserved.'),
+(569,125,'pl','−10%'),
+(570,125,'uk','−10%'),
+(571,125,'en','−10%'),
+(573,126,'pl','na pierwszą wizytę'),
+(574,126,'uk','на перший візит'),
+(575,126,'en','on your first visit'),
+(577,127,'pl','przy rezerwacji przez Booksy lub Direct'),
+(578,127,'uk','при записі через Booksy або Direct'),
+(579,127,'en','when you book via Booksy or Instagram'),
+(581,128,'pl','pierwsza wizyta • rabat • nox beauty space •'),
+(582,128,'uk','перший візит • знижка • nox beauty space •'),
+(583,128,'en','first visit • discount • nox beauty space •'),
+(585,129,'pl','NOX Beauty Space — salon beauty na Woli w Warszawie'),
+(586,129,'uk','NOX Beauty Space — салон краси на Волі у Варшаві'),
+(587,129,'en','NOX Beauty Space — beauty salon in Wola, Warsaw'),
+(588,130,'pl','Telefon'),
+(589,130,'uk','Телефон'),
+(590,130,'en','Phone'),
+(591,131,'pl','Wyznacz trasę w Google Maps'),
+(592,131,'uk','Прокласти маршрут у Google Maps'),
+(593,131,'en','Get directions in Google Maps'),
+(594,132,'pl','FAQ'),
+(595,132,'uk','FAQ'),
+(596,132,'en','FAQ'),
+(597,133,'pl','Najczęstsze <em>pytania</em>'),
+(598,133,'uk','Часті <em>запитання</em>'),
+(599,133,'en','Frequently asked <em>questions</em>'),
+(600,134,'pl','Ile kosztuje manicure hybrydowy na Woli?'),
+(601,134,'uk','Скільки коштує гібридний манікюр на Волі?'),
+(602,134,'en','How much is a gel manicure in Wola?'),
+(603,135,'pl','W NOX manicure hybrydowy kosztuje 160 zł, manicure klasyczny i męski — 110 zł, a manicure japoński — 130 zł. Na pierwszą wizytę przez Booksy lub Instagram Direct otrzymasz −10%.'),
+(604,135,'uk','У NOX гібридний манікюр коштує 160 zł, класичний і чоловічий — 110 zł, японський — 130 zł. На перший візит через Booksy або Instagram Direct — знижка −10%.'),
+(605,135,'en','At NOX a gel (hybrid) manicure costs 160 zł, a classic or men’s manicure 110 zł and a Japanese manicure 130 zł. Book your first visit via Booksy or Instagram and get 10% off.'),
+(606,136,'pl','Ile kosztuje pedicure i przedłużanie paznokci?'),
+(607,136,'uk','Скільки коштує педикюр і нарощування нігтів?'),
+(608,136,'en','How much are pedicures and nail extensions?'),
+(609,137,'pl','Pedicure klasyczny kosztuje 150 zł, hybrydowy — 190 zł, a pedicure hybrydowy SPA — 205 zł. Przedłużanie paznokci żelem lub akrylożelem zaczyna się od 240 zł, uzupełnienie — od 200 zł.'),
+(610,137,'uk','Класичний педикюр коштує 150 zł, гібридний — 190 zł, гібридний SPA-педикюр — 205 zł. Нарощування нігтів гелем або акригелем — від 240 zł, корекція — від 200 zł.'),
+(611,137,'en','A classic pedicure is 150 zł, a gel pedicure 190 zł and a SPA gel pedicure 205 zł. Gel or polygel nail extensions start at 240 zł, refills at 200 zł.'),
+(612,138,'pl','Jak dojechać do salonu NOX?'),
+(613,138,'uk','Як дістатися до салону NOX?'),
+(614,138,'en','How do I get to NOX?'),
+(615,139,'pl','Salon znajduje się przy ul. Ludwiki 4B/U1 (01-226 Warszawa, Wola), kilka minut pieszo od stacji metra Płocka (linia M2). W pobliżu salonu jest parking.'),
+(616,139,'uk','Салон розташований за адресою ul. Ludwiki 4B/U1 (01-226 Варшава, Воля), за кілька хвилин пішки від станції метро Płocka (лінія M2). Поруч із салоном є паркування.'),
+(617,139,'en','We are at ul. Ludwiki 4B/U1 (01-226 Warsaw, Wola district), a few minutes’ walk from Płocka metro station (M2 line). Parking is available nearby.'),
+(618,140,'pl','Jak umówić wizytę?'),
+(619,140,'uk','Як записатися на візит?'),
+(620,140,'en','How can I book an appointment?'),
+(621,141,'pl','Najwygodniej przez Booksy — rezerwacja działa całą dobę i od razu widzisz wolne terminy. Możesz też napisać do nas na Instagramie (@nox.beauty.space) lub zostawić wiadomość w formularzu na tej stronie.'),
+(622,141,'uk','Найзручніше — через Booksy: запис працює цілодобово, і ви одразу бачите вільні години. Також можна написати нам в Instagram (@nox.beauty.space) або залишити повідомлення у формі на цій сторінці.'),
+(623,141,'en','The easiest way is Booksy — it works 24/7 and shows free slots instantly. You can also message us on Instagram (@nox.beauty.space) or use the contact form on this page.'),
+(624,142,'pl','W jakich godzinach jest otwarty salon?'),
+(625,142,'uk','Коли працює салон?'),
+(626,142,'en','What are your opening hours?'),
+(627,143,'pl','Pracujemy codziennie, także w soboty i niedziele, w godzinach 10:00–20:00.'),
+(628,143,'uk','Ми працюємо щодня, зокрема в суботу та неділю, з 10:00 до 20:00.'),
+(629,143,'en','We are open every day, including Saturdays and Sundays, from 10:00 to 20:00.'),
+(630,144,'pl','Jak dbacie o higienę i sterylizację narzędzi?'),
+(631,144,'uk','Як ви дбаєте про гігієну та стерилізацію інструментів?'),
+(632,144,'en','How do you sterilise your tools?'),
+(633,145,'pl','Każde narzędzie przechodzi 3 etapy: dezynfekcję, czyszczenie w myjce ultradźwiękowej i sterylizację w autoklawie. Pakiet z narzędziami otwieramy przy Tobie.'),
+(634,145,'uk','Кожен інструмент проходить 3 етапи: дезінфекцію, очищення в ультразвуковій мийці та стерилізацію в автоклаві. Пакет з інструментами відкриваємо при вас.'),
+(635,145,'en','Every tool goes through 3 stages: disinfection, ultrasonic cleaning and autoclave sterilisation. The sealed pouch is opened in front of you.'),
+(636,146,'pl','Czy mogę zapłacić kartą?'),
+(637,146,'uk','Чи можна оплатити карткою?'),
+(638,146,'en','Can I pay by card?'),
+(639,147,'pl','Tak, w salonie akceptujemy płatności kartą. Mamy też program lojalnościowy dla stałych klientów.'),
+(640,147,'uk','Так, у салоні можна оплатити карткою. Для постійних клієнтів діє програма лояльності.'),
+(641,147,'en','Yes, we accept card payments. Regular clients can also join our loyalty programme.'),
+(642,148,'pl','W jakich językach obsługujecie klientów?'),
+(643,148,'uk','Якими мовами ви обслуговуєте клієнтів?'),
+(644,148,'en','Which languages do you speak?'),
+(645,149,'pl','Obsługujemy klientów po polsku, ukraińsku i angielsku.'),
+(646,149,'uk','Ми обслуговуємо клієнтів польською, українською та англійською.'),
+(647,149,'en','We speak Polish, Ukrainian and English.'),
+(648,150,'pl','salon NOX Beauty Space, Warszawa Wola'),
+(649,150,'uk','салон NOX Beauty Space, Варшава Воля'),
+(650,150,'en','NOX Beauty Space salon, Warsaw Wola'),
+(651,151,'pl','Manicure hybrydowy w kolorze wiśni — NOX Beauty Space Warszawa'),
+(652,151,'uk','Гібридний манікюр вишневого кольору — NOX Beauty Space Варшава'),
+(653,151,'en','Cherry red gel manicure — NOX Beauty Space Warsaw'),
+(654,152,'pl','Naturalny różowy manicure hybrydowy clean girl'),
+(655,152,'uk','Натуральний рожевий гібридний манікюр clean girl'),
+(656,152,'en','Natural clean-girl pink gel manicure'),
+(657,153,'pl','Matowy manicure hybrydowy w kolorze śliwki'),
+(658,153,'uk','Матовий гібридний манікюр сливового кольору'),
+(659,153,'en','Matte plum gel manicure'),
+(660,154,'pl','Laminowanie rzęs — efekt po zabiegu'),
+(661,154,'uk','Ламінування вій — результат після процедури'),
+(662,154,'en','Lash lift and tint — result'),
+(663,155,'pl','Strzyżenie i stylizacja długich ciemnych włosów'),
+(664,155,'uk','Стрижка та укладка довгого темного волосся'),
+(665,155,'en','Haircut and styling for long dark hair'),
+(666,156,'pl','Francuski manicure na kwadratowych paznokciach'),
+(667,156,'uk','Френч-манікюр на квадратних нігтях'),
+(668,156,'en','French manicure on square nails'),
+(669,157,'pl','Manicure nude ze zdobieniem'),
+(670,157,'uk','Нюдовий манікюр з дизайном'),
+(671,157,'en','Nude manicure with nail art'),
+(672,158,'pl','Czerwony pedicure hybrydowy'),
+(673,158,'uk','Червоний гібридний педикюр'),
+(674,158,'en','Red gel pedicure'),
+(675,159,'pl','Manicure z motywem Halloween'),
+(676,159,'uk','Манікюр з дизайном на Хелловін'),
+(677,159,'en','Halloween nail art manicure'),
+(678,160,'pl','Koloryzacja blond i strzyżenie damskie'),
+(679,160,'uk','Фарбування у блонд і жіноча стрижка'),
+(680,160,'en','Blonde colouring and women’s haircut'),
+(681,161,'pl','Śliwkowy french na migdałowych paznokciach'),
+(682,161,'uk','Сливовий френч на мигдалеподібних нігтях'),
+(683,161,'en','Plum French tips on almond nails'),
+(684,162,'pl','Laminowanie rzęs — przed i po'),
+(685,162,'uk','Ламінування вій — до і після'),
+(686,162,'en','Lash lift — before and after'),
+(687,163,'pl','Mleczny manicure nude'),
+(688,163,'uk','Молочний нюдовий манікюр'),
+(689,163,'en','Milky nude manicure'),
+(690,164,'pl','Męskie strzyżenie fade — barber NOX'),
+(691,164,'uk','Чоловіча стрижка фейд — барбер NOX'),
+(692,164,'en','Men’s fade haircut — NOX barber'),
+(693,165,'pl','Różowy manicure nude na krótkich paznokciach'),
+(694,165,'uk','Рожевий нюдовий манікюр на коротких нігтях'),
+(695,165,'en','Pink nude manicure on short nails'),
+(696,166,'pl','Manicure hybrydowy ze złotym pierścionkiem'),
+(697,166,'uk','Гібридний манікюр із золотим кільцем'),
+(698,166,'en','Gel manicure with a gold ring'),
+(699,167,'pl','Nie znaleziono strony'),
+(700,167,'uk','Сторінку не знайдено'),
+(701,167,'en','Page not found'),
+(702,168,'pl','Ta strona nie istnieje lub została przeniesiona. Wróć na stronę główną — tam znajdziesz cennik, galerię i rezerwację.'),
+(703,168,'uk','Такої сторінки не існує або її перенесено. Поверніться на головну — там ціни, галерея та запис.'),
+(704,168,'en','This page doesn’t exist or has moved. Go back to the home page for prices, gallery and booking.'),
+(705,169,'pl','Strona główna'),
+(706,169,'uk','На головну'),
+(707,169,'en','Home page'),
+(708,170,'pl','Polityka prywatności'),
+(709,170,'uk','Політика конфіденційності'),
+(710,170,'en','Privacy policy'),
+(711,171,'pl','Polityka prywatności'),
+(712,171,'uk','Політика конфіденційності'),
+(713,171,'en','Privacy policy'),
+(714,172,'pl','Jak NOX Beauty Space przetwarza dane osobowe i pliki cookies.'),
+(715,172,'uk','Як NOX Beauty Space обробляє персональні дані та файли cookie.'),
+(716,172,'en','How NOX Beauty Space processes personal data and cookies.'),
+(717,173,'pl','<h2>1. Administrator danych</h2><p>Administratorem danych osobowych jest NOX Beauty Space, ul. Ludwiki 4B/U1, 01-226 Warszawa. W sprawach danych osobowych skontaktuj się z nami przez formularz na stronie lub Instagram @nox.beauty.space.</p><h2>2. Jakie dane i w jakim celu</h2><p>Formularz kontaktowy: imię, telefon, e-mail i treść wiadomości — wyłącznie po to, by odpowiedzieć na Twoje pytanie (art. 6 ust. 1 lit. a i f RODO). Rezerwacje przez Booksy i wiadomości na Instagramie podlegają politykom prywatności tych serwisów.</p><h2>3. Jak długo przechowujemy dane</h2><p>Dane z formularza przechowujemy do czasu zakończenia korespondencji, nie dłużej niż 12 miesięcy, chyba że przepisy wymagają dłużej.</p><h2>4. Odbiorcy danych</h2><p>Dane mogą być powierzane wyłącznie dostawcom usług technicznych (hosting, poczta e-mail), którzy przetwarzają je na nasze zlecenie. Nie sprzedajemy danych.</p><h2>5. Pliki cookies</h2><p>Strona używa niezbędnych plików cookies (np. zapamiętanie języka). Cookies analityczne i marketingowe (Google Analytics, Google Ads) włączamy tylko po Twojej zgodzie w banerze. Zgodę możesz w każdej chwili wycofać, czyszcząc dane strony w przeglądarce.</p><h2>6. Twoje prawa</h2><p>Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia, sprzeciwu oraz cofnięcia zgody. Przysługuje Ci skarga do Prezesa Urzędu Ochrony Danych Osobowych (uodo.gov.pl).</p>'),
+(718,173,'uk','<h2>1. Адміністратор даних</h2><p>Адміністратором персональних даних є NOX Beauty Space, ul. Ludwiki 4B/U1, 01-226 Warszawa. З питань персональних даних зв’яжіться з нами через форму на сайті або Instagram @nox.beauty.space.</p><h2>2. Які дані та для чого</h2><p>Контактна форма: ім’я, телефон, e-mail і текст повідомлення — лише для відповіді на ваше запитання (ст. 6 ч. 1 п. a та f GDPR/RODO). Записи через Booksy та повідомлення в Instagram регулюються політиками конфіденційності цих сервісів.</p><h2>3. Як довго зберігаємо дані</h2><p>Дані з форми зберігаємо до завершення листування, але не довше 12 місяців, якщо закон не вимагає довшого строку.</p><h2>4. Отримувачі даних</h2><p>Дані можуть передаватися лише постачальникам технічних послуг (хостинг, електронна пошта), які обробляють їх на наше доручення. Ми не продаємо дані.</p><h2>5. Файли cookie</h2><p>Сайт використовує необхідні cookie (наприклад, для запам’ятовування мови). Аналітичні та маркетингові cookie (Google Analytics, Google Ads) вмикаються лише після вашої згоди в банері. Згоду можна відкликати будь-коли, очистивши дані сайту в браузері.</p><h2>6. Ваші права</h2><p>Ви маєте право на доступ до даних, їх виправлення, видалення, обмеження обробки, перенесення, заперечення та відкликання згоди. Ви можете подати скаргу до Голови Управління захисту персональних даних Польщі (uodo.gov.pl).</p>'),
+(719,173,'en','<h2>1. Data controller</h2><p>The controller of your personal data is NOX Beauty Space, ul. Ludwiki 4B/U1, 01-226 Warsaw, Poland. For any data protection matters, contact us via the form on this site or on Instagram @nox.beauty.space.</p><h2>2. What data we process and why</h2><p>Contact form: name, phone, e-mail and your message — only to reply to your enquiry (Art. 6(1)(a) and (f) GDPR). Bookings via Booksy and Instagram messages are governed by those services’ privacy policies.</p><h2>3. How long we keep data</h2><p>Form data is kept until our correspondence ends and no longer than 12 months, unless the law requires longer.</p><h2>4. Recipients</h2><p>Data may only be shared with technical service providers (hosting, e-mail) that process it on our behalf. We never sell data.</p><h2>5. Cookies</h2><p>The site uses essential cookies (e.g. to remember your language). Analytics and marketing cookies (Google Analytics, Google Ads) are enabled only after you consent in the banner. You can withdraw consent at any time by clearing this site’s data in your browser.</p><h2>6. Your rights</h2><p>You have the right to access, rectify, erase, restrict and port your data, to object, and to withdraw consent. You may lodge a complaint with the Polish Data Protection Authority (uodo.gov.pl).</p>'),
+(720,174,'pl','Używamy plików cookies, aby mierzyć ruch i ulepszać stronę. Analityka włączy się tylko za Twoją zgodą.'),
+(721,174,'uk','Ми використовуємо cookie, щоб вимірювати відвідуваність і покращувати сайт. Аналітика вмикається лише за вашою згодою.'),
+(722,174,'en','We use cookies to measure traffic and improve the site. Analytics is enabled only with your consent.'),
+(723,175,'pl','Akceptuję'),
+(724,175,'uk','Погоджуюсь'),
+(725,175,'en','Accept'),
+(726,176,'pl','Tylko niezbędne'),
+(727,176,'uk','Лише необхідні'),
+(728,176,'en','Essential only'),
+(729,177,'pl','Strona główna'),
+(730,177,'uk','Головна'),
+(731,177,'en','Home'),
+(732,178,'pl','Usługi'),
+(733,178,'uk','Послуги'),
+(734,178,'en','Services'),
+(735,179,'pl','Dlaczego NOX'),
+(736,179,'uk','Чому NOX'),
+(737,179,'en','Why NOX'),
+(738,180,'pl','Cennik'),
+(739,180,'uk','Ціни'),
+(740,180,'en','Prices'),
+(741,181,'pl','Aktualne <em>ceny</em>'),
+(742,181,'uk','Актуальні <em>ціни</em>'),
+(743,181,'en','Current <em>prices</em>'),
+(744,182,'pl','Portfolio'),
+(745,182,'uk','Портфоліо'),
+(746,182,'en','Portfolio'),
+(747,183,'pl','Nasze <em>prace</em>'),
+(748,183,'uk','Наші <em>роботи</em>'),
+(749,183,'en','Our <em>work</em>'),
+(750,184,'pl','Pytania i <em>odpowiedzi</em>'),
+(751,184,'uk','Питання та <em>відповіді</em>'),
+(752,184,'en','Questions & <em>answers</em>'),
+(753,185,'pl','Zobacz też'),
+(754,185,'uk','Дивіться також'),
+(755,185,'en','See also'),
+(756,186,'pl','Inne <em>usługi</em>'),
+(757,186,'uk','Інші <em>послуги</em>'),
+(758,186,'en','Other <em>services</em>'),
+(759,187,'pl','Szczegóły'),
+(760,187,'uk','Детальніше'),
+(761,187,'en','Learn more'),
+(762,188,'pl','Usługi'),
+(763,188,'uk','Послуги'),
+(764,188,'en','Services'),
+(765,189,'pl','Manicure hybrydowy i japoński Warszawa Wola | NOX Beauty Space'),
+(766,189,'uk','Гібридний і японський манікюр Варшава, Воля | NOX Beauty Space'),
+(767,189,'en','Gel & Japanese Manicure in Warsaw, Wola | NOX Beauty Space'),
+(768,190,'pl','Manicure hybrydowy, japoński, klasyczny i męski na Woli, blisko metra Płocka. Sterylizacja w autoklawie, ocena 5.0 w Booksy. −10% na pierwszą wizytę.'),
+(769,190,'uk','Гібридний, японський, класичний і чоловічий манікюр на Волі біля метро Płocka. Стерилізація в автоклаві, рейтинг 5.0 у Booksy. −10% на перший візит.'),
+(770,190,'en','Gel, Japanese, classic and men’s manicure in Wola near Płocka metro. Autoclave-sterilised tools, 5.0 rating on Booksy. 10% off your first visit.'),
+(771,191,'pl','Manicure · Warszawa Wola'),
+(772,191,'uk','Манікюр · Варшава, Воля'),
+(773,191,'en','Manicure · Warsaw, Wola'),
+(774,192,'pl','Manicure hybrydowy <em>na Woli</em>'),
+(775,192,'uk','Гібридний манікюр <em>на Волі</em>'),
+(776,192,'en','Gel manicure <em>in Wola</em>'),
+(777,193,'pl','Czyste skórki, idealny kształt i lustrzany połysk, który trzyma się tygodniami. Manicure hybrydowy, japoński, klasyczny i męski — kilka minut od metra Płocka.'),
+(778,193,'uk','Акуратна кутикула, ідеальна форма та дзеркальний блиск, який тримається тижнями. Гібридний, японський, класичний і чоловічий манікюр — за кілька хвилин від метро Płocka.'),
+(779,193,'en','Neat cuticles, a perfect shape and a mirror shine that lasts for weeks. Gel, Japanese, classic and men’s manicure — a few minutes from Płocka metro station.'),
+(780,194,'pl','Manicure, który <em>wygląda perfekcyjnie</em>'),
+(781,194,'uk','Манікюр, який <em>виглядає бездоганно</em>'),
+(782,194,'en','A manicure that <em>looks flawless</em>'),
+(783,195,'pl','W NOX Beauty Space manicure to nie pośpiech, tylko dokładność. Stylistki Nataliia i Taya dbają o każdy detal: precyzyjne opracowanie skórek, równy kształt płytki i cienkie, gładkie pokrycie hybrydą. Efekt — paznokcie, które wyglądają naturalnie i elegancko, a kolor nie odpryskuje po kilku dniach.'),
+(784,195,'uk','У NOX Beauty Space манікюр — це не поспіх, а точність. Майстрині Наталія та Тая дбають про кожну деталь: акуратне опрацювання кутикули, рівна форма нігтя та тонке гладке гібридне покриття. Результат — нігті, які виглядають природно й елегантно, а колір не відколюється за кілька днів.'),
+(785,195,'en','At NOX Beauty Space a manicure is about precision, not speed. Our stylists Nataliia and Taya take care of every detail: careful cuticle work, an even nail shape and a thin, smooth gel finish. The result is natural, elegant nails with colour that doesn’t chip after a few days.'),
+(786,196,'pl','Wybierz manicure hybrydowy, jeśli chcesz trwałego koloru i połysku. Manicure japoński to naturalna pielęgnacja i wzmocnienie płytki bez lakieru, a klasyczny — szybkie odświeżenie dłoni. Panów zapraszamy na manicure męski: zadbane dłonie bez efektu „lakieru”.'),
+(787,196,'uk','Обирайте гібридний манікюр, якщо хочете стійкого кольору й блиску. Японський манікюр — це природний догляд і зміцнення нігтя без лаку, а класичний — швидке оновлення рук. Чоловіків запрошуємо на чоловічий манікюр: доглянуті руки без ефекту «лаку».'),
+(788,196,'en','Choose a gel manicure for long-lasting colour and shine. A Japanese manicure is natural care that strengthens the nail without polish, while a classic manicure is a quick refresh. Gentlemen are welcome too: our men’s manicure gives well-groomed hands with no “polished” look.'),
+(789,197,'pl','Sterylne narzędzia'),
+(790,197,'uk','Стерильні інструменти'),
+(791,197,'en','Sterile tools'),
+(792,198,'pl','Dezynfekcja, myjka ultradźwiękowa i autoklaw. Pakiet otwieramy przy Tobie.'),
+(793,198,'uk','Дезінфекція, ультразвукова мийка та автоклав. Пакет відкриваємо при вас.'),
+(794,198,'en','Disinfection, ultrasonic cleaning and autoclave. The pouch is opened in front of you.'),
+(795,199,'pl','Trwałe pokrycie'),
+(796,199,'uk','Стійке покриття'),
+(797,199,'en','Long-lasting finish'),
+(798,200,'pl','Sprawdzone materiały i cienka, równa warstwa — kolor bez odprysków.'),
+(799,200,'uk','Перевірені матеріали й тонкий рівний шар — колір без сколів.'),
+(800,200,'en','Trusted products and a thin, even layer — colour without chips.'),
+(801,201,'pl','Ocena 5.0'),
+(802,201,'uk','Рейтинг 5.0'),
+(803,201,'en','5.0 rating'),
+(804,202,'pl','143 opinie zweryfikowanych klientek w Booksy.'),
+(805,202,'uk','143 відгуки перевірених клієнток у Booksy.'),
+(806,202,'en','143 verified client reviews on Booksy.'),
+(807,203,'pl','−10% na start'),
+(808,203,'uk','−10% на перший візит'),
+(809,203,'en','10% off to start'),
+(810,204,'pl','Rabat na pierwszą wizytę przez Booksy lub Instagram Direct.'),
+(811,204,'uk','Знижка на перший візит через Booksy або Instagram Direct.'),
+(812,204,'en','First-visit discount when you book via Booksy or Instagram.'),
+(813,205,'pl','Ile kosztuje manicure hybrydowy w NOX?'),
+(814,205,'uk','Скільки коштує гібридний манікюр у NOX?'),
+(815,205,'en','How much does a gel manicure cost at NOX?'),
+(816,206,'pl','Manicure hybrydowy kosztuje 160 zł, japoński — 130 zł, a klasyczny i męski — 110 zł. Usunięcie poprzedniej stylizacji żelowej to dodatkowe 40 zł.'),
+(817,206,'uk','Гібридний манікюр коштує 160 zł, японський — 130 zł, класичний і чоловічий — 110 zł. Зняття попереднього гелевого покриття — додатково 40 zł.'),
+(818,206,'en','A gel manicure is 160 zł, Japanese 130 zł, classic and men’s 110 zł. Removal of a previous gel set is an extra 40 zł.'),
+(819,207,'pl','Czym różni się manicure hybrydowy od japońskiego?'),
+(820,207,'uk','Чим гібридний манікюр відрізняється від японського?'),
+(821,207,'en','What is the difference between gel and Japanese manicure?'),
+(822,208,'pl','Hybryda to trwały kolor i połysk utwardzany w lampie. Manicure japoński to pielęgnacja bez lakieru: płytka zostaje wzmocniona i wypolerowana do naturalnego blasku.'),
+(823,208,'uk','Гібрид — це стійкий колір і блиск, що полімеризується в лампі. Японський манікюр — догляд без лаку: ніготь зміцнюється й полірується до природного блиску.'),
+(824,208,'en','Gel gives long-lasting colour and shine cured under a lamp. A Japanese manicure is polish-free care: the nail is strengthened and buffed to a natural shine.'),
+(825,209,'pl','Czy robicie manicure męski?'),
+(826,209,'uk','Чи робите ви чоловічий манікюр?'),
+(827,209,'en','Do you offer men’s manicures?'),
+(828,210,'pl','Tak. Manicure męski za 110 zł to opracowanie skórek, nadanie kształtu i pielęgnacja dłoni — bez koloru i bez efektu lakieru.'),
+(829,210,'uk','Так. Чоловічий манікюр за 110 zł — це обробка кутикули, форма та догляд за руками, без кольору й без ефекту лаку.'),
+(830,210,'en','Yes. Our men’s manicure (110 zł) includes cuticle care, shaping and hand care — no colour and no polished look.'),
+(831,211,'pl','Przedłużanie paznokci Warszawa Wola — żel, akrylożel | NOX'),
+(832,211,'uk','Нарощування нігтів Варшава, Воля — гель, акригель | NOX'),
+(833,211,'en','Nail Extensions in Warsaw, Wola — gel & polygel | NOX'),
+(834,212,'pl','Przedłużanie paznokci żelem i akrylożelem na górnych formach na Woli: french, migdał, kwadrat. Od 240 zł, uzupełnienie od 200 zł. −10% na pierwszą wizytę.'),
+(835,212,'uk','Нарощування нігтів гелем і акригелем на верхніх формах на Волі: френч, мигдаль, квадрат. Від 240 zł, корекція від 200 zł. −10% на перший візит.'),
+(836,212,'en','Gel and polygel nail extensions on dual forms in Wola: French, almond or square. From 240 zł, refills from 200 zł. 10% off your first visit.'),
+(837,213,'pl','Przedłużanie paznokci · Wola'),
+(838,213,'uk','Нарощування нігтів · Воля'),
+(839,213,'en','Nail extensions · Wola'),
+(840,214,'pl','Przedłużanie paznokci <em>w Warszawie</em>'),
+(841,214,'uk','Нарощування нігтів <em>у Варшаві</em>'),
+(842,214,'en','Nail extensions <em>in Warsaw</em>'),
+(843,215,'pl','Wymarzona długość i kształt w jedną wizytę. Żel i akrylożel na górnych formach — delikatny french, migdał lub kwadrat, lekkie i naturalnie cienkie.'),
+(844,215,'uk','Бажана довжина й форма за один візит. Гель і акригель на верхніх формах — ніжний френч, мигдаль або квадрат, легкі та природно тонкі.'),
+(845,215,'en','Your dream length and shape in one visit. Gel and polygel on dual forms — soft French, almond or square, light and naturally thin.'),
+(846,216,'pl','Długie paznokcie, <em>które nie ciążą</em>'),
+(847,216,'uk','Довгі нігті, <em>які не обтяжують</em>'),
+(848,216,'en','Long nails <em>that feel light</em>'),
+(849,217,'pl','Przedłużamy paznokcie metodą górnych form. Dzięki temu kształt jest powtarzalny i symetryczny, a stylizacja pozostaje cienka i lekka — bez „grubego” efektu. Pracujemy żelem i akrylożelem, dobierając materiał do Twojej płytki i stylu życia.'),
+(850,217,'uk','Ми нарощуємо нігті на верхні форми. Завдяки цьому форма повторювана й симетрична, а покриття залишається тонким і легким — без «товстого» ефекту. Працюємо гелем і акригелем, підбираючи матеріал під ваш ніготь і спосіб життя.'),
+(851,217,'en','We build extensions on dual (top) forms, so every nail has a repeatable, symmetrical shape and stays thin and light — never bulky. We work with gel and polygel, choosing the material for your nails and lifestyle.'),
+(852,218,'pl','Cena zależy od długości: od 240 zł za długość 1 do 280 zł za długość 3–4. Uzupełnienie co 3–4 tygodnie zaczyna się od 200 zł. Najpopularniejsze kształty to migdał, kwadrat i klasyczny french.'),
+(853,218,'uk','Ціна залежить від довжини: від 240 zł за довжину 1 до 280 zł за довжину 3–4. Корекція кожні 3–4 тижні — від 200 zł. Найпопулярніші форми — мигдаль, квадрат і класичний френч.'),
+(854,218,'en','Prices depend on length: from 240 zł for length 1 to 280 zł for length 3–4. Refills every 3–4 weeks start at 200 zł. Our most popular shapes are almond, square and classic French.'),
+(855,219,'pl','Górne formy'),
+(856,219,'uk','Верхні форми'),
+(857,219,'en','Dual forms'),
+(858,220,'pl','Symetryczny kształt i cienka, lekka stylizacja.'),
+(859,220,'uk','Симетрична форма й тонке, легке покриття.'),
+(860,220,'en','Symmetrical shape and a thin, light set.'),
+(861,221,'pl','Żel lub akrylożel'),
+(862,221,'uk','Гель або акригель'),
+(863,221,'en','Gel or polygel'),
+(864,222,'pl','Dobieramy materiał do Twoich paznokci.'),
+(865,222,'uk','Підбираємо матеріал під ваші нігті.'),
+(866,222,'en','We match the material to your nails.'),
+(867,223,'pl','Sterylność'),
+(868,223,'uk','Стерильність'),
+(869,223,'en','Sterility'),
+(870,224,'pl','3-etapowa sterylizacja narzędzi i autoklaw.'),
+(871,224,'uk','3-етапна стерилізація інструментів і автоклав.'),
+(872,224,'en','3-stage tool sterilisation and autoclave.'),
+(873,225,'pl','−10% na start'),
+(874,225,'uk','−10% на перший візит'),
+(875,225,'en','10% off to start'),
+(876,226,'pl','Rabat na pierwszą wizytę przez Booksy lub Direct.'),
+(877,226,'uk','Знижка на перший візит через Booksy або Direct.'),
+(878,226,'en','First-visit discount via Booksy or Instagram.'),
+(879,227,'pl','Ile kosztuje przedłużanie paznokci?'),
+(880,227,'uk','Скільки коштує нарощування нігтів?'),
+(881,227,'en','How much are nail extensions?'),
+(882,228,'pl','Przedłużanie kosztuje 240 zł (długość 1), 260 zł (długość 2) i 280 zł (długość 3–4). Uzupełnienie — od 200 do 240 zł.'),
+(883,228,'uk','Нарощування коштує 240 zł (довжина 1), 260 zł (довжина 2) і 280 zł (довжина 3–4). Корекція — від 200 до 240 zł.'),
+(884,228,'en','Extensions cost 240 zł (length 1), 260 zł (length 2) and 280 zł (length 3–4). Refills are 200–240 zł.'),
+(885,229,'pl','Co wybrać: żel czy akrylożel?'),
+(886,229,'uk','Що обрати: гель чи акригель?'),
+(887,229,'en','Gel or polygel — which should I choose?'),
+(888,230,'pl','Oba materiały dają trwały i estetyczny efekt. Akrylożel jest bardzo wytrzymały, żel — elastyczny i lekki. Stylistka doradzi najlepszą opcję podczas wizyty.'),
+(889,230,'uk','Обидва матеріали дають стійкий і естетичний результат. Акригель дуже міцний, гель — еластичний і легкий. Майстриня порадить найкращий варіант під час візиту.'),
+(890,230,'en','Both give a durable, beautiful result. Polygel is very strong, gel is flexible and light. Your stylist will recommend the best option at your visit.'),
+(891,231,'pl','Jak często robić uzupełnienie?'),
+(892,231,'uk','Як часто робити корекцію?'),
+(893,231,'en','How often do I need a refill?'),
+(894,232,'pl','Zwykle co 3–4 tygodnie, gdy paznokieć odrośnie. Regularne uzupełnienie utrzymuje kształt i chroni naturalną płytkę.'),
+(895,232,'uk','Зазвичай кожні 3–4 тижні, коли ніготь відросте. Регулярна корекція зберігає форму й захищає натуральний ніготь.'),
+(896,232,'en','Usually every 3–4 weeks as the nail grows out. Regular refills keep the shape and protect your natural nail.'),
+(897,233,'pl','Pedicure hybrydowy i SPA Warszawa Wola | NOX Beauty Space'),
+(898,233,'uk','Гібридний і SPA-педикюр Варшава, Воля | NOX Beauty Space'),
+(899,233,'en','Gel & SPA Pedicure in Warsaw, Wola | NOX Beauty Space'),
+(900,234,'pl','Pedicure klasyczny, hybrydowy i SPA z kąpielą solną i peelingiem na Woli, blisko metra Płocka. Pedicure męski SPA. Sterylne narzędzia. −10% na pierwszą wizytę.'),
+(901,234,'uk','Класичний, гібридний і SPA-педикюр із сольовою ванночкою та пілінгом на Волі біля метро Płocka. Чоловічий SPA-педикюр. Стерильні інструменти. −10% на перший візит.'),
+(902,234,'en','Classic, gel and SPA pedicure with a salt soak and scrub in Wola near Płocka metro. Men’s SPA pedicure. Sterile tools. 10% off your first visit.'),
+(903,235,'pl','Pedicure · Warszawa Wola'),
+(904,235,'uk','Педикюр · Варшава, Воля'),
+(905,235,'en','Pedicure · Warsaw, Wola'),
+(906,236,'pl','Pedicure hybrydowy i SPA <em>na Woli</em>'),
+(907,236,'uk','Гібридний і SPA-педикюр <em>на Волі</em>'),
+(908,236,'en','Gel & SPA pedicure <em>in Wola</em>'),
+(909,237,'pl','Gładkie stopy i trwały kolor. Pedicure klasyczny, hybrydowy i SPA z kąpielą w soli i peelingiem — chwila relaksu kilka kroków od metra Płocka.'),
+(910,237,'uk','Гладенькі стопи й стійкий колір. Класичний, гібридний і SPA-педикюр із ванночкою з сіллю та пілінгом — хвилина відпочинку за кілька кроків від метро Płocka.'),
+(911,237,'en','Smooth feet and lasting colour. Classic, gel and SPA pedicure with a salt soak and scrub — a moment of relaxation steps from Płocka metro.'),
+(912,238,'pl','Pedicure, po którym <em>chce się chodzić boso</em>'),
+(913,238,'uk','Педикюр, після якого <em>хочеться ходити босоніж</em>'),
+(914,238,'en','A pedicure that makes you <em>want to go barefoot</em>'),
+(915,239,'pl','Pedicure w NOX to dokładne opracowanie stóp i paznokci w spokojnej atmosferze. Wersja SPA zaczyna się od kąpieli w soli i peelingu, które zmiękczają skórę i dają uczucie lekkości. Kończymy trwałym kolorem hybrydowym albo naturalnym, zadbanym wykończeniem.'),
+(916,239,'uk','Педикюр у NOX — це ретельне опрацювання стоп і нігтів у спокійній атмосфері. SPA-версія починається з ванночки з сіллю та пілінгу, які пом’якшують шкіру й дарують відчуття легкості. Завершуємо стійким гібридним кольором або природним доглянутим виглядом.'),
+(917,239,'en','A pedicure at NOX means thorough care of your feet and nails in a calm atmosphere. The SPA version starts with a salt soak and scrub that soften the skin and leave your feet feeling light. We finish with long-lasting gel colour or a natural, well-groomed look.'),
+(918,240,'pl','Do wyboru masz pedicure klasyczny (150 zł), hybrydowy (190 zł), hybrydowy częściowy — tylko paznokcie, bez opracowania stopy (160 zł) oraz wersje SPA. Panów zapraszamy na pedicure męski SPA (180 zł).'),
+(919,240,'uk','На вибір: класичний педикюр (150 zł), гібридний (190 zł), гібридний частковий — лише нігті, без обробки стопи (160 zł), а також SPA-версії. Чоловіків запрошуємо на чоловічий SPA-педикюр (180 zł).'),
+(920,240,'en','Choose from classic (150 zł), gel (190 zł), partial gel — toes only, without foot treatment (160 zł) and SPA options. Gentlemen are welcome for a men’s SPA pedicure (180 zł).'),
+(921,241,'pl','Wersja SPA'),
+(922,241,'uk','SPA-версія'),
+(923,241,'en','SPA option'),
+(924,242,'pl','Kąpiel w soli i peeling dla miękkiej, gładkiej skóry.'),
+(925,242,'uk','Ванночка з сіллю та пілінг для м’якої, гладкої шкіри.'),
+(926,242,'en','Salt soak and scrub for soft, smooth skin.'),
+(927,243,'pl','Trwały kolor'),
+(928,243,'uk','Стійкий колір'),
+(929,243,'en','Lasting colour'),
+(930,244,'pl','Hybryda, która wygląda świeżo przez tygodnie.'),
+(931,244,'uk','Гібрид, який виглядає свіжо тижнями.'),
+(932,244,'en','Gel polish that looks fresh for weeks.'),
+(933,245,'pl','Sterylne narzędzia'),
+(934,245,'uk','Стерильні інструменти'),
+(935,245,'en','Sterile tools'),
+(936,246,'pl','Autoklaw i pakiety otwierane przy Tobie.'),
+(937,246,'uk','Автоклав і пакети, які відкриваємо при вас.'),
+(938,246,'en','Autoclave and pouches opened in front of you.'),
+(939,247,'pl','Także dla panów'),
+(940,247,'uk','Також для чоловіків'),
+(941,247,'en','For men too'),
+(942,248,'pl','Pedicure męski SPA za 180 zł.'),
+(943,248,'uk','Чоловічий SPA-педикюр за 180 zł.'),
+(944,248,'en','Men’s SPA pedicure for 180 zł.'),
+(945,249,'pl','Ile kosztuje pedicure hybrydowy?'),
+(946,249,'uk','Скільки коштує гібридний педикюр?'),
+(947,249,'en','How much is a gel pedicure?'),
+(948,250,'pl','Pedicure hybrydowy kosztuje 190 zł, w wersji SPA — 205 zł. Wersja częściowa (tylko paznokcie) to 160 zł.'),
+(949,250,'uk','Гібридний педикюр коштує 190 zł, у SPA-версії — 205 zł. Частковий (лише нігті) — 160 zł.'),
+(950,250,'en','A gel pedicure is 190 zł, or 205 zł with SPA. The partial version (toes only) is 160 zł.'),
+(951,251,'pl','Czym jest pedicure SPA?'),
+(952,251,'uk','Що таке SPA-педикюр?'),
+(953,251,'en','What is a SPA pedicure?'),
+(954,252,'pl','To pedicure rozszerzony o kąpiel stóp w soli i peeling. Skóra staje się miękka i gładka, a zabieg jest bardziej relaksujący.'),
+(955,252,'uk','Це педикюр, доповнений ванночкою для стоп із сіллю та пілінгом. Шкіра стає м’якою і гладкою, а процедура — більш розслаблюючою.'),
+(956,252,'en','It’s a pedicure with an added salt foot soak and scrub, leaving the skin soft and smooth and the treatment more relaxing.'),
+(957,253,'pl','Czy jest pedicure dla mężczyzn?'),
+(958,253,'uk','Чи є педикюр для чоловіків?'),
+(959,253,'en','Do you offer pedicures for men?'),
+(960,254,'pl','Tak, pedicure męski SPA kosztuje 180 zł i obejmuje kąpiel, peeling oraz opracowanie stóp i paznokci.'),
+(961,254,'uk','Так, чоловічий SPA-педикюр коштує 180 zł і включає ванночку, пілінг та обробку стоп і нігтів.'),
+(962,254,'en','Yes, the men’s SPA pedicure costs 180 zł and includes a soak, scrub and foot and nail care.'),
+(963,255,'pl','Laminowanie brwi i rzęs Warszawa Wola | NOX Beauty Space'),
+(964,255,'uk','Ламінування брів і вій Варшава, Воля | NOX Beauty Space'),
+(965,255,'en','Brow & Lash Lamination in Warsaw, Wola | NOX Beauty Space'),
+(966,256,'pl','Laminowanie brwi i rzęs, regulacja, farbowanie i elektroepilacja na Woli, blisko metra Płocka. Promocja: laminowanie brwi i rzęs 270 zł. −10% na pierwszą wizytę.'),
+(967,256,'uk','Ламінування брів і вій, корекція, фарбування та електроепіляція на Волі біля метро Płocka. Акція: ламінування брів і вій 270 zł. −10% на перший візит.'),
+(968,256,'en','Brow and lash lamination, shaping, tinting and electrolysis in Wola near Płocka metro. Offer: brow + lash lamination 270 zł. 10% off your first visit.'),
+(969,257,'pl','Brwi i rzęsy · Warszawa Wola'),
+(970,257,'uk','Брови та вії · Варшава, Воля'),
+(971,257,'en','Brows & lashes · Warsaw, Wola'),
+(972,258,'pl','Laminowanie brwi i rzęs <em>na Woli</em>'),
+(973,258,'uk','Ламінування брів і вій <em>на Волі</em>'),
+(974,258,'en','Brow & lash lamination <em>in Wola</em>'),
+(975,259,'pl','Pełne, uporządkowane brwi i podkręcone rzęsy bez codziennego makijażu. Laminowanie, regulacja, farbowanie oraz trwała elektroepilacja.'),
+(976,259,'uk','Густі, доглянуті брови та підкручені вії без щоденного макіяжу. Ламінування, корекція, фарбування та електроепіляція назавжди.'),
+(977,259,'en','Full, groomed brows and lifted lashes without daily make-up. Lamination, shaping, tinting and permanent electrolysis.'),
+(978,260,'pl','Spojrzenie, które <em>mówi samo za siebie</em>'),
+(979,260,'uk','Погляд, який <em>говорить сам за себе</em>'),
+(980,260,'en','A look that <em>speaks for itself</em>'),
+(981,261,'pl','Stylistka Alina dobiera kształt brwi do rysów twarzy, a laminowanie układa włoski tak, by brwi wyglądały na gęstsze i zadbane. Laminowanie rzęs unosi je od nasady i optycznie wydłuża — efekt „otwartego” spojrzenia bez tuszu i doklejanych rzęs.'),
+(982,261,'uk','Майстриня Аліна підбирає форму брів під риси обличчя, а ламінування вкладає волоски так, щоб брови виглядали густішими й доглянутими. Ламінування вій піднімає їх від основи й візуально подовжує — ефект «відкритого» погляду без туші й нарощених вій.'),
+(983,261,'en','Our stylist Alina shapes your brows to suit your face, and lamination sets the hairs so the brows look fuller and groomed. A lash lift curls lashes from the root and makes them look longer — an “open” look without mascara or extensions.'),
+(984,262,'pl','Oferujemy też regulację i farbowanie brwi, farbowanie rzęs i depilację wąsika. Elektroepilacja usuwa trwale każdy rodzaj włosa — na tę usługę zapisujemy przez Instagram Direct, aby dobrać plan zabiegów.'),
+(985,262,'uk','Також пропонуємо корекцію та фарбування брів, фарбування вій і депіляцію над губою. Електроепіляція назавжди видаляє будь-який тип волосся — на цю послугу записуємо через Instagram Direct, щоб підібрати план процедур.'),
+(986,262,'en','We also offer brow shaping and tinting, lash tinting and upper-lip waxing. Electrolysis permanently removes any type of hair — book it via Instagram so we can plan your sessions.'),
+(987,263,'pl','Kształt do twarzy'),
+(988,263,'uk','Форма під обличчя'),
+(989,263,'en','Shape for your face'),
+(990,264,'pl','Regulacja dopasowana do Twoich rysów.'),
+(991,264,'uk','Корекція під ваші риси обличчя.'),
+(992,264,'en','Shaping tailored to your features.'),
+(993,265,'pl','Laminowanie'),
+(994,265,'uk','Ламінування'),
+(995,265,'en','Lamination'),
+(996,266,'pl','Gęstsze brwi i podkręcone rzęsy na tygodnie.'),
+(997,266,'uk','Густіші брови й підкручені вії на тижні.'),
+(998,266,'en','Fuller brows and lifted lashes for weeks.'),
+(999,267,'pl','Elektroepilacja'),
+(1000,267,'uk','Електроепіляція'),
+(1001,267,'en','Electrolysis'),
+(1002,268,'pl','Trwałe usuwanie każdego rodzaju włosa.'),
+(1003,268,'uk','Видалення будь-якого типу волосся назавжди.'),
+(1004,268,'en','Permanent removal of any hair type.'),
+(1005,269,'pl','Promocja 270 zł'),
+(1006,269,'uk','Акція 270 zł'),
+(1007,269,'en','270 zł offer'),
+(1008,270,'pl','Laminowanie brwi i rzęs w jednej wizycie.'),
+(1009,270,'uk','Ламінування брів і вій за один візит.'),
+(1010,270,'en','Brow and lash lamination in one visit.'),
+(1011,271,'pl','Ile kosztuje laminowanie brwi?'),
+(1012,271,'uk','Скільки коштує ламінування брів?'),
+(1013,271,'en','How much is brow lamination?'),
+(1014,272,'pl','Laminowanie brwi z regulacją kosztuje 130 zł, a z regulacją i farbowaniem — 150 zł. Laminowanie rzęs to 160 zł, a pakiet brwi + rzęsy — 270 zł.'),
+(1015,272,'uk','Ламінування брів із корекцією коштує 130 zł, з корекцією та фарбуванням — 150 zł. Ламінування вій — 160 zł, пакет брови + вії — 270 zł.'),
+(1016,272,'en','Brow lamination with shaping is 130 zł, or 150 zł with tint. Lash lamination is 160 zł and the brow + lash package 270 zł.'),
+(1017,273,'pl','Ile kosztuje regulacja brwi?'),
+(1018,273,'uk','Скільки коштує корекція брів?'),
+(1019,273,'en','How much is brow shaping?'),
+(1020,274,'pl','Regulacja brwi kosztuje 50 zł, regulacja z farbowaniem — 80 zł. Farbowanie rzęs to 40 zł.'),
+(1021,274,'uk','Корекція брів коштує 50 zł, корекція з фарбуванням — 80 zł. Фарбування вій — 40 zł.'),
+(1022,274,'en','Brow shaping is 50 zł, shaping with tint 80 zł. Lash tinting is 40 zł.'),
+(1023,275,'pl','Jak zapisać się na elektroepilację?'),
+(1024,275,'uk','Як записатися на електроепіляцію?'),
+(1025,275,'en','How do I book electrolysis?'),
+(1026,276,'pl','Napisz do nas na Instagramie @nox.beauty.space. Dobierzemy obszar i plan zabiegów, a potem zaproponujemy termin.'),
+(1027,276,'uk','Напишіть нам в Instagram @nox.beauty.space. Ми підберемо зону та план процедур і запропонуємо час.'),
+(1028,276,'en','Message us on Instagram @nox.beauty.space. We’ll discuss the area and treatment plan and offer you a time slot.'),
+(1029,277,'pl','Fryzjer damski Warszawa Wola — strzyżenie, koloryzacja | NOX'),
+(1030,277,'uk','Жіночий перукар Варшава, Воля — стрижка, фарбування | NOX'),
+(1031,277,'en','Hair Salon in Warsaw, Wola — haircuts & colour | NOX'),
+(1032,278,'pl','Strzyżenie damskie, koloryzacja, tonowanie i balayage na Woli, blisko metra Płocka. Bezpłatna konsultacja przed farbowaniem. Strzyżenie od 40 zł.'),
+(1033,278,'uk','Жіноча стрижка, фарбування, тонування та балаяж на Волі біля метро Płocka. Безкоштовна консультація перед фарбуванням. Стрижка від 40 zł.'),
+(1034,278,'en','Women’s haircuts, colouring, toning and balayage in Wola near Płocka metro. Free consultation before colouring. Haircuts from 40 zł.'),
+(1035,279,'pl','Fryzjer · Warszawa Wola'),
+(1036,279,'uk','Перукар · Варшава, Воля'),
+(1037,279,'en','Hair salon · Warsaw, Wola'),
+(1038,280,'pl','Fryzjer damski <em>na Woli</em>'),
+(1039,280,'uk','Жіночий перукар <em>на Волі</em>'),
+(1040,280,'en','Women’s hairdresser <em>in Wola</em>'),
+(1041,281,'pl','Strzyżenie, koloryzacja, tonowanie i balayage. Bezpłatna konsultacja przed farbowaniem — razem dobierzemy kolor, który podkreśli Twoją urodę.'),
+(1042,281,'uk','Стрижка, фарбування, тонування та балаяж. Безкоштовна консультація перед фарбуванням — разом підберемо колір, який підкреслить вашу красу.'),
+(1043,281,'en','Haircuts, colouring, toning and balayage. A free consultation before colouring — together we’ll find the shade that suits you best.'),
+(1044,282,'pl','Włosy, które <em>dobrze się układają</em>'),
+(1045,282,'uk','Волосся, яке <em>гарно лягає</em>'),
+(1046,282,'en','Hair that <em>falls into place</em>'),
+(1047,283,'pl','Dobre strzyżenie widać po tym, jak włosy układają się bez stylizacji. Vadzim strzyże z dbałością o detal i dopasowuje fryzurę do rodzaju włosów, kształtu twarzy i tego, ile czasu chcesz poświęcać na układanie każdego dnia.'),
+(1048,283,'uk','Гарну стрижку видно з того, як волосся лягає без укладання. Вадим стриже з увагою до деталей і підбирає зачіску під тип волосся, форму обличчя та те, скільки часу ви готові витрачати на укладку щодня.'),
+(1049,283,'en','A good haircut shows in how your hair sits without styling. Vadzim cuts with attention to detail and tailors the style to your hair type, face shape and how much time you want to spend styling each day.'),
+(1050,284,'pl','Strzyżenie z myciem i czesaniem kosztuje od 100 zł (włosy krótkie) do 140 zł (długie). Koloryzacja jednolita — od 280 zł. Przed farbowaniem zapraszamy na bezpłatną konsultację, a w promocji tonowanie ze strzyżeniem kosztuje 300 zł.'),
+(1051,284,'uk','Стрижка з миттям і укладкою коштує від 100 zł (коротке волосся) до 140 zł (довге). Однотонне фарбування — від 280 zł. Перед фарбуванням запрошуємо на безкоштовну консультацію, а за акцією тонування зі стрижкою коштує 300 zł.'),
+(1052,284,'en','A wash, cut and style costs from 100 zł (short hair) to 140 zł (long). Single-colour dye starts at 280 zł. Book a free consultation before colouring — and toning with a haircut is on offer for 300 zł.'),
+(1053,285,'pl','Bezpłatna konsultacja'),
+(1054,285,'uk','Безкоштовна консультація'),
+(1055,285,'en','Free consultation'),
+(1056,286,'pl','Przed farbowaniem dobieramy kolor razem z Tobą.'),
+(1057,286,'uk','Перед фарбуванням підбираємо колір разом із вами.'),
+(1058,286,'en','We choose your colour together before dyeing.'),
+(1059,287,'pl','Strzyżenie od 40 zł'),
+(1060,287,'uk','Стрижка від 40 zł'),
+(1061,287,'en','Cuts from 40 zł'),
+(1062,288,'pl','Od grzywki i końcówek po pełne strzyżenie.'),
+(1063,288,'uk','Від чубчика й кінчиків до повної стрижки.'),
+(1064,288,'en','From fringe and trims to a full cut.'),
+(1065,289,'pl','Koloryzacja'),
+(1066,289,'uk','Фарбування'),
+(1067,289,'en','Colouring'),
+(1068,290,'pl','Kolor jednolity, tonowanie i balayage.'),
+(1069,290,'uk','Однотонне фарбування, тонування та балаяж.'),
+(1070,290,'en','Single colour, toning and balayage.'),
+(1071,291,'pl','Ocena 5.0'),
+(1072,291,'uk','Рейтинг 5.0'),
+(1073,291,'en','5.0 rating'),
+(1074,292,'pl','Klientki wracają do nas regularnie.'),
+(1075,292,'uk','Клієнтки повертаються до нас регулярно.'),
+(1076,292,'en','Our clients come back regularly.'),
+(1077,293,'pl','Ile kosztuje strzyżenie damskie?'),
+(1078,293,'uk','Скільки коштує жіноча стрижка?'),
+(1079,293,'en','How much is a women’s haircut?'),
+(1080,294,'pl','Mycie, strzyżenie i czesanie kosztuje 100 zł (włosy krótkie), 120 zł (średnie) lub 140 zł (długie). Strzyżenie końcówek bez mycia — 80 zł, grzywki — 40 zł.'),
+(1081,294,'uk','Миття, стрижка та укладка коштують 100 zł (коротке волосся), 120 zł (середнє) або 140 zł (довге). Підрізання кінчиків без миття — 80 zł, чубчика — 40 zł.'),
+(1082,294,'en','A wash, cut and style is 100 zł (short), 120 zł (medium) or 140 zł (long). A trim without wash is 80 zł, a fringe trim 40 zł.'),
+(1083,295,'pl','Ile kosztuje farbowanie włosów?'),
+(1084,295,'uk','Скільки коштує фарбування волосся?'),
+(1085,295,'en','How much does hair colouring cost?'),
+(1086,296,'pl','Koloryzacja jednolita kosztuje 280 zł (włosy krótkie), 310 zł (średnie) i 350 zł (długie). Konsultacja przed farbowaniem jest bezpłatna.'),
+(1087,296,'uk','Однотонне фарбування коштує 280 zł (коротке волосся), 310 zł (середнє) і 350 zł (довге). Консультація перед фарбуванням безкоштовна.'),
+(1088,296,'en','Single-colour dye is 280 zł (short), 310 zł (medium) and 350 zł (long). The pre-colour consultation is free.'),
+(1089,297,'pl','Czy mogę przyjść na samą konsultację?'),
+(1090,297,'uk','Чи можна прийти лише на консультацію?'),
+(1091,297,'en','Can I come just for a consultation?'),
+(1092,298,'pl','Tak. Konsultacja przed farbowaniem jest bezpłatna — omówimy kolor, stan włosów i najlepszą technikę.'),
+(1093,298,'uk','Так. Консультація перед фарбуванням безкоштовна — обговоримо колір, стан волосся та найкращу техніку.'),
+(1094,298,'en','Yes. The consultation before colouring is free — we’ll talk through colour, hair condition and the best technique.'),
+(1095,299,'pl','Barber Warszawa Wola — strzyżenie męskie od 70 zł | NOX'),
+(1096,299,'uk','Барбер Варшава, Воля — чоловіча стрижка від 70 zł | NOX'),
+(1097,299,'en','Barber in Warsaw, Wola — men’s haircut from 70 zł | NOX'),
+(1098,300,'pl','Strzyżenie męskie maszynką i nożyczkami, fade oraz strzyżenie dziecięce na Woli, blisko metra Płocka. Od 70 zł, dzieci do 10 lat — 50 zł. Otwarte codziennie 10–20.'),
+(1099,300,'uk','Чоловіча стрижка машинкою та ножицями, фейд і дитяча стрижка на Волі біля метро Płocka. Від 70 zł, діти до 10 років — 50 zł. Працюємо щодня 10–20.'),
+(1100,300,'en','Men’s clipper and scissor cuts, fades and kids’ haircuts in Wola near Płocka metro. From 70 zł, kids under 10 — 50 zł. Open daily 10:00–20:00.'),
+(1101,301,'pl','Barber · Warszawa Wola'),
+(1102,301,'uk','Барбер · Варшава, Воля'),
+(1103,301,'en','Barber · Warsaw, Wola'),
+(1104,302,'pl','Barber i strzyżenie męskie <em>na Woli</em>'),
+(1105,302,'uk','Барбер і чоловіча стрижка <em>на Волі</em>'),
+(1106,302,'en','Barber & men’s haircuts <em>in Wola</em>'),
+(1107,303,'pl','Fade, klasyka nożyczkami albo szybkie odświeżenie — męskie strzyżenie z dbałością o detal. Strzyżemy też dzieci do 10 lat.'),
+(1108,303,'uk','Фейд, класика ножицями або швидке оновлення — чоловіча стрижка з увагою до деталей. Також стрижемо дітей до 10 років.'),
+(1109,303,'en','A fade, a classic scissor cut or a quick tidy-up — men’s haircuts with attention to detail. We also cut kids’ hair (up to age 10).'),
+(1110,304,'pl','Ostre linie, <em>czysty fade</em>'),
+(1111,304,'uk','Чіткі лінії, <em>чистий фейд</em>'),
+(1112,304,'en','Sharp lines, <em>clean fades</em>'),
+(1113,305,'pl','Vadzim — fryzjer i barber — pracuje maszynką i nożyczkami. Robi płynne przejścia fade, klasyczne męskie fryzury i strzyżenie wyłącznie nożyczkami dla tych, którzy wolą naturalny efekt. Klienci w opiniach podkreślają jego perfekcjonizm i uwagę do szczegółów.'),
+(1114,305,'uk','Вадим — перукар і барбер — працює машинкою та ножицями. Робить плавні переходи фейд, класичні чоловічі зачіски та стрижку лише ножицями для тих, хто любить природний вигляд. У відгуках клієнти відзначають його перфекціонізм і увагу до деталей.'),
+(1115,305,'en','Vadzim, our hairdresser and barber, works with clippers and scissors: smooth fades, classic men’s styles and scissor-only cuts for a natural look. Clients’ reviews highlight his perfectionism and attention to detail.'),
+(1116,306,'pl','Strzyżenie męskie z myciem kosztuje 70 zł, strzyżenie nożyczkami — 90 zł, a dziecięce (do 10 lat) — 50 zł. Salon jest otwarty codziennie 10–20, kilka minut od metra Płocka — łatwo wpaść po pracy.'),
+(1117,306,'uk','Чоловіча стрижка з миттям коштує 70 zł, стрижка ножицями — 90 zł, дитяча (до 10 років) — 50 zł. Салон працює щодня 10–20, за кілька хвилин від метро Płocka — легко зайти після роботи.'),
+(1118,306,'en','A men’s haircut with wash is 70 zł, a scissor cut 90 zł and a kids’ cut (under 10) 50 zł. We’re open daily 10:00–20:00, a few minutes from Płocka metro — easy to drop by after work.'),
+(1119,307,'pl','Fade i klasyka'),
+(1120,307,'uk','Фейд і класика'),
+(1121,307,'en','Fades & classics'),
+(1122,308,'pl','Maszynka, nożyczki i precyzyjne przejścia.'),
+(1123,308,'uk','Машинка, ножиці та точні переходи.'),
+(1124,308,'en','Clippers, scissors and precise blends.'),
+(1125,309,'pl','Od 70 zł'),
+(1126,309,'uk','Від 70 zł'),
+(1127,309,'en','From 70 zł'),
+(1128,310,'pl','Przejrzyste ceny bez niespodzianek.'),
+(1129,310,'uk','Прозорі ціни без сюрпризів.'),
+(1130,310,'en','Clear prices, no surprises.'),
+(1131,311,'pl','Strzyżenie dzieci'),
+(1132,311,'uk','Дитяча стрижка'),
+(1133,311,'en','Kids’ cuts'),
+(1134,312,'pl','Dzieci do 10 lat za 50 zł.'),
+(1135,312,'uk','Діти до 10 років — 50 zł.'),
+(1136,312,'en','Children under 10 for 50 zł.'),
+(1137,313,'pl','Codziennie 10–20'),
+(1138,313,'uk','Щодня 10–20'),
+(1139,313,'en','Daily 10–20'),
+(1140,314,'pl','Także w weekendy, blisko metra Płocka.'),
+(1141,314,'uk','Також у вихідні, біля метро Płocka.'),
+(1142,314,'en','Weekends too, near Płocka metro.'),
+(1143,315,'pl','Ile kosztuje strzyżenie męskie?'),
+(1144,315,'uk','Скільки коштує чоловіча стрижка?'),
+(1145,315,'en','How much is a men’s haircut?'),
+(1146,316,'pl','Strzyżenie męskie (mycie + strzyżenie) kosztuje 70 zł, strzyżenie nożyczkami — 90 zł.'),
+(1147,316,'uk','Чоловіча стрижка (миття + стрижка) коштує 70 zł, стрижка ножицями — 90 zł.'),
+(1148,316,'en','A men’s haircut (wash + cut) is 70 zł, a scissor cut 90 zł.'),
+(1149,317,'pl','Czy strzyżecie dzieci?'),
+(1150,317,'uk','Чи стрижете ви дітей?'),
+(1151,317,'en','Do you cut children’s hair?'),
+(1152,318,'pl','Tak, strzyżenie dziecięce dla dzieci do 10 lat kosztuje 50 zł.'),
+(1153,318,'uk','Так, дитяча стрижка для дітей до 10 років коштує 50 zł.'),
+(1154,318,'en','Yes, a haircut for children up to 10 years old costs 50 zł.'),
+(1155,319,'pl','Jak zapisać się do barbera?'),
+(1156,319,'uk','Як записатися до барбера?'),
+(1157,319,'en','How do I book the barber?'),
+(1158,320,'pl','Najszybciej przez Booksy — widzisz wolne terminy od razu. Możesz też napisać na Instagramie @nox.beauty.space.'),
+(1159,320,'uk','Найшвидше через Booksy — вільні години видно одразу. Також можна написати в Instagram @nox.beauty.space.'),
+(1160,320,'en','The quickest way is Booksy, where you see free slots right away. You can also message us on Instagram @nox.beauty.space.'),
+(1161,321,'pl','Francuski manicure na migdałowych paznokciach przedłużanych żelem'),
+(1162,321,'uk','Френч на мигдалеподібних нарощених нігтях'),
+(1163,321,'en','French tips on almond gel extensions'),
+(1164,322,'pl','Laminowanie rzęs i brwi — efekt po zabiegu'),
+(1165,322,'uk','Ламінування вій і брів — результат'),
+(1166,322,'en','Lash lift and brow lamination result'),
+(1167,323,'pl','Klasyczne strzyżenie męskie — barber NOX Warszawa'),
+(1168,323,'uk','Класична чоловіча стрижка — барбер NOX Варшава'),
+(1169,323,'en','Classic men’s haircut — NOX barber Warsaw'),
+(1170,324,'pl','Krok po kroku'),
+(1171,324,'uk','Крок за кроком'),
+(1172,324,'en','Step by step'),
+(1173,325,'pl','Jak wygląda <em>wizyta</em>'),
+(1174,325,'uk','Як проходить <em>візит</em>'),
+(1175,325,'en','How your <em>visit</em> goes'),
+(1176,326,'pl','Konsultacja i kolor'),
+(1177,326,'uk','Консультація та колір'),
+(1178,326,'en','Consultation & colour'),
+(1179,327,'pl','Dobieramy kształt, długość i odcień — możesz pokazać inspirację z Pinterestu.'),
+(1180,327,'uk','Підбираємо форму, довжину та відтінок — можна показати референс із Pinterest.'),
+(1181,327,'en','We choose the shape, length and shade — feel free to bring a Pinterest idea.'),
+(1182,328,'pl','Opracowanie skórek'),
+(1183,328,'uk','Обробка кутикули'),
+(1184,328,'en','Cuticle work'),
+(1185,329,'pl','Precyzyjne, gładkie cięcie bez zadziorów — sterylnymi narzędziami z pakietu.'),
+(1186,329,'uk','Точний, гладкий зріз без задирок — стерильними інструментами з крафт-пакета.'),
+(1187,329,'en','A precise, smooth cut with no hangnails — using sterile tools from a sealed pouch.'),
+(1188,330,'pl','Kształt i pokrycie'),
+(1189,330,'uk','Форма та покриття'),
+(1190,330,'en','Shape & finish'),
+(1191,331,'pl','Idealna architektura i cienka warstwa hipoalergicznej hybrydy.'),
+(1192,331,'uk','Ідеальна архітектура та тонкий шар гіпоалергенного гель-лаку.'),
+(1193,331,'en','Perfect architecture and a thin layer of hypoallergenic gel polish.'),
+(1194,332,'pl','Pielęgnacja na koniec'),
+(1195,332,'uk','Догляд наприкінці'),
+(1196,332,'en','Finishing care'),
+(1197,333,'pl','Olejek do skórek i wskazówki, jak utrzymać efekt na 2–4 tygodnie.'),
+(1198,333,'uk','Олійка для кутикули та поради, як зберегти результат на 2–4 тижні.'),
+(1199,333,'en','Cuticle oil and tips to keep the result for 2–4 weeks.'),
+(1200,334,'pl','Jak często odświeżać manicure hybrydowy?'),
+(1201,334,'uk','Як часто оновлювати гібридний манікюр?'),
+(1202,334,'en','How often should I refresh a gel manicure?'),
+(1203,335,'pl','Optymalnie co 2–4 tygodnie, zależnie od tempa wzrostu paznokci. Dłuższe noszenie zmienia balans paznokcia i może prowadzić do łamania lub odwarstwień.'),
+(1204,335,'uk','Оптимально кожні 2–4 тижні, залежно від швидкості росту нігтів. Довше носіння змінює баланс нігтя й може призвести до ламкості або відшарувань.'),
+(1205,335,'en','Ideally every 2–4 weeks, depending on how fast your nails grow. Wearing it longer shifts the nail’s balance and can cause breakage or lifting.'),
+(1206,336,'pl','Czy paznokcie potrzebują przerwy od hybrydy?'),
+(1207,336,'uk','Чи потрібна нігтям перерва від гібриду?'),
+(1208,336,'en','Do nails need a break from gel polish?'),
+(1209,337,'pl','Nie, jeśli manicure jest wykonywany profesjonalnie i prawidłowo zdejmowany — płytka nie „oddycha”. Gdy paznokcie są osłabione, polecamy manicure japoński: pasta z woskiem pszczelim i puder perłowy regenerują i dają naturalny połysk.'),
+(1210,337,'uk','Ні, якщо манікюр робиться професійно й правильно знімається — ніготь не «дихає». Якщо нігті ослаблені, радимо японський манікюр: паста з бджолиним воском і перлинна пудра відновлюють і дають природний блиск.'),
+(1211,337,'en','Not if the manicure is done and removed professionally — nails don’t “breathe”. If your nails are weak, try a Japanese manicure: beeswax paste and pearl powder restore them and add a natural shine.'),
+(1212,338,'pl','Kształt i długość'),
+(1213,338,'uk','Форма та довжина'),
+(1214,338,'en','Shape & length'),
+(1215,339,'pl','Migdał, kwadrat, sztylet czy french — wybieramy razem z Tobą.'),
+(1216,339,'uk','Мигдаль, квадрат, стилет чи френч — обираємо разом із вами.'),
+(1217,339,'en','Almond, square, stiletto or French — we choose together.'),
+(1218,340,'pl','Przygotowanie płytki'),
+(1219,340,'uk','Підготовка нігтя'),
+(1220,340,'en','Nail prep'),
+(1221,341,'pl','Delikatne opracowanie bez uszkodzeń i sterylne narzędzia.'),
+(1222,341,'uk','Делікатна обробка без травм і стерильні інструменти.'),
+(1223,341,'en','Gentle prep with no damage and sterile tools.'),
+(1224,342,'pl','Górne formy'),
+(1225,342,'uk','Верхні форми'),
+(1226,342,'en','Dual forms'),
+(1227,343,'pl','Minimalne piłowanie, idealna architektura i cienka, lekka powłoka.'),
+(1228,343,'uk','Мінімальне опилювання, ідеальна архітектура та тонке, легке покриття.'),
+(1229,343,'en','Minimal filing, perfect architecture and a thin, light layer.'),
+(1230,344,'pl','Kolor lub zdobienie'),
+(1231,344,'uk','Колір або дизайн'),
+(1232,344,'en','Colour or nail art'),
+(1233,345,'pl','Od mlecznej klasyki po zdobienia 3D i ręcznie malowane wzory.'),
+(1234,345,'uk','Від молочної класики до 3D-дизайну та ручного розпису.'),
+(1235,345,'en','From milky classics to 3D details and hand-painted art.'),
+(1236,346,'pl','Czym jest przedłużanie na górnych formach?'),
+(1237,346,'uk','Що таке нарощування на верхні форми?'),
+(1238,346,'en','What are dual-form extensions?'),
+(1239,347,'pl','To technika, w której materiał nakładamy w formę i odwracamy na paznokieć. Daje schludny wygląd bez nadmiernej objętości, minimalne piłowanie i cienką powłokę, której nie czuć na paznokciach.'),
+(1240,347,'uk','Це техніка, коли матеріал викладається у форму й перевертається на ніготь. Дає акуратний вигляд без зайвого об’єму, мінімальне опилювання й тонке покриття, яке не відчувається.'),
+(1241,347,'en','The material is placed in a form and flipped onto the nail. You get a neat look without bulk, minimal filing and a thin layer you can barely feel.'),
+(1242,348,'pl','Czy robicie zdobienia i nail art?'),
+(1243,348,'uk','Чи робите ви дизайн і нейл-арт?'),
+(1244,348,'en','Do you do nail art?'),
+(1245,349,'pl','Tak — od subtelnego minimalizmu po zdobienia artystyczne i elementy 3D. Pokaż nam inspirację, a odwzorujemy ją z czystą techniką i trwałością.'),
+(1246,349,'uk','Так — від стриманого мінімалізму до арт-дизайнів і 3D-елементів. Покажіть референс, і ми втілимо його з чистою технікою та стійкістю.'),
+(1247,349,'en','Yes — from subtle minimalism to artistic designs and 3D elements. Show us your inspiration and we’ll recreate it cleanly and durably.'),
+(1248,350,'pl','Kąpiel stóp'),
+(1249,350,'uk','Ванночка для стоп'),
+(1250,350,'en','Foot soak'),
+(1251,351,'pl','W wersji SPA — kąpiel w soli, która zmiękcza skórę.'),
+(1252,351,'uk','У SPA-версії — ванночка із сіллю, що пом’якшує шкіру.'),
+(1253,351,'en','In the SPA version — a salt soak that softens the skin.'),
+(1254,352,'pl','Opracowanie stóp'),
+(1255,352,'uk','Обробка стоп'),
+(1256,352,'en','Foot treatment'),
+(1257,353,'pl','Usunięcie zrogowaceń i peeling dla gładkiej skóry.'),
+(1258,353,'uk','Видалення огрубінь і пілінг для гладкої шкіри.'),
+(1259,353,'en','Removing hard skin plus a scrub for smooth feet.'),
+(1260,354,'pl','Paznokcie i skórki'),
+(1261,354,'uk','Нігті та кутикула'),
+(1262,354,'en','Nails & cuticles'),
+(1263,355,'pl','Kształt i precyzyjne opracowanie sterylnymi narzędziami.'),
+(1264,355,'uk','Форма та точна обробка стерильними інструментами.'),
+(1265,355,'en','Shaping and precise care with sterile tools.'),
+(1266,356,'pl','Kolor'),
+(1267,356,'uk','Колір'),
+(1268,356,'en','Colour'),
+(1269,357,'pl','Trwała hybryda — klasyczna czerwień, burgund, nude albo french.'),
+(1270,357,'uk','Стійкий гібрид — класичний червоний, бордо, нюд або френч.'),
+(1271,357,'en','Long-lasting gel — classic red, burgundy, nude or French.'),
+(1272,358,'pl','Jak długo utrzymuje się pedicure hybrydowy?'),
+(1273,358,'uk','Скільки тримається гібридний педикюр?'),
+(1274,358,'en','How long does a gel pedicure last?'),
+(1275,359,'pl','Paznokcie u stóp rosną wolniej niż u rąk, dlatego pedicure hybrydowy zwykle wygląda świeżo dłużej niż manicure. Na odświeżenie zapraszamy, gdy widać odrost.'),
+(1276,359,'uk','Нігті на ногах ростуть повільніше, ніж на руках, тому гібридний педикюр зазвичай довше виглядає свіжим, ніж манікюр. Оновити покриття варто, коли видно відростання.'),
+(1277,359,'en','Toenails grow more slowly than fingernails, so a gel pedicure usually stays fresh longer than a manicure. Come back for a refresh once you see regrowth.'),
+(1278,360,'pl','Czy można zrobić manicure i pedicure w jednej wizycie?'),
+(1279,360,'uk','Чи можна зробити манікюр і педикюр за один візит?'),
+(1280,360,'en','Can I book a manicure and pedicure together?'),
+(1281,361,'pl','Tak, wiele klientek łączy oba zabiegi. Zarezerwuj je jeden po drugim w Booksy albo napisz do nas na Instagramie — dopasujemy termin.'),
+(1282,361,'uk','Так, багато клієнток поєднують обидві процедури. Забронюйте їх одну за одною в Booksy або напишіть нам в Instagram — підберемо час.'),
+(1283,361,'en','Yes, many clients combine both. Book them back to back on Booksy or message us on Instagram and we’ll find a slot.'),
+(1284,362,'pl','Analiza i kształt'),
+(1285,362,'uk','Аналіз і форма'),
+(1286,362,'en','Analysis & shape'),
+(1287,363,'pl','Proporcje, kształt i kolor dopasowane do Twoich rysów.'),
+(1288,363,'uk','Пропорції, форма та колір під ваші риси обличчя.'),
+(1289,363,'en','Proportions, shape and colour matched to your features.'),
+(1290,364,'pl','Laminowanie'),
+(1291,364,'uk','Ламінування'),
+(1292,364,'en','Lamination'),
+(1293,365,'pl','Preparaty, które odżywiają włoski i układają je w pożądanym kierunku.'),
+(1294,365,'uk','Склади, які живлять волоски й укладають їх у потрібному напрямку.'),
+(1295,365,'en','Formulas that nourish the hairs and set them in place.'),
+(1296,366,'pl','Koloryzacja'),
+(1297,366,'uk','Фарбування'),
+(1298,366,'en','Tinting'),
+(1299,367,'pl','Głęboki kolor brwi i rzęs bez codziennego makijażu.'),
+(1300,367,'uk','Насичений колір брів і вій без щоденного макіяжу.'),
+(1301,367,'en','Rich brow and lash colour without daily make-up.'),
+(1302,368,'pl','Regulacja i efekt'),
+(1303,368,'uk','Корекція та результат'),
+(1304,368,'en','Shaping & result'),
+(1305,369,'pl','Precyzyjna regulacja i efekt, który utrzymuje się tygodniami.'),
+(1306,369,'uk','Точна корекція й результат, що тримається тижнями.'),
+(1307,369,'en','Precise shaping and a result that lasts for weeks.'),
+(1308,370,'pl','Jak długo utrzymuje się laminowanie rzęs?'),
+(1309,370,'uk','Скільки тримається ламінування вій?'),
+(1310,370,'en','How long does a lash lift last?'),
+(1311,371,'pl','Podkręcenie i objętość utrzymują się około 1,5–2 miesięcy. Wysokiej jakości preparaty odżywiają rzęsy, a po 24 godzinach możesz wrócić do zwykłej pielęgnacji.'),
+(1312,371,'uk','Вигин і об’єм тримаються приблизно 1,5–2 місяці. Якісні склади живлять вії, а вже через 24 години можна повернутися до звичного догляду.'),
+(1313,371,'en','The curl and volume last about 1.5–2 months. Quality formulas nourish the lashes, and after 24 hours you can return to your usual routine.'),
+(1314,372,'pl','Czy elektroepilacja usuwa jasne i siwe włosy?'),
+(1315,372,'uk','Чи видаляє електроепіляція світле й сиве волосся?'),
+(1316,372,'en','Does electrolysis remove light and grey hair?'),
+(1317,373,'pl','Tak. W przeciwieństwie do lasera elektroepilacja działa bezpośrednio na mieszek włosowy, a nie na pigment — dlatego usuwa trwale każdy rodzaj włosa, także jasne, siwe i meszek.'),
+(1318,373,'uk','Так. На відміну від лазера, електроепіляція діє безпосередньо на волосяний фолікул, а не на пігмент — тому назавжди видаляє будь-яке волосся, зокрема світле, сиве та пушкове.'),
+(1319,373,'en','Yes. Unlike laser, electrolysis targets the hair follicle rather than the pigment, so it permanently removes any hair — including light, grey and vellus hair.'),
+(1320,374,'pl','Konsultacja'),
+(1321,374,'uk','Консультація'),
+(1322,374,'en','Consultation'),
+(1323,375,'pl','Rozmawiamy o stylu, stanie włosów i codziennej stylizacji.'),
+(1324,375,'uk','Говоримо про стиль, стан волосся та щоденну укладку.'),
+(1325,375,'en','We talk about your style, hair condition and daily styling.'),
+(1326,376,'pl','Mycie i pielęgnacja'),
+(1327,376,'uk','Миття та догляд'),
+(1328,376,'en','Wash & care'),
+(1329,377,'pl','Przygotowanie włosów profesjonalnymi kosmetykami.'),
+(1330,377,'uk','Підготовка волосся професійною косметикою.'),
+(1331,377,'en','Prepping your hair with professional products.'),
+(1332,378,'pl','Strzyżenie lub kolor'),
+(1333,378,'uk','Стрижка або колір'),
+(1334,378,'en','Cut or colour'),
+(1335,379,'pl','Precyzyjna geometria cięcia, koloryzacja, tonowanie lub balayage.'),
+(1336,379,'uk','Точна геометрія стрижки, фарбування, тонування або балаяж.'),
+(1337,379,'en','Precise cutting geometry, colour, toning or balayage.'),
+(1338,380,'pl','Stylizacja'),
+(1339,380,'uk','Укладка'),
+(1340,380,'en','Styling'),
+(1341,381,'pl','Fryzura, którą łatwo ułożysz w domu każdego ranka.'),
+(1342,381,'uk','Зачіска, яку легко вкласти вдома щоранку.'),
+(1343,381,'en','A style that’s easy to recreate at home every morning.'),
+(1344,382,'pl','Czym różni się farbowanie od tonowania?'),
+(1345,382,'uk','Чим фарбування відрізняється від тонування?'),
+(1346,382,'en','What’s the difference between colouring and toning?'),
+(1347,383,'pl','Farbowanie trwale zmienia kolor włosów, a tonowanie delikatnie koryguje odcień i dodaje blasku. Na bezpłatnej konsultacji dobierzemy zabieg, który zadba o zdrowie Twoich włosów.'),
+(1348,383,'uk','Фарбування стійко змінює колір волосся, а тонування делікатно коригує відтінок і додає блиску. На безкоштовній консультації підберемо процедуру, яка подбає про здоров’я вашого волосся.'),
+(1349,383,'en','Colouring changes your hair colour permanently, while toning gently adjusts the shade and adds shine. At the free consultation we’ll pick the treatment that keeps your hair healthy.'),
+(1350,384,'pl','Czy pomożecie przejść na naturalny siwy kolor?'),
+(1351,384,'uk','Чи допоможете перейти на натуральну сивину?'),
+(1352,384,'en','Can you help me grow out grey hair?'),
+(1353,385,'pl','Tak. Zamiast radykalnych kroków proponujemy np. miękki Total Blond, który rozmywa granicę między odrostem a długością — siwizna odrasta wtedy naturalnie i estetycznie.'),
+(1354,385,'uk','Так. Замість радикальних кроків пропонуємо, наприклад, м’який Total Blond, який розмиває межу між відрослим корінням і довжиною — сивина відростає природно та естетично.'),
+(1355,385,'en','Yes. Instead of drastic steps we suggest, for example, a soft Total Blond that blurs the line between regrowth and lengths, so grey grows out naturally and elegantly.'),
+(1356,386,'pl','Rozmowa o stylu'),
+(1357,386,'uk','Розмова про стиль'),
+(1358,386,'en','Style chat'),
+(1359,387,'pl','Fade, klasyka czy nożyczki — dobieramy fryzurę do Ciebie.'),
+(1360,387,'uk','Фейд, класика чи ножиці — підбираємо зачіску під вас.'),
+(1361,387,'en','Fade, classic or scissors — we match the cut to you.'),
+(1362,388,'pl','Mycie'),
+(1363,388,'uk','Миття'),
+(1364,388,'en','Wash'),
+(1365,389,'pl','Odświeżenie włosów przed strzyżeniem.'),
+(1366,389,'uk','Освіження волосся перед стрижкою.'),
+(1367,389,'en','A refreshing wash before the cut.'),
+(1368,390,'pl','Strzyżenie'),
+(1369,390,'uk','Стрижка'),
+(1370,390,'en','Haircut'),
+(1371,391,'pl','Maszynka i nożyczki, płynne przejścia i ostre linie.'),
+(1372,391,'uk','Машинка та ножиці, плавні переходи й чіткі лінії.'),
+(1373,391,'en','Clippers and scissors, smooth blends and sharp lines.'),
+(1374,392,'pl','Stylizacja'),
+(1375,392,'uk','Укладка'),
+(1376,392,'en','Styling'),
+(1377,393,'pl','Wykończenie i wskazówki do codziennego układania.'),
+(1378,393,'uk','Фінальна укладка та поради для щоденного догляду.'),
+(1379,393,'en','Finishing touches and tips for everyday styling.'),
+(1380,394,'pl','Jak często strzyc fade?'),
+(1381,394,'uk','Як часто оновлювати фейд?'),
+(1382,394,'en','How often should I get a fade?'),
+(1383,395,'pl','Fade najlepiej wygląda, gdy odświeżasz go co 2–4 tygodnie. Dłuższe fryzury nożyczkami wystarczy poprawiać rzadziej.'),
+(1384,395,'uk','Фейд найкраще виглядає, якщо оновлювати його кожні 2–4 тижні. Довші стрижки ножицями можна поправляти рідше.'),
+(1385,395,'en','A fade looks best when refreshed every 2–4 weeks. Longer scissor cuts can be tidied up less often.'),
+(1386,396,'pl','Czy mężczyźni mogą też zrobić manicure i pedicure?'),
+(1387,396,'uk','Чи можуть чоловіки також зробити манікюр і педикюр?'),
+(1388,396,'en','Can men also get a manicure and pedicure?'),
+(1389,397,'pl','Oczywiście. Oferujemy manicure męski (110 zł) i pedicure męski SPA (180 zł) — zadbane dłonie i stopy bez efektu lakieru.'),
+(1390,397,'uk','Звісно. Пропонуємо чоловічий манікюр (110 zł) і чоловічий SPA-педикюр (180 zł) — доглянуті руки й стопи без ефекту лаку.'),
+(1391,397,'en','Of course. We offer a men’s manicure (110 zł) and men’s SPA pedicure (180 zł) — well-groomed hands and feet with no polished look.'),
+(1392,398,'pl','Bordowy manicure hybrydowy ze złotym zdobieniem — NOX Warszawa Wola'),
+(1393,398,'uk','Бордовий гібридний манікюр із золотим декором — NOX Варшава'),
+(1394,398,'en','Burgundy gel manicure with gold accents — NOX Warsaw'),
+(1395,399,'pl','Klasyczny czerwony manicure hybrydowy'),
+(1396,399,'uk','Класичний червоний гібридний манікюр'),
+(1397,399,'en','Classic red gel manicure'),
+(1398,400,'pl','Matowy french w śliwkowym odcieniu — stylistka Nataliia'),
+(1399,400,'uk','Матовий френч у сливовому відтінку — майстриня Наталія'),
+(1400,400,'en','Matte plum French manicure by Nataliia'),
+(1401,401,'pl','Manicure clean pink nude — czyste skórki i lustrzany połysk'),
+(1402,401,'uk','Манікюр clean pink nude — ідеальна кутикула й дзеркальний блиск'),
+(1403,401,'en','Clean pink nude manicure with neat cuticles and mirror shine'),
+(1404,402,'pl','Mleczny manicure hybrydowy na krótkich paznokciach'),
+(1405,402,'uk','Молочний гібридний манікюр на коротких нігтях'),
+(1406,402,'en','Milky gel manicure on short nails'),
+(1407,403,'pl','Matowy manicure w odcieniu szałwii'),
+(1408,403,'uk','Матовий манікюр шавлієвого відтінку'),
+(1409,403,'en','Matte sage-green manicure'),
+(1410,404,'pl','Manicure nude z graficznym zdobieniem'),
+(1411,404,'uk','Нюдовий манікюр із графічним дизайном'),
+(1412,404,'en','Nude manicure with graphic nail art'),
+(1413,405,'pl','Szmaragdowy manicure kocie oko'),
+(1414,405,'uk','Смарагдовий манікюр «котяче око»'),
+(1415,405,'en','Emerald cat-eye manicure'),
+(1416,406,'pl','Manicure japoński — pasta z woskiem pszczelim i puder perłowy'),
+(1417,406,'uk','Японський манікюр — паста з бджолиним воском і перлинна пудра'),
+(1418,406,'en','Japanese manicure — beeswax paste and pearl powder'),
+(1419,407,'pl','Przedłużone paznokcie w kształcie migdała w mlecznym odcieniu'),
+(1420,407,'uk','Нарощені нігті мигдалевої форми в молочному відтінку'),
+(1421,407,'en','Almond nail extensions in a milky shade'),
+(1422,408,'pl','Długie białe paznokcie przedłużane w kształcie sztyletu'),
+(1423,408,'uk','Довгі білі нарощені нігті форми стилет'),
+(1424,408,'en','Long white stiletto nail extensions'),
+(1425,409,'pl','Kwadratowe paznokcie przedłużane w kolorze nude'),
+(1426,409,'uk','Квадратні нарощені нігті нюдового кольору'),
+(1427,409,'en','Square nude nail extensions'),
+(1428,410,'pl','Długie migdałowe paznokcie żelowe'),
+(1429,410,'uk','Довгі мигдалеподібні гелеві нігті'),
+(1430,410,'en','Long almond gel nails'),
+(1431,411,'pl','Przedłużane paznokcie z frenchem'),
+(1432,411,'uk','Нарощені нігті з френчем'),
+(1433,411,'en','French-tip nail extensions'),
+(1434,412,'pl','Długie paznokcie ze zdobieniami 3D'),
+(1435,412,'uk','Довгі нігті з 3D-дизайном'),
+(1436,412,'en','Long nails with 3D nail art'),
+(1437,413,'pl','Artystyczne zdobienie paznokci w morskim stylu'),
+(1438,413,'uk','Художній дизайн нігтів у морському стилі'),
+(1439,413,'en','Sea-themed nail art'),
+(1440,414,'pl','Czerwony pedicure hybrydowy — NOX Warszawa Wola'),
+(1441,414,'uk','Червоний гібридний педикюр — NOX Варшава'),
+(1442,414,'en','Red gel pedicure — NOX Warsaw'),
+(1443,415,'pl','Bordowy pedicure hybrydowy'),
+(1444,415,'uk','Бордовий гібридний педикюр'),
+(1445,415,'en','Burgundy gel pedicure'),
+(1446,416,'pl','Pedicure w ciemnym, wiśniowym odcieniu'),
+(1447,416,'uk','Педикюр у темному вишневому відтінку'),
+(1448,416,'en','Dark cherry pedicure'),
+(1449,417,'pl','Klasyczny czerwony pedicure'),
+(1450,417,'uk','Класичний червоний педикюр'),
+(1451,417,'en','Classic red pedicure'),
+(1452,418,'pl','Pedicure w kolorze burgund'),
+(1453,418,'uk','Педикюр кольору бургунді'),
+(1454,418,'en','Burgundy pedicure'),
+(1455,419,'pl','Naturalny pedicure nude z frenchem'),
+(1456,419,'uk','Натуральний нюдовий педикюр із френчем'),
+(1457,419,'en','Natural nude French pedicure'),
+(1458,420,'pl','Laminowanie rzęs — efekt po zabiegu, stylistka Alina'),
+(1459,420,'uk','Ламінування вій — результат, майстриня Аліна'),
+(1460,420,'en','Lash lift result by Alina'),
+(1461,421,'pl','Laminowanie i farbowanie rzęs — przed i po'),
+(1462,421,'uk','Ламінування та фарбування вій — до і після'),
+(1463,421,'en','Lash lift and tint — before and after'),
+(1464,422,'pl','Zabieg elektroepilacji w salonie NOX'),
+(1465,422,'uk','Процедура електроепіляції в салоні NOX'),
+(1466,422,'en','Electrolysis treatment at NOX'),
+(1467,423,'pl','Elektroepilacja — trwałe usuwanie owłosienia w Warszawie'),
+(1468,423,'uk','Електроепіляція — видалення волосся назавжди у Варшаві'),
+(1469,423,'en','Electrolysis — permanent hair removal in Warsaw'),
+(1470,424,'pl','Strzyżenie bob na ciemnych, lśniących włosach'),
+(1471,424,'uk','Стрижка боб на темному блискучому волоссі'),
+(1472,424,'en','Sleek bob haircut on dark hair'),
+(1473,425,'pl','Balayage na długich włosach — płynne przejścia koloru'),
+(1474,425,'uk','Балаяж на довгому волоссі — плавні переходи кольору'),
+(1475,425,'en','Balayage on long hair with soft colour blends'),
+(1476,426,'pl','Gładkie, lśniące długie włosy po strzyżeniu'),
+(1477,426,'uk','Гладке блискуче довге волосся після стрижки'),
+(1478,426,'en','Smooth, glossy long hair after a cut'),
+(1479,427,'pl','Fryzjer NOX podczas stylizacji włosów klientki'),
+(1480,427,'uk','Перукар NOX під час укладки волосся клієнтки'),
+(1481,427,'en','NOX hairdresser styling a client’s hair'),
+(1482,428,'pl','Strzyżenie męskie — barber NOX przy pracy'),
+(1483,428,'uk','Чоловіча стрижка — барбер NOX за роботою'),
+(1484,428,'en','Men’s haircut — NOX barber at work'),
+(1485,429,'pl','Vadzim — fryzjer i barber NOX Beauty Space'),
+(1486,429,'uk','Вадим — перукар і барбер NOX Beauty Space'),
+(1487,429,'en','Vadzim — hairdresser and barber at NOX Beauty Space');
+/*!40000 ALTER TABLE `translations` ENABLE KEYS */;
+UNLOCK TABLES;
 COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES
+(1,'admin','$2y$10$eb0PPozs1ninn5sY/vljYO6VQIC0cGXHa5uisq6YAfvFBQ7ztTI2S');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
+
+-- Dump completed on 2026-11-12 23:44:02

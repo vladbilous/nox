@@ -11,13 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $actionType = $_POST['service_action'] ?? '';
 
     if ($actionType === 'add_cat') {
-        DB::execute("INSERT INTO service_categories (slug, name_pl, name_uk, name_en, name_ru, sort_order) VALUES (?, ?, ?, ?, ?, ?)", [
-            $_POST['slug'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['name_ru'], (int)$_POST['sort_order']
+        DB::execute("INSERT INTO service_categories (slug, name_pl, name_uk, name_en, sort_order) VALUES (?, ?, ?, ?, ?)", [
+            $_POST['slug'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], (int)$_POST['sort_order']
         ]);
         $msg = "Категорію додано.";
     } elseif ($actionType === 'edit_cat') {
-        DB::execute("UPDATE service_categories SET slug=?, name_pl=?, name_uk=?, name_en=?, name_ru=?, sort_order=? WHERE id=?", [
-            $_POST['slug'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['name_ru'], (int)$_POST['sort_order'], $_POST['id']
+        DB::execute("UPDATE service_categories SET slug=?, name_pl=?, name_uk=?, name_en=?, sort_order=? WHERE id=?", [
+            $_POST['slug'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], (int)$_POST['sort_order'], $_POST['id']
         ]);
         $msg = "Категорію оновлено.";
     } elseif ($actionType === 'del_cat') {
@@ -26,13 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     elseif ($actionType === 'add_subcat') {
-        DB::execute("INSERT INTO service_subcategories (category_id, name_pl, name_uk, name_en, name_ru, sort_order) VALUES (?, ?, ?, ?, ?, ?)", [
-            $_POST['category_id'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['name_ru'], (int)$_POST['sort_order']
+        DB::execute("INSERT INTO service_subcategories (category_id, name_pl, name_uk, name_en, sort_order) VALUES (?, ?, ?, ?, ?)", [
+            $_POST['category_id'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], (int)$_POST['sort_order']
         ]);
         $msg = "Підкатегорію додано.";
     } elseif ($actionType === 'edit_subcat') {
-        DB::execute("UPDATE service_subcategories SET name_pl=?, name_uk=?, name_en=?, name_ru=?, sort_order=? WHERE id=?", [
-            $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['name_ru'], (int)$_POST['sort_order'], $_POST['id']
+        DB::execute("UPDATE service_subcategories SET name_pl=?, name_uk=?, name_en=?, sort_order=? WHERE id=?", [
+            $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], (int)$_POST['sort_order'], $_POST['id']
         ]);
         $msg = "Підкатегорію оновлено.";
     } elseif ($actionType === 'del_subcat') {
@@ -41,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     elseif ($actionType === 'add_item') {
-        DB::execute("INSERT INTO service_items (subcategory_id, name_pl, name_uk, name_en, name_ru, price_pl, price_uk, price_en, price_ru, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
-            $_POST['subcategory_id'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['name_ru'], $_POST['price_pl'], $_POST['price_uk'], $_POST['price_en'], $_POST['price_ru'], (int)$_POST['sort_order']
+        DB::execute("INSERT INTO service_items (subcategory_id, name_pl, name_uk, name_en, price_pl, price_uk, price_en, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
+            $_POST['subcategory_id'], $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['price_pl'], $_POST['price_uk'], $_POST['price_en'], (int)$_POST['sort_order']
         ]);
         $msg = "Послугу додано.";
     } elseif ($actionType === 'edit_item') {
-        DB::execute("UPDATE service_items SET name_pl=?, name_uk=?, name_en=?, name_ru=?, price_pl=?, price_uk=?, price_en=?, price_ru=?, sort_order=? WHERE id=?", [
-            $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['name_ru'], $_POST['price_pl'], $_POST['price_uk'], $_POST['price_en'], $_POST['price_ru'], (int)$_POST['sort_order'], $_POST['id']
+        DB::execute("UPDATE service_items SET name_pl=?, name_uk=?, name_en=?, price_pl=?, price_uk=?, price_en=?, sort_order=? WHERE id=?", [
+            $_POST['name_pl'], $_POST['name_uk'], $_POST['name_en'], $_POST['price_pl'], $_POST['price_uk'], $_POST['price_en'], (int)$_POST['sort_order'], $_POST['id']
         ]);
         $msg = "Послугу оновлено.";
     } elseif ($actionType === 'del_item') {
@@ -185,7 +185,6 @@ ob_start();
         </div>
         <div class="form-row">
             <div><label>Назва EN:</label><input type="text" name="name_en" id="cat_en"></div>
-            <div><label>Назва RU:</label><input type="text" name="name_ru" id="cat_ru"></div>
         </div>
         <div style="text-align:right; margin-top:20px;">
             <button type="button" onclick="document.getElementById('catModal').close()">Скасувати</button>
@@ -210,7 +209,6 @@ ob_start();
         </div>
         <div class="form-row">
             <div><label>Назва EN:</label><input type="text" name="name_en" id="subcat_en"></div>
-            <div><label>Назва RU:</label><input type="text" name="name_ru" id="subcat_ru"></div>
         </div>
         <div style="text-align:right; margin-top:20px;">
             <button type="button" onclick="document.getElementById('subcatModal').close()">Скасувати</button>
@@ -238,7 +236,6 @@ ob_start();
         </div>
         <div class="form-row">
             <div><label>Назва EN:</label><input type="text" name="name_en" id="item_name_en"></div>
-            <div><label>Назва RU:</label><input type="text" name="name_ru" id="item_name_ru"></div>
         </div>
 
         <h4>Ціни (напр. "80 zł")</h4>
@@ -248,7 +245,6 @@ ob_start();
         </div>
         <div class="form-row">
             <div><label>Ціна EN:</label><input type="text" name="price_en" id="item_price_en"></div>
-            <div><label>Ціна RU:</label><input type="text" name="price_ru" id="item_price_ru"></div>
         </div>
 
         <div style="text-align:right; margin-top:20px;">
@@ -275,7 +271,6 @@ function editCat(data) {
     document.getElementById('cat_pl').value = data.name_pl;
     document.getElementById('cat_uk').value = data.name_uk;
     document.getElementById('cat_en').value = data.name_en;
-    document.getElementById('cat_ru').value = data.name_ru;
     openModal('catModal');
 }
 
@@ -288,7 +283,6 @@ function openSubcatModal(catId) {
     document.getElementById('subcat_pl').value = '';
     document.getElementById('subcat_uk').value = '';
     document.getElementById('subcat_en').value = '';
-    document.getElementById('subcat_ru').value = '';
     openModal('subcatModal');
 }
 function editSubcat(data) {
@@ -298,7 +292,6 @@ function editSubcat(data) {
     document.getElementById('subcat_pl').value = data.name_pl;
     document.getElementById('subcat_uk').value = data.name_uk;
     document.getElementById('subcat_en').value = data.name_en;
-    document.getElementById('subcat_ru').value = data.name_ru;
     openModal('subcatModal');
 }
 
@@ -312,12 +305,10 @@ function openItemModal(subcatId) {
     document.getElementById('item_name_pl').value = '';
     document.getElementById('item_name_uk').value = '';
     document.getElementById('item_name_en').value = '';
-    document.getElementById('item_name_ru').value = '';
     
     document.getElementById('item_price_pl').value = '';
     document.getElementById('item_price_uk').value = '';
     document.getElementById('item_price_en').value = '';
-    document.getElementById('item_price_ru').value = '';
     
     openModal('itemModal');
 }
@@ -329,12 +320,10 @@ function editItem(data) {
     document.getElementById('item_name_pl').value = data.name_pl;
     document.getElementById('item_name_uk').value = data.name_uk;
     document.getElementById('item_name_en').value = data.name_en;
-    document.getElementById('item_name_ru').value = data.name_ru;
     
     document.getElementById('item_price_pl').value = data.price_pl;
     document.getElementById('item_price_uk').value = data.price_uk;
     document.getElementById('item_price_en').value = data.price_en;
-    document.getElementById('item_price_ru').value = data.price_ru;
     
     openModal('itemModal');
 }
