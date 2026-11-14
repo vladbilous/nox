@@ -176,4 +176,9 @@ return [
     ],
     'cookie_accept' => ['Akceptuję', 'Погоджуюсь', 'Accept'],
     'cookie_decline' => ['Tylko niezbędne', 'Лише необхідні', 'Essential only'],
+
+    // ---------- Mobile quick actions (footer) and map ----------
+    'footer_call' => ['Zadzwoń', 'Зателефонувати', 'Call us'],
+    'footer_route' => ['Trasa', 'Маршрут', 'Directions'],
+    'map_tap_hint' => ['Otwórz w Google Maps', 'Відкрити в Google Maps', 'Open in Google Maps'],
 ];

@@ -349,7 +349,16 @@ body.menu-open .site-header { background: var(--ink); backdrop-filter: none; -we
 .form-status.is-success { color: var(--gold-light); }
 .form-status.is-error { color: #e88f7f; }
 
-.map-wrap { margin-top: 72px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line-soft); height: 380px; }
+.map-wrap { position: relative; margin-top: 72px; border-radius: 24px; overflow: hidden; border: 1px solid var(--line-soft); height: 380px; }
+.map-cta { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 2; white-space: nowrap; gap: 10px; box-shadow: 0 14px 34px -10px rgba(0, 0, 0, .7); }
+.map-cta:hover { transform: translateX(-50%) translateY(-2px); }
+.map-tap { display: none; }
+.map-cta-short { display: none; }
+/* Touch screens: an embedded Google map does not move with one finger, so the whole map opens Google Maps */
+@media (hover: none) and (pointer: coarse) {
+    .map-wrap iframe { pointer-events: none; }
+    .map-tap { display: block; position: absolute; inset: 0; z-index: 1; }
+}
 .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: grayscale(1) invert(.92) contrast(.9) sepia(.15); }
 
 /* Footer */
@@ -362,6 +371,7 @@ body.menu-open .site-header { background: var(--ink); backdrop-filter: none; -we
 .site-footer li a:hover, .site-footer li a[aria-current] { color: var(--gold-light); }
 .footer-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line-soft); font-size: 13px; color: var(--muted); }
 .footer-bottom a:hover { color: var(--gold); }
+.footer-actions { display: none; }
 
 .mobile-book { display: none; }
 
@@ -525,7 +535,36 @@ address { font-style: normal; }
     .contact-list div { grid-template-columns: 1fr; gap: 4px; }
     .field-row { grid-template-columns: 1fr; gap: 0; }
     .map-wrap { height: 300px; margin-top: 48px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .map-cta { bottom: 14px; padding: 13px 26px; }
+    .map-cta-long { display: none; }
+    .map-cta-short { display: inline; }
+
+    /* Bigger tap area for small text links (the look stays the same) */
+    .link-gold, .rating, .contact-list dd a, .breadcrumbs a, .footer-bottom a, .footer-contact a { position: relative; }
+    .link-gold::after, .rating::after, .contact-list dd a::after, .breadcrumbs a::after, .footer-bottom a::after, .footer-contact a::after { content: ""; position: absolute; inset: -12px -6px; }
+
+    /* ---- Compact footer for phones ---- */
+    .site-footer { padding-top: 44px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 26px; }
+    .footer-brand { display: flex; align-items: center; gap: 14px; }
+    .footer-brand img { width: 56px; height: 56px; margin: 0; flex-shrink: 0; }
+    .footer-brand p { margin: 0; font-size: 13.5px; line-height: 1.5; }
+    .footer-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .footer-actions a { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 50px; padding: 0 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); color: var(--text); font-size: 13.5px; font-weight: 500; letter-spacing: .02em; transition: border-color .2s, color .2s; }
+    .footer-actions a:active, .footer-actions a:hover { border-color: var(--gold); color: var(--gold-light); }
+    .footer-actions .ico { color: var(--gold); }
+    .site-footer h4 { margin-bottom: 12px; font-size: 12px; }
+    .footer-nav ul, .footer-services ul { display: flex; flex-wrap: wrap; gap: 8px; }
+    .footer-nav li, .footer-services li { margin: 0; }
+    .footer-nav li a, .footer-services li a { display: inline-flex; align-items: center; min-height: 38px; padding: 0 14px; border: 1px solid var(--line-soft); border-radius: 999px; font-size: 13px; color: var(--text); }
+    .footer-contact .footer-dup { display: none; }
+    .footer-contact li { margin-bottom: 6px; font-size: 13.5px; }
+    .footer-contact address { font-style: normal; }
+    .footer-lang ul { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+    .footer-lang li { margin: 0; }
+    .footer-lang li a { display: block; min-width: 52px; padding: 8px 12px; text-align: center; border-radius: 999px; font-size: 12.5px; letter-spacing: .08em; }
+    .footer-lang li a[aria-current] { background: var(--gold); color: var(--ink); }
+    .footer-bottom { margin-top: 28px; padding-top: 18px; font-size: 12px; align-items: center; }
     .lb-nav { width: 44px; height: 44px; }
     .lb-prev { left: 8px; } .lb-next { right: 8px; }
 }

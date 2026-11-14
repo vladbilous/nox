@@ -376,6 +376,12 @@ $icons = [
 
         <div class="container map-wrap reveal">
             <iframe title="<?= tre('map_title', 'Mapa dojazdu do NOX Beauty Space') ?>" src="https://www.google.com/maps?q=Ludwiki+4B,+01-226+Warszawa&hl=<?= $currentLang ?>&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <?php /* On phones the embedded map ignores one-finger gestures, so the whole map opens Google Maps instead */ ?>
+            <a class="map-tap" href="https://www.google.com/maps/search/?api=1&amp;query=NOX+Beauty+Space+Ludwiki+4B+01-226+Warszawa" target="_blank" rel="noopener" data-track="directions" aria-label="<?= tre('map_tap_hint', 'Otwórz w Google Maps') ?>"></a>
+            <a class="map-cta btn btn-gold" href="https://www.google.com/maps/dir/?api=1&amp;destination=NOX+Beauty+Space+Ludwiki+4B+01-226+Warszawa" target="_blank" rel="noopener" data-track="directions">
+                <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                <span class="map-cta-long"><?= tre('map_link', 'Wyznacz trasę w Google Maps') ?></span><span class="map-cta-short"><?= tre('footer_route', 'Trasa') ?></span>
+            </a>
         </div>
     </section>
 </main>
