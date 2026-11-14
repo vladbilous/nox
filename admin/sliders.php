@@ -6,7 +6,7 @@ $message = '';
 $error = '';
 
 // Handle Delete
-if (isset($_GET['delete_id'])) {
+if (isset($_GET['delete_id']) && nox_csrf_valid($_GET['token'] ?? '')) {
     $id = (int)$_GET['delete_id'];
     $image = DB::fetch("SELECT image_path FROM slider_images WHERE id = ?", [$id]);
     if ($image) {
@@ -40,10 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_image'])) {
         $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
         
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
-        if (in_array($fileExtension, $allowedExtensions)) {
+        // Check the real file content, not only the name (a renamed script is rejected)
+        $realType = (new finfo(FILEINFO_MIME_TYPE))->file($fileTmpPath);
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+        if (in_array($fileExtension, $allowedExtensions) && in_array($realType, $allowedTypes, true) && @getimagesize($fileTmpPath)) {
             $uploadDir = __DIR__ . '/../assets/img/uploads/';
             if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
+                mkdir($uploadDir, 0755, true);
             }
             
             $newFileName = uniqid($slider_type . '_') . '.' . $fileExtension;
@@ -126,7 +129,7 @@ ob_start();
                         <div>
                             Порядок: <input type="number" name="sort_order[<?= $img['id'] ?>]" value="<?= $img['sort_order'] ?>">
                         </div>
-                        <a href="?action=sliders&delete_id=<?= $img['id'] ?>" class="delete-btn" onclick="return confirm('Ви впевнені?')">Видалити</a>
+                        <a href="?action=sliders&delete_id=<?= (int)$img['id'] ?>&token=<?= urlencode($_SESSION['csrf_token']) ?>" class="delete-btn" onclick="return confirm('Ви впевнені?')">Видалити</a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -145,7 +148,7 @@ ob_start();
                         <div>
                             Порядок: <input type="number" name="sort_order[<?= $img['id'] ?>]" value="<?= $img['sort_order'] ?>">
                         </div>
-                        <a href="?action=sliders&delete_id=<?= $img['id'] ?>" class="delete-btn" onclick="return confirm('Ви впевнені?')">Видалити</a>
+                        <a href="?action=sliders&delete_id=<?= (int)$img['id'] ?>&token=<?= urlencode($_SESSION['csrf_token']) ?>" class="delete-btn" onclick="return confirm('Ви впевнені?')">Видалити</a>
                     </div>
                 </div>
             <?php endforeach; ?>

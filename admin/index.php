@@ -1,9 +1,20 @@
 <?php
 // admin/index.php
+// Hardened admin session cookie: not readable from JS, not sent from other sites, HTTPS-only when on HTTPS
+$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+session_name('nox_admin');
+session_set_cookie_params(['lifetime' => 0, 'path' => '/admin', 'httponly' => true, 'samesite' => 'Strict', 'secure' => $isHttps]);
 session_start();
-ini_set('display_errors', 1);
+// Errors go to the server log, never to the screen (they can leak paths and SQL)
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
 error_reporting(E_ALL);
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+header('Referrer-Policy: same-origin');
+header('Cache-Control: no-store');
 require_once __DIR__ . '/../DB.php';
+require_once __DIR__ . '/security.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'dashboard';
 
@@ -18,16 +29,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         die("CSRF Token validation failed.");
     }
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    
-    $user = DB::fetch("SELECT * FROM users WHERE username = ?", [$username]);
-    if ($user && password_verify($password, $user['password_hash'])) {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_id'] = $user['id'];
-        header("Location: /admin");
-        exit;
+    $username = (string)($_POST['username'] ?? '');
+    $password = (string)($_POST['password'] ?? '');
+
+    $wait = nox_login_locked();
+    if ($wait > 0) {
+        $error = "Забагато невдалих спроб. Спробуйте через " . ceil($wait / 60) . " хв.";
     } else {
+        $user = DB::fetch("SELECT * FROM users WHERE username = ?", [$username]);
+        if ($user && password_verify($password, $user['password_hash'])) {
+            nox_login_success();
+            session_regenerate_id(true); // protects against session fixation
+            $_SESSION['admin_logged_in'] = true;
+            $_SESSION['admin_id'] = $user['id'];
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            if (password_needs_rehash($user['password_hash'], PASSWORD_DEFAULT)) {
+                DB::execute("UPDATE users SET password_hash = ? WHERE id = ?", [password_hash($password, PASSWORD_DEFAULT), $user['id']]);
+            }
+            header("Location: /admin");
+            exit;
+        }
+        nox_login_failed();
         $error = "Невірний логін або пароль";
     }
 }
@@ -43,6 +65,7 @@ if ($action === 'logout') {
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     ?>
     <!DOCTYPE html>
+    <html lang="uk">
     <head>
         <meta charset="UTF-8">
         <title>Вхід - Salon CMS</title>
@@ -70,6 +93,13 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     </html>
     <?php
     exit;
+}
+
+// Every state-changing request inside the admin panel must carry the CSRF token
+// (forms get it automatically in layout.php; links use ?token=...)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !nox_csrf_valid($_POST['csrf_token'] ?? '')) {
+    http_response_code(403);
+    die('Сесія застаріла. Оновіть сторінку і спробуйте ще раз.');
 }
 
 // Routes

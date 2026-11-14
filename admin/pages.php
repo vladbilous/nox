@@ -5,7 +5,7 @@ $pageTitle = "Контент та Сторінки";
 $languages = DB::fetchAll("SELECT * FROM languages");
 $blocks = DB::fetchAll("SELECT * FROM content_blocks ORDER BY key_name");
 
-$currentLang = isset($_GET['lang']) ? $_GET['lang'] : 'pl';
+$currentLang = (isset($_GET['lang']) && preg_match('/^[a-z]{2}$/', $_GET['lang'])) ? $_GET['lang'] : 'pl';
 
 // Handle Save
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_translations'])) {

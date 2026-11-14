@@ -272,9 +272,7 @@ $jsonLd = ['@context' => 'https://schema.org', '@graph' => $graph];
     <script type="application/ld+json"><?= json_encode($jsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) ?></script>
 <?php endif; ?>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="/assets/css/fonts.css?v=<?= filemtime(__DIR__ . '/../assets/css/fonts.css') ?>">
 <?php if (($pagePath === '' || !empty($service)) && !$isNotFound): ?>
     <link rel="preload" as="image" href="<?= htmlspecialchars($heroPreload) ?>"<?php if ($heroSrcset): ?> imagesrcset="<?= htmlspecialchars($heroSrcset) ?>" imagesizes="(max-width: 1024px) 92vw, 46vw"<?php endif; ?> fetchpriority="high">
 <?php endif; ?>

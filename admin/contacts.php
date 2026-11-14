@@ -4,7 +4,9 @@ $pageTitle = "Заявки з сайту";
 
 // Handle Status Change
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
-    DB::execute("UPDATE contacts SET status = ? WHERE id = ?", [$_POST['status'], $_POST['id']]);
+    if (in_array($_POST['status'] ?? '', ['new', 'read', 'archived'], true)) {
+        DB::execute("UPDATE contacts SET status = ? WHERE id = ?", [$_POST['status'], (int)($_POST['id'] ?? 0)]);
+    }
     header("Location: /admin/?action=contacts");
     exit;
 }

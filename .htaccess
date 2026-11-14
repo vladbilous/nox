@@ -28,6 +28,8 @@ RewriteRule ^index\.php$ / [R=301,L]
 # Hidden/service folders and anything that is not a public asset return 404
 # (database dumps, setup scripts, docs, .git, PHPMailer, password notes...).
 RewriteRule ^(\.git|\.claude|\.osp|node_modules|database|PHPMailer|components|pages)(/|$) - [R=404,L,NC]
+# Never execute scripts from the assets folder (e.g. a disguised upload)
+RewriteRule ^assets/.*\.(php[0-9]?|phtml|phar)$ - [R=404,L,NC]
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteCond %{REQUEST_URI} !^/(assets/|favicon\.ico$|index\.php$|send_form\.php$|admin/(index\.php)?$|google[0-9a-f]+\.html$|BingSiteAuth\.xml$) [NC]
 RewriteRule ^ - [R=404,L]

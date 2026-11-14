@@ -7,7 +7,7 @@ $file = __DIR__ . $path;
 $public = '#^/(assets/|favicon\.ico$|send_form\.php$|admin/(index\.php)?$|google[0-9a-f]+\.html$|BingSiteAuth\.xml$)#i';
 $blockedDir = '#^/(\.git|\.claude|\.osp|node_modules|database|PHPMailer|components|pages)(/|$)#i';
 
-if (preg_match($blockedDir, $path) || ($path !== '/' && is_file($file) && !preg_match($public, $path) && $path !== '/index.php')) {
+if (preg_match($blockedDir, $path) || preg_match('#^/assets/.*\.(php[0-9]?|phtml|phar)$#i', $path) || ($path !== '/' && is_file($file) && !preg_match($public, $path) && $path !== '/index.php')) {
     $_GET['route'] = '404-not-found';
     require __DIR__ . '/index.php';
     return true;

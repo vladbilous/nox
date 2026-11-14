@@ -37,9 +37,15 @@
     </div>
     <div class="content">
         <div class="header">
-            <h1><?= $pageTitle ?? 'Dashboard' ?></h1>
+            <h1><?= htmlspecialchars($pageTitle ?? 'Dashboard') ?></h1>
         </div>
-        <?= $content ?>
+        <?php if (nox_weak_password($_SESSION['admin_id'] ?? 0)): ?>
+        <div style="background:#fee2e2;color:#991b1b;padding:15px;margin-bottom:20px;border-radius:4px;">
+            ⚠️ Ви досі використовуєте простий пароль. Будь-хто зможе зайти в адмінку.
+            <a href="/admin/?action=profile" style="color:#991b1b;font-weight:bold">Змініть пароль зараз →</a>
+        </div>
+        <?php endif; ?>
+        <?= nox_csrf_inject($content) ?>
     </div>
 </body>
 </html>
