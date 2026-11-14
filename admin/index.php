@@ -79,6 +79,8 @@ if ($action === 'dashboard') {
     require __DIR__ . '/pages.php';
 } elseif ($action === 'contacts') {
     require __DIR__ . '/contacts.php';
+} elseif ($action === 'mail') {
+    require __DIR__ . '/mail.php';
 } elseif ($action === 'profile') {
     require __DIR__ . '/profile.php';
 } elseif ($action === 'sliders') {

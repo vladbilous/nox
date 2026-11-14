@@ -31,6 +31,7 @@
         <a href="/admin/?action=services" class="<?= $action === 'services' ? 'active' : '' ?>">Прайс-лист</a>
         <a href="/admin/?action=sliders" class="<?= $action === 'sliders' ? 'active' : '' ?>">Слайдери</a>
         <a href="/admin/?action=contacts" class="<?= $action === 'contacts' ? 'active' : '' ?>">Заявки</a>
+        <a href="/admin/?action=mail" class="<?= $action === 'mail' ? 'active' : '' ?>">Пошта</a>
         <a href="/admin/?action=profile" class="<?= $action === 'profile' ? 'active' : '' ?>">Профіль</a>
         <a href="/admin/?action=logout" style="margin-top: auto;">Вихід</a>
     </div>

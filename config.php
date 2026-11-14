@@ -1,6 +1,6 @@
 <?php
 // config.php
-return [
+$config = [
     'db' => [
         'host' => getenv('DB_HOST') ?: 'MariaDB-11.2',
         'dbname' => getenv('DB_NAME') ?: 'salon_cms',
@@ -23,12 +23,24 @@ return [
         'google_verification' => getenv('GOOGLE_VERIFICATION') ?: '',
         'bing_verification' => getenv('BING_VERIFICATION') ?: '',
     ],
+    // E-mail notifications for contact-form leads.
+    // Who receives leads is set in the admin panel (Пошта); admin_email is only the fallback.
+    // SMTP secrets do NOT go here — put them in config.local.php (not in git) or env vars.
     'mail' => [
-        'admin_email' => 'vladbilous17@gmail.com',
-        'smtp_host' => 'smtp.gmail.com',
-        'smtp_port' => 587,
-        'smtp_user' => 'vladbilous17@gmail.com',
-        'smtp_pass' => 'your_app_password', // to be filled by user
-        'smtp_secure' => 'tls',
+        'admin_email' => getenv('MAIL_TO') ?: 'vladbilous17@gmail.com',
+        'smtp_host' => getenv('SMTP_HOST') ?: 'smtp.gmail.com',
+        'smtp_port' => getenv('SMTP_PORT') ?: 587,
+        'smtp_secure' => getenv('SMTP_SECURE') ?: 'tls',
+        'smtp_user' => getenv('SMTP_USER') ?: '',
+        'smtp_pass' => getenv('SMTP_PASS') ?: '',
+        'from_email' => getenv('MAIL_FROM') ?: '', // empty = smtp_user
+        'from_name' => 'NOX Beauty Space — сайт',
     ]
 ];
+
+// Local overrides (SMTP password etc.) — config.local.php is git-ignored.
+$local = __DIR__ . '/config.local.php';
+if (is_file($local)) {
+    $config = array_replace_recursive($config, require $local);
+}
+return $config;

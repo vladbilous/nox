@@ -6,3 +6,4 @@ fix_quotes.php
 check_db.php
 clean_svg.php
 replace_css.php
+config.local.php
