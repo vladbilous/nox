@@ -1,6 +1,6 @@
 <?php
 // index.php — front controller: language detection, SEO routes (robots.txt, sitemap.xml), pages.
-session_start();
+// No session here: public pages must not set cookies that are not strictly necessary (PKE art. 399 / RODO).
 require_once __DIR__ . '/DB.php';
 
 // DB Connection check
@@ -12,6 +12,7 @@ try {
 
 $config = require __DIR__ . '/config.php';
 $siteConfig = $config['site'] ?? [];
+$company = $config['company'] ?? [];
 
 $route = isset($_GET['route']) ? trim($_GET['route'], '/') : '';
 $parts = explode('/', $route);
@@ -67,7 +68,8 @@ if (empty($parts[0]) && !isset($_COOKIE['lang_detected'])) {
             $detected = $headerLang;
         }
     }
-    setcookie('lang_detected', '1', time() + 86400 * 30, '/');
+    // Session cookie (deleted when the browser closes): strictly necessary, only stops repeated redirects
+    setcookie('lang_detected', '1', ['expires' => 0, 'path' => '/', 'httponly' => true, 'samesite' => 'Lax']);
     if ($detected !== $defaultLang) {
         header("Location: /{$detected}/", true, 302);
         exit;
@@ -145,6 +147,43 @@ function lang_url($code) {
 }
 
 $homeUrl = lang_url($currentLang);
+
+// Legal details of the business (config.php → company), as label => value pairs; empty fields are skipped
+function company_info() {
+    global $company;
+    $salonAddress = 'ul. Ludwiki 4B/U1, 01-226 Warszawa';
+    $rows = [];
+    if (!empty($company['legal_name'])) $rows[tr('company_name_label', 'Firma')] = $company['legal_name'];
+    $rows[tr('company_address_label', 'Adres')] = !empty($company['address']) ? $company['address'] : $salonAddress;
+    if (!empty($company['nip'])) $rows['NIP'] = $company['nip'];
+    if (!empty($company['regon'])) $rows['REGON'] = $company['regon'];
+    if (!empty($company['krs'])) $rows['KRS'] = $company['krs'];
+    if (!empty($company['email'])) $rows['E-mail'] = $company['email'];
+    return $rows;
+}
+
+// Legal texts are stored in the CMS with placeholders filled from config.php
+function legal_text($key) {
+    global $company, $homeUrl, $siteUrl, $siteConfig;
+    $name = !empty($company['legal_name']) ? $company['legal_name'] : 'NOX Beauty Space';
+    $parts = [];
+    foreach (company_info() as $label => $value) {
+        $parts[] = htmlspecialchars($label . ': ' . $value);
+    }
+    $email = !empty($company['email'])
+        ? '<a href="mailto:' . htmlspecialchars($company['email']) . '">' . htmlspecialchars($company['email']) . '</a>'
+        : tr('legal_contact_form', 'formularz kontaktowy na stronie');
+    return strtr(tr($key), [
+        '{{company}}' => htmlspecialchars($name),
+        '{{company_details}}' => implode('<br>', $parts),
+        '{{email}}' => $email,
+        '{{site}}' => htmlspecialchars($siteUrl),
+        '{{phone}}' => htmlspecialchars($siteConfig['phone'] ?? ''),
+        '{{privacy_url}}' => $homeUrl . 'polityka-prywatnosci',
+        '{{cookies_url}}' => $homeUrl . 'polityka-cookies',
+        '{{terms_url}}' => $homeUrl . 'regulamin',
+    ]);
+}
 
 // Service landing pages share one template (pages/service.php)
 $services = require __DIR__ . '/components/services.php';

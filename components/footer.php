@@ -50,8 +50,21 @@
             </ul>
         </div>
     </div>
+    <div class="container footer-legal">
+        <p class="footer-company">
+<?php $ci = company_info(); $first = true; foreach ($ci as $label => $value): ?>
+            <?= $first ? '' : '<span aria-hidden="true">·</span>' ?><span><?= htmlspecialchars($label) ?>: <?= $label === 'E-mail' ? '<a href="mailto:' . htmlspecialchars($value) . '">' . htmlspecialchars($value) . '</a>' : htmlspecialchars($value) ?></span>
+<?php $first = false; endforeach; ?>
+        </p>
+        <nav class="footer-legal-links" aria-label="<?= tre('legal_nav_label', 'Informacje prawne') ?>">
+            <a href="<?= $homeUrl ?>polityka-prywatnosci"><?= tre('privacy_link', 'Polityka prywatności') ?></a>
+            <a href="<?= $homeUrl ?>polityka-cookies"><?= tre('cookies_policy_link', 'Polityka cookies') ?></a>
+            <a href="<?= $homeUrl ?>regulamin"><?= tre('terms_link', 'Regulamin') ?></a>
+            <button type="button" class="link-button" data-cookie-open><?= tre('cookie_settings_link', 'Ustawienia cookies') ?></button>
+        </nav>
+    </div>
     <div class="container footer-bottom">
-        <span>© <?= date('Y') ?> NOX Beauty Space. <?= tre('footer_rights', 'Wszelkie prawa zastrzeżone.') ?> · <a href="<?= $homeUrl ?>polityka-prywatnosci"><?= tre('privacy_link', 'Polityka prywatności') ?></a></span>
+        <span>© <?= date('Y') ?> NOX Beauty Space. <?= tre('footer_rights', 'Wszelkie prawa zastrzeżone.') ?></span>
         <a href="#main"><?= tre('back_to_top', 'Do góry') ?> ↑</a>
     </div>
 </footer>
@@ -65,15 +78,7 @@
     <button type="button" class="lb-nav lb-next" aria-label="→" data-lb-next>›</button>
 </div>
 
-<?php if (!empty($analyticsEnabled)): ?>
-<div class="cookie-banner" data-cookie-banner hidden role="dialog" aria-live="polite" aria-label="Cookies">
-    <p><?= tre('cookie_text') ?> <a href="<?= $homeUrl ?>polityka-prywatnosci"><?= tre('privacy_link', 'Polityka prywatności') ?></a></p>
-    <div class="cookie-actions">
-        <button type="button" class="btn btn-ghost btn-sm" data-cookie-choice="denied"><?= tre('cookie_decline', 'Tylko niezbędne') ?></button>
-        <button type="button" class="btn btn-gold btn-sm" data-cookie-choice="granted"><?= tre('cookie_accept', 'Akceptuję') ?></button>
-    </div>
-</div>
-<?php endif; ?>
+<?php require __DIR__ . '/cookie-consent.php'; ?>
 
 <script>window.NOX_I18N = <?= json_encode([
     'error' => tr('form_error', 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz do nas na Instagramie.'),

@@ -11,10 +11,10 @@ if (PHP_SAPI !== 'cli') {
 
 require __DIR__ . '/../DB.php';
 
-$texts = array_merge(require __DIR__ . '/seo_texts.php', require __DIR__ . '/service_texts.php');
+$texts = array_merge(require __DIR__ . '/seo_texts.php', require __DIR__ . '/service_texts.php', require __DIR__ . '/legal_texts.php');
 $services = require __DIR__ . '/../components/services.php';
 $langs = ['pl', 'uk', 'en'];
-$overwrite = ['seo_title', 'seo_desc', 'about_text_2'];
+$overwrite = ['seo_title', 'seo_desc', 'about_text_2', 'privacy_body', 'privacy_desc', 'cookie_text'];
 
 $pdo = DB::getConnection();
 $pdo->exec("SET NAMES utf8mb4");
@@ -61,6 +61,13 @@ try {
     // Privacy policy page (/polityka-prywatnosci, /uk/polityka-prywatnosci, /en/polityka-prywatnosci)
     if (!DB::fetch("SELECT id FROM pages WHERE slug = 'polityka-prywatnosci'")) {
         DB::execute("INSERT INTO pages (slug, name) VALUES ('polityka-prywatnosci', 'Політика конфіденційності')");
+    }
+
+    // Legal pages (/polityka-cookies, /regulamin)
+    foreach (['polityka-cookies' => 'Політика cookies', 'regulamin' => 'Регламент сайту'] as $slug => $name) {
+        if (!DB::fetch("SELECT id FROM pages WHERE slug = ?", [$slug])) {
+            DB::execute("INSERT INTO pages (slug, name) VALUES (?, ?)", [$slug, $name]);
+        }
     }
 
     // Service landing pages (/manicure-warszawa-wola, /uk/manicure-warszawa-wola, ...)

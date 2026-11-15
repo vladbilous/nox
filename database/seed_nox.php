@@ -260,7 +260,7 @@ $texts = [
 // Price list from Booksy. category => [names[4], subcategories => [names[4], items => [[names[4], price]]]]
 // Price strings use "zł"; translations of "od" (from) are applied per language below.
 // SEO texts (FAQ, image alts, 404, privacy, cookies, search snippet) live in a separate file
-$texts = array_merge($texts, require __DIR__ . '/seo_texts.php', require __DIR__ . '/service_texts.php');
+$texts = array_merge($texts, require __DIR__ . '/seo_texts.php', require __DIR__ . '/service_texts.php', require __DIR__ . '/legal_texts.php');
 
 $priceList = [
     'manicure' => [['Manicure', 'Манікюр', 'Manicure'], [
@@ -409,6 +409,13 @@ try {
     // Privacy policy page
     if (!DB::fetch("SELECT id FROM pages WHERE slug = 'polityka-prywatnosci'")) {
         DB::execute("INSERT INTO pages (slug, name) VALUES ('polityka-prywatnosci', 'Політика конфіденційності')");
+    }
+
+    // Legal pages
+    foreach (['polityka-cookies', 'regulamin'] as $slug) {
+        if (!DB::fetch("SELECT id FROM pages WHERE slug = ?", [$slug])) {
+            DB::execute("INSERT INTO pages (slug, name) VALUES (?, ?)", [$slug, $slug]);
+        }
     }
 
     // Service landing pages

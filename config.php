@@ -23,6 +23,21 @@ $config = [
         'google_verification' => getenv('GOOGLE_VERIFICATION') ?: '',
         'bing_verification' => getenv('BING_VERIFICATION') ?: '',
     ],
+    // Legal details of the business (required in Poland: UŚUDE art. 5 — name, address, e-mail;
+    // Prawo przedsiębiorców art. 20 — NIP). Shown in the footer, privacy policy, cookie policy and terms.
+    // Copy them exactly from CEIDG (sole trader) or KRS (company).
+    'company' => [
+        // Full legal name, e.g. 'Anna Kowalska NOX Beauty Space' (CEIDG) or 'NOX Beauty Sp. z o.o.' (KRS)
+        'legal_name' => getenv('COMPANY_NAME') ?: '',
+        // Registered address if different from the salon address (empty = salon address)
+        'address' => getenv('COMPANY_ADDRESS') ?: '',
+        'nip' => getenv('COMPANY_NIP') ?: '',
+        'regon' => getenv('COMPANY_REGON') ?: '',
+        // Only for companies registered in KRS, e.g. '0000123456'
+        'krs' => getenv('COMPANY_KRS') ?: '',
+        // Public contact e-mail of the salon (shown on the site; also for privacy requests)
+        'email' => getenv('COMPANY_EMAIL') ?: '',
+    ],
     // E-mail notifications for contact-form leads.
     // Who receives leads is set in the admin panel (Пошта); admin_email is only the fallback.
     // SMTP secrets do NOT go here — put them in config.local.php (not in git) or env vars.

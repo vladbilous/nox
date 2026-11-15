@@ -213,7 +213,7 @@ $icons = [
 <?php endforeach; ?>
 
             <div class="prices-footer reveal">
-                <p><?= tre('prices_note') ?></p>
+                <p><?= tre('prices_note') ?><br><small class="prices-legal-note"><?= tre('prices_legal_note') ?></small></p>
                 <a class="btn btn-dark" href="<?= htmlspecialchars($booksyUrl) ?>" target="_blank" rel="noopener"><?= tre('btn_book', 'Wybierz termin w Booksy') ?></a>
             </div>
         </div>
@@ -277,6 +277,7 @@ $icons = [
 <?php endforeach; ?>
                 </div>
             </div>
+            <p class="reviews-note reveal"><?= legal_text('reviews_note') ?></p>
         </div>
     </section>
 
@@ -371,11 +372,19 @@ $icons = [
                 </label>
                 <button type="submit" class="btn btn-gold btn-block" data-label-sending="<?= tre('form_sending', 'Wysyłanie…') ?>"><?= tre('form_submit', 'Wyślij') ?></button>
                 <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+                <p class="form-rodo-info"><?= legal_text('form_rodo_info') ?></p>
             </form>
         </div>
 
         <div class="container map-wrap reveal">
-            <iframe title="<?= tre('map_title', 'Mapa dojazdu do NOX Beauty Space') ?>" src="https://www.google.com/maps?q=Ludwiki+4B,+01-226+Warszawa&hl=<?= $currentLang ?>&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <?php /* The Google Map sets Google cookies, so it loads only after consent ("external media") or a click */ ?>
+            <div class="map-consent" data-map-consent data-map-src="https://www.google.com/maps?q=Ludwiki+4B,+01-226+Warszawa&amp;hl=<?= $currentLang ?>&amp;z=16&amp;output=embed" data-map-title="<?= tre('map_title', 'Mapa dojazdu do NOX Beauty Space') ?>">
+                <div class="map-consent-inner">
+                    <svg class="map-consent-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                    <p><strong>ul. Ludwiki 4B/U1, 01-226 Warszawa</strong><br><?= tre('map_consent_text', 'Mapa Google zostanie wczytana dopiero po Twojej zgodzie — Google może wtedy zapisać pliki cookies.') ?></p>
+                    <button type="button" class="btn btn-ghost btn-sm" data-map-load><?= tre('map_consent_btn', 'Pokaż mapę') ?></button>
+                </div>
+            </div>
             <?php /* On phones the embedded map ignores one-finger gestures, so the whole map opens Google Maps instead */ ?>
             <a class="map-tap" href="https://www.google.com/maps/search/?api=1&amp;query=NOX+Beauty+Space+Ludwiki+4B+01-226+Warszawa" target="_blank" rel="noopener" data-track="directions" aria-label="<?= tre('map_tap_hint', 'Otwórz w Google Maps') ?>"></a>
             <a class="map-cta btn btn-gold" href="https://www.google.com/maps/dir/?api=1&amp;destination=NOX+Beauty+Space+Ludwiki+4B+01-226+Warszawa" target="_blank" rel="noopener" data-track="directions">

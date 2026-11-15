@@ -29,7 +29,10 @@ $navItems = [
 $phone = trim($siteConfig['phone'] ?? '');
 $phoneHref = $phone !== '' ? 'tel:' . preg_replace('/[^0-9+]/', '', $phone) : '';
 $isNotFound = $isNotFound ?? false;
-$isPrivacy = ($pageSlug ?? '') === 'polityka-prywatnosci';
+// Legal pages: slug => CMS key prefix (title/desc/body)
+$legalPages = ['polityka-prywatnosci' => 'privacy', 'polityka-cookies' => 'cookies_policy', 'regulamin' => 'terms'];
+$legalKey = $legalPages[$pageSlug ?? ''] ?? null;
+$isPrivacy = $legalKey !== null;
 $pagePath = in_array($pageSlug ?? 'home', ['home', '404'], true) ? '' : $pageSlug;
 $noIndex = $isNotFound || $isPrivacy;
 if ($isNotFound) {
@@ -41,8 +44,8 @@ if ($isNotFound) {
     $ogTitle = $pageTitle;
     $ogDesc = $pageDesc;
 } elseif ($isPrivacy) {
-    $pageTitle = tr('privacy_title', 'Polityka prywatności') . ' — NOX Beauty Space';
-    $pageDesc = tr('privacy_desc', $pageDesc);
+    $pageTitle = tr("{$legalKey}_title", 'Polityka prywatności') . ' — NOX Beauty Space';
+    $pageDesc = tr("{$legalKey}_desc", $pageDesc);
     $ogTitle = $pageTitle;
     $ogDesc = $pageDesc;
 }

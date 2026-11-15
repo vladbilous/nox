@@ -167,7 +167,7 @@ $imgSize = function ($path) {
 <?php endforeach; ?>
             </div>
             <div class="prices-footer reveal">
-                <p><?= tre('prices_note') ?></p>
+                <p><?= tre('prices_note') ?><br><small class="prices-legal-note"><?= tre('prices_legal_note') ?></small></p>
                 <a class="btn btn-dark" href="<?= htmlspecialchars($booksyUrl) ?>" target="_blank" rel="noopener"><?= tre('btn_book', 'Wybierz termin w Booksy') ?></a>
             </div>
         </div>

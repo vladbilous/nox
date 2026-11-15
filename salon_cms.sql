@@ -17,6 +17,33 @@
 /*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 --
+-- Table structure for table `admin_login_attempts`
+--
+
+DROP TABLE IF EXISTS `admin_login_attempts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin_login_attempts` (
+  `ip` varchar(45) NOT NULL,
+  `fails` int(11) NOT NULL DEFAULT 0,
+  `last_fail` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_login_attempts`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `admin_login_attempts` WRITE;
+/*!40000 ALTER TABLE `admin_login_attempts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `admin_login_attempts` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
 -- Table structure for table `contacts`
 --
 
@@ -32,7 +59,7 @@ CREATE TABLE `contacts` (
   `status` enum('new','read','archived') DEFAULT 'new',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +88,7 @@ CREATE TABLE `content_blocks` (
   `type` varchar(50) DEFAULT 'text',
   PRIMARY KEY (`id`),
   UNIQUE KEY `key_name` (`key_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=430 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -500,7 +527,44 @@ INSERT INTO `content_blocks` VALUES
 (426,'alt_fryzjer-dlugie-proste-wlosy','alt_fryzjer-dlugie-proste-wlosy','text'),
 (427,'alt_fryzjer-stylizacja-wlosow','alt_fryzjer-stylizacja-wlosow','text'),
 (428,'alt_barber-strzyzenie-meskie','alt_barber-strzyzenie-meskie','text'),
-(429,'alt_fryzjer-barber-vadzim','alt_fryzjer-barber-vadzim','text');
+(429,'alt_fryzjer-barber-vadzim','alt_fryzjer-barber-vadzim','text'),
+(430,'footer_call','footer_call','text'),
+(431,'footer_route','footer_route','text'),
+(432,'map_tap_hint','map_tap_hint','text'),
+(433,'cookies_policy_title','cookies_policy_title','text'),
+(434,'cookies_policy_desc','cookies_policy_desc','text'),
+(435,'cookies_policy_body','cookies_policy_body','html'),
+(436,'cookies_policy_link','cookies_policy_link','text'),
+(437,'terms_title','terms_title','text'),
+(438,'terms_desc','terms_desc','text'),
+(439,'terms_body','terms_body','html'),
+(440,'terms_link','terms_link','text'),
+(441,'legal_nav_label','legal_nav_label','text'),
+(442,'legal_updated','legal_updated','text'),
+(443,'legal_effective_date','legal_effective_date','text'),
+(444,'legal_contact_form','legal_contact_form','text'),
+(445,'legal_company_block','legal_company_block','html'),
+(446,'company_name_label','company_name_label','text'),
+(447,'company_address_label','company_address_label','text'),
+(448,'cookie_title','cookie_title','text'),
+(449,'cookie_accept_all','cookie_accept_all','text'),
+(450,'cookie_reject_all','cookie_reject_all','text'),
+(451,'cookie_settings','cookie_settings','text'),
+(452,'cookie_save','cookie_save','text'),
+(453,'cookie_settings_link','cookie_settings_link','text'),
+(454,'cookie_cat_necessary','cookie_cat_necessary','text'),
+(455,'cookie_cat_necessary_desc','cookie_cat_necessary_desc','text'),
+(456,'cookie_cat_media','cookie_cat_media','text'),
+(457,'cookie_cat_media_desc','cookie_cat_media_desc','text'),
+(458,'cookie_cat_analytics','cookie_cat_analytics','text'),
+(459,'cookie_cat_analytics_desc','cookie_cat_analytics_desc','text'),
+(460,'cookie_cat_marketing','cookie_cat_marketing','text'),
+(461,'cookie_cat_marketing_desc','cookie_cat_marketing_desc','text'),
+(462,'map_consent_text','map_consent_text','text'),
+(463,'map_consent_btn','map_consent_btn','text'),
+(464,'form_rodo_info','form_rodo_info','html'),
+(465,'prices_legal_note','prices_legal_note','text'),
+(466,'reviews_note','reviews_note','html');
 /*!40000 ALTER TABLE `content_blocks` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -550,7 +614,7 @@ CREATE TABLE `pages` (
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -568,7 +632,9 @@ INSERT INTO `pages` VALUES
 (5,'pedicure-warszawa-wola','Послуга: Педикюр · Варшава, Воля'),
 (6,'brwi-rzesy-warszawa-wola','Послуга: Брови та вії · Варшава, Воля'),
 (7,'fryzjer-warszawa-wola','Послуга: Перукар · Варшава, Воля'),
-(8,'barber-warszawa-wola','Послуга: Барбер · Варшава, Воля');
+(8,'barber-warszawa-wola','Послуга: Барбер · Варшава, Воля'),
+(9,'polityka-cookies','Політика cookies'),
+(10,'regulamin','Регламент сайту');
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -767,6 +833,33 @@ COMMIT;
 SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
+-- Table structure for table `settings`
+--
+
+DROP TABLE IF EXISTS `settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `settings` (
+  `key` varchar(64) NOT NULL,
+  `value` text DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `settings`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `settings` WRITE;
+/*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `settings` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
 -- Table structure for table `slider_images`
 --
 
@@ -830,7 +923,7 @@ CREATE TABLE `translations` (
   KEY `lang_code` (`lang_code`),
   CONSTRAINT `translations_ibfk_1` FOREIGN KEY (`block_id`) REFERENCES `content_blocks` (`id`) ON DELETE CASCADE,
   CONSTRAINT `translations_ibfk_2` FOREIGN KEY (`lang_code`) REFERENCES `languages` (`code`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1488 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1599 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1354,15 +1447,15 @@ INSERT INTO `translations` VALUES
 (711,171,'pl','Polityka prywatności'),
 (712,171,'uk','Політика конфіденційності'),
 (713,171,'en','Privacy policy'),
-(714,172,'pl','Jak NOX Beauty Space przetwarza dane osobowe i pliki cookies.'),
-(715,172,'uk','Як NOX Beauty Space обробляє персональні дані та файли cookie.'),
-(716,172,'en','How NOX Beauty Space processes personal data and cookies.'),
-(717,173,'pl','<h2>1. Administrator danych</h2><p>Administratorem danych osobowych jest NOX Beauty Space, ul. Ludwiki 4B/U1, 01-226 Warszawa. W sprawach danych osobowych skontaktuj się z nami przez formularz na stronie lub Instagram @nox.beauty.space.</p><h2>2. Jakie dane i w jakim celu</h2><p>Formularz kontaktowy: imię, telefon, e-mail i treść wiadomości — wyłącznie po to, by odpowiedzieć na Twoje pytanie (art. 6 ust. 1 lit. a i f RODO). Rezerwacje przez Booksy i wiadomości na Instagramie podlegają politykom prywatności tych serwisów.</p><h2>3. Jak długo przechowujemy dane</h2><p>Dane z formularza przechowujemy do czasu zakończenia korespondencji, nie dłużej niż 12 miesięcy, chyba że przepisy wymagają dłużej.</p><h2>4. Odbiorcy danych</h2><p>Dane mogą być powierzane wyłącznie dostawcom usług technicznych (hosting, poczta e-mail), którzy przetwarzają je na nasze zlecenie. Nie sprzedajemy danych.</p><h2>5. Pliki cookies</h2><p>Strona używa niezbędnych plików cookies (np. zapamiętanie języka). Cookies analityczne i marketingowe (Google Analytics, Google Ads) włączamy tylko po Twojej zgodzie w banerze. Zgodę możesz w każdej chwili wycofać, czyszcząc dane strony w przeglądarce.</p><h2>6. Twoje prawa</h2><p>Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia, sprzeciwu oraz cofnięcia zgody. Przysługuje Ci skarga do Prezesa Urzędu Ochrony Danych Osobowych (uodo.gov.pl).</p>'),
-(718,173,'uk','<h2>1. Адміністратор даних</h2><p>Адміністратором персональних даних є NOX Beauty Space, ul. Ludwiki 4B/U1, 01-226 Warszawa. З питань персональних даних зв’яжіться з нами через форму на сайті або Instagram @nox.beauty.space.</p><h2>2. Які дані та для чого</h2><p>Контактна форма: ім’я, телефон, e-mail і текст повідомлення — лише для відповіді на ваше запитання (ст. 6 ч. 1 п. a та f GDPR/RODO). Записи через Booksy та повідомлення в Instagram регулюються політиками конфіденційності цих сервісів.</p><h2>3. Як довго зберігаємо дані</h2><p>Дані з форми зберігаємо до завершення листування, але не довше 12 місяців, якщо закон не вимагає довшого строку.</p><h2>4. Отримувачі даних</h2><p>Дані можуть передаватися лише постачальникам технічних послуг (хостинг, електронна пошта), які обробляють їх на наше доручення. Ми не продаємо дані.</p><h2>5. Файли cookie</h2><p>Сайт використовує необхідні cookie (наприклад, для запам’ятовування мови). Аналітичні та маркетингові cookie (Google Analytics, Google Ads) вмикаються лише після вашої згоди в банері. Згоду можна відкликати будь-коли, очистивши дані сайту в браузері.</p><h2>6. Ваші права</h2><p>Ви маєте право на доступ до даних, їх виправлення, видалення, обмеження обробки, перенесення, заперечення та відкликання згоди. Ви можете подати скаргу до Голови Управління захисту персональних даних Польщі (uodo.gov.pl).</p>'),
-(719,173,'en','<h2>1. Data controller</h2><p>The controller of your personal data is NOX Beauty Space, ul. Ludwiki 4B/U1, 01-226 Warsaw, Poland. For any data protection matters, contact us via the form on this site or on Instagram @nox.beauty.space.</p><h2>2. What data we process and why</h2><p>Contact form: name, phone, e-mail and your message — only to reply to your enquiry (Art. 6(1)(a) and (f) GDPR). Bookings via Booksy and Instagram messages are governed by those services’ privacy policies.</p><h2>3. How long we keep data</h2><p>Form data is kept until our correspondence ends and no longer than 12 months, unless the law requires longer.</p><h2>4. Recipients</h2><p>Data may only be shared with technical service providers (hosting, e-mail) that process it on our behalf. We never sell data.</p><h2>5. Cookies</h2><p>The site uses essential cookies (e.g. to remember your language). Analytics and marketing cookies (Google Analytics, Google Ads) are enabled only after you consent in the banner. You can withdraw consent at any time by clearing this site’s data in your browser.</p><h2>6. Your rights</h2><p>You have the right to access, rectify, erase, restrict and port your data, to object, and to withdraw consent. You may lodge a complaint with the Polish Data Protection Authority (uodo.gov.pl).</p>'),
-(720,174,'pl','Używamy plików cookies, aby mierzyć ruch i ulepszać stronę. Analityka włączy się tylko za Twoją zgodą.'),
-(721,174,'uk','Ми використовуємо cookie, щоб вимірювати відвідуваність і покращувати сайт. Аналітика вмикається лише за вашою згодою.'),
-(722,174,'en','We use cookies to measure traffic and improve the site. Analytics is enabled only with your consent.'),
+(714,172,'pl','Jak NOX Beauty Space przetwarza dane osobowe — administrator, cele, podstawy prawne, Twoje prawa.'),
+(715,172,'uk','Як NOX Beauty Space обробляє персональні дані — адміністратор, мета, правові підстави, ваші права.'),
+(716,172,'en','How NOX Beauty Space processes personal data — controller, purposes, legal bases, your rights.'),
+(717,173,'pl','<h2>1. Administrator danych</h2>\n<p>Administratorem Twoich danych osobowych jest {{company}} (dane powyżej). W sprawach dotyczących danych osobowych możesz kontaktować się z nami: {{email}}, tel. {{phone}} lub osobiście w salonie. Nie powołaliśmy inspektora ochrony danych.</p>\n<h2>2. Cele, podstawy prawne i zakres przetwarzania</h2>\n<ul>\n<li><strong>Formularz kontaktowy</strong> — imię, telefon, e-mail i treść wiadomości przetwarzamy, aby odpowiedzieć na Twoje zapytanie (art. 6 ust. 1 lit. f RODO — prawnie uzasadniony interes, jakim jest prowadzenie korespondencji; jeśli zapytanie dotyczy wizyty — art. 6 ust. 1 lit. b RODO).</li>\n<li><strong>Rezerwacja i realizacja wizyty</strong> — dane potrzebne do umówienia i wykonania usługi (art. 6 ust. 1 lit. b RODO). Rezerwacje online prowadzimy przez serwis Booksy, który w zakresie swojego serwisu jest odrębnym administratorem danych i działa według własnej polityki prywatności.</li>\n<li><strong>Kontakt telefoniczny i przez Instagram</strong> — odpowiedź na wiadomość (art. 6 ust. 1 lit. f RODO). Operatorem Instagrama jest Meta Platforms Ireland Ltd., odrębny administrator danych.</li>\n<li><strong>Statystyka i marketing</strong> (np. Google Analytics, Google Ads) — wyłącznie po wyrażeniu zgody w banerze cookies (art. 6 ust. 1 lit. a RODO w zw. z art. 399 Prawa komunikacji elektronicznej).</li>\n<li><strong>Mapa Google</strong> — wczytujemy ją dopiero po Twojej zgodzie lub kliknięciu „Pokaż mapę” (art. 6 ust. 1 lit. a RODO).</li>\n<li><strong>Bezpieczeństwo strony</strong> — serwer automatycznie zapisuje dane techniczne (adres IP, data i godzina, przeglądarka) w logach (art. 6 ust. 1 lit. f RODO — ochrona przed nadużyciami).</li>\n<li><strong>Obowiązki prawne</strong> — np. przechowywanie dokumentów księgowych (art. 6 ust. 1 lit. c RODO).</li>\n</ul>\n<h2>3. Odbiorcy danych</h2>\n<p>Dane mogą otrzymać wyłącznie podmioty, które pomagają nam prowadzić działalność: dostawca hostingu, dostawca poczty e-mail, firmy świadczące wsparcie IT i księgowe, a w zakresie, na który wyrazisz zgodę — Google Ireland Ltd. Booksy i Meta przetwarzają dane jako odrębni administratorzy. Nie sprzedajemy danych.</p>\n<h2>4. Przekazywanie danych poza EOG</h2>\n<p>Usługi Google mogą wiązać się z przekazaniem danych do USA. Odbywa się to na podstawie decyzji Komisji Europejskiej w sprawie EU-US Data Privacy Framework lub standardowych klauzul umownych.</p>\n<h2>5. Okres przechowywania</h2>\n<ul>\n<li>dane z formularza i korespondencji — do zakończenia sprawy, nie dłużej niż 12 miesięcy od ostatniego kontaktu;</li>\n<li>dane przetwarzane na podstawie zgody — do jej wycofania;</li>\n<li>dane związane z wizytą — przez okres przedawnienia roszczeń i wymagany przepisami podatkowymi;</li>\n<li>logi serwera — przez okres niezbędny dla bezpieczeństwa, zgodnie z ustawieniami dostawcy hostingu.</li>\n</ul>\n<h2>6. Twoje prawa</h2>\n<p>Masz prawo do: dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych, sprzeciwu wobec przetwarzania opartego na prawnie uzasadnionym interesie oraz wycofania zgody w dowolnym momencie (bez wpływu na zgodność z prawem przetwarzania przed jej wycofaniem). Przysługuje Ci skarga do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa, uodo.gov.pl).</p>\n<h2>7. Dobrowolność i profilowanie</h2>\n<p>Podanie danych jest dobrowolne, ale bez nich nie odpowiemy na wiadomość ani nie umówimy wizyty. Nie podejmujemy decyzji w sposób zautomatyzowany i nie profilujemy Cię w rozumieniu art. 22 RODO.</p>\n<h2>8. Pliki cookies</h2>\n<p>Zasady korzystania z plików cookies opisuje <a href=\"{{cookies_url}}\">Polityka cookies</a>. Swoje wybory możesz zmienić w każdej chwili przez link „Ustawienia cookies” w stopce strony.</p>\n<h2>9. Zmiany polityki</h2>\n<p>Polityka może być aktualizowana, np. przy zmianie przepisów lub usług. Aktualna wersja jest zawsze dostępna na tej stronie.</p>'),
+(718,173,'uk','<p><em>Переклад для зручності. Юридично обов’язковою є польська версія документа.</em></p>\n<h2>1. Адміністратор даних</h2>\n<p>Адміністратором ваших персональних даних є {{company}} (дані вище). З питань персональних даних пишіть: {{email}}, телефонуйте {{phone}} або звертайтеся в салоні. Інспектора із захисту даних не призначено.</p>\n<h2>2. Мета, правові підстави та обсяг обробки</h2>\n<ul>\n<li><strong>Контактна форма</strong> — ім’я, телефон, e-mail і текст повідомлення обробляємо, щоб відповісти на запит (ст. 6 ч. 1 п. f RODO/GDPR — законний інтерес; якщо запит стосується візиту — ст. 6 ч. 1 п. b).</li>\n<li><strong>Запис і проведення візиту</strong> — дані, потрібні для запису та надання послуги (ст. 6 ч. 1 п. b). Онлайн-запис працює через Booksy, який є окремим адміністратором даних у своєму сервісі.</li>\n<li><strong>Телефон та Instagram</strong> — відповідь на повідомлення (ст. 6 ч. 1 п. f). Оператор Instagram — Meta Platforms Ireland Ltd., окремий адміністратор.</li>\n<li><strong>Статистика та маркетинг</strong> (Google Analytics, Google Ads) — лише після вашої згоди в банері cookies (ст. 6 ч. 1 п. a та ст. 399 закону Prawo komunikacji elektronicznej).</li>\n<li><strong>Карта Google</strong> — завантажується лише після згоди або натискання «Показати карту».</li>\n<li><strong>Безпека сайту</strong> — сервер автоматично записує технічні дані (IP, дата, браузер) у журнали (ст. 6 ч. 1 п. f).</li>\n<li><strong>Юридичні обов’язки</strong> — наприклад, зберігання бухгалтерських документів (ст. 6 ч. 1 п. c).</li>\n</ul>\n<h2>3. Отримувачі даних</h2>\n<p>Дані можуть отримати лише ті, хто допомагає нам працювати: хостинг, поштовий сервіс, IT- та бухгалтерська підтримка, а за вашою згодою — Google Ireland Ltd. Booksy та Meta є окремими адміністраторами. Ми не продаємо дані.</p>\n<h2>4. Передача даних за межі ЄЕЗ</h2>\n<p>Сервіси Google можуть передавати дані до США на підставі рішення Єврокомісії щодо EU-US Data Privacy Framework або стандартних договірних умов.</p>\n<h2>5. Строк зберігання</h2>\n<ul>\n<li>дані з форми та листування — до завершення справи, не довше 12 місяців від останнього контакту;</li>\n<li>дані, що обробляються за згодою, — до її відкликання;</li>\n<li>дані про візит — протягом строку позовної давності та строків, яких вимагає податкове право;</li>\n<li>журнали сервера — стільки, скільки потрібно для безпеки, згідно з налаштуваннями хостингу.</li>\n</ul>\n<h2>6. Ваші права</h2>\n<p>Ви маєте право на доступ до даних, їх виправлення, видалення, обмеження обробки, перенесення, заперечення проти обробки на підставі законного інтересу та відкликання згоди будь-коли. Ви можете подати скаргу до Голови Управління захисту персональних даних (ul. Stawki 2, 00-193 Warszawa, uodo.gov.pl).</p>\n<h2>7. Добровільність і профілювання</h2>\n<p>Надання даних добровільне, але без них ми не зможемо відповісти чи записати вас. Ми не ухвалюємо автоматизованих рішень і не профілюємо вас (ст. 22 RODO).</p>\n<h2>8. Файли cookie</h2>\n<p>Детальніше — у <a href=\"{{cookies_url}}\">Політиці cookies</a>. Змінити свій вибір можна будь-коли через посилання «Налаштування cookies» у підвалі сайту.</p>\n<h2>9. Зміни</h2>\n<p>Політика може оновлюватися. Актуальна версія завжди доступна на цій сторінці.</p>'),
+(719,173,'en','<p><em>Translation for convenience. The Polish version of this document is legally binding.</em></p>\n<h2>1. Data controller</h2>\n<p>The controller of your personal data is {{company}} (details above). For data protection matters contact us at {{email}}, by phone {{phone}} or in the salon. No data protection officer has been appointed.</p>\n<h2>2. Purposes, legal bases and scope</h2>\n<ul>\n<li><strong>Contact form</strong> — your name, phone, e-mail and message are used to reply to your enquiry (Art. 6(1)(f) GDPR — legitimate interest; where it concerns a visit — Art. 6(1)(b)).</li>\n<li><strong>Booking and providing the service</strong> — data needed to book and perform the treatment (Art. 6(1)(b)). Online booking runs through Booksy, a separate controller for its own service.</li>\n<li><strong>Phone and Instagram</strong> — replying to your message (Art. 6(1)(f)). Instagram is operated by Meta Platforms Ireland Ltd., a separate controller.</li>\n<li><strong>Statistics and marketing</strong> (Google Analytics, Google Ads) — only with your consent in the cookie banner (Art. 6(1)(a) GDPR and Art. 399 of the Polish Electronic Communications Law).</li>\n<li><strong>Google Map</strong> — loaded only after your consent or a click on “Show map”.</li>\n<li><strong>Website security</strong> — the server logs technical data (IP address, time, browser) (Art. 6(1)(f)).</li>\n<li><strong>Legal obligations</strong> — e.g. keeping accounting records (Art. 6(1)(c)).</li>\n</ul>\n<h2>3. Recipients</h2>\n<p>Data may only be shared with providers that help us run the business: hosting, e-mail, IT and accounting support and — to the extent you consent — Google Ireland Ltd. Booksy and Meta act as separate controllers. We never sell data.</p>\n<h2>4. Transfers outside the EEA</h2>\n<p>Google services may involve transfers to the USA based on the European Commission’s EU-US Data Privacy Framework decision or standard contractual clauses.</p>\n<h2>5. Retention</h2>\n<ul>\n<li>form data and correspondence — until the matter is closed, no longer than 12 months after the last contact;</li>\n<li>consent-based data — until you withdraw consent;</li>\n<li>visit-related data — for the limitation period of claims and as required by tax law;</li>\n<li>server logs — as long as needed for security, according to the hosting provider’s settings.</li>\n</ul>\n<h2>6. Your rights</h2>\n<p>You have the right to access, rectify, erase and restrict your data, to data portability, to object to processing based on legitimate interest and to withdraw consent at any time. You may lodge a complaint with the Polish Data Protection Authority (Prezes UODO, ul. Stawki 2, 00-193 Warszawa, uodo.gov.pl).</p>\n<h2>7. Voluntary data and profiling</h2>\n<p>Providing data is voluntary, but without it we cannot reply or book your visit. We do not make automated decisions or profile you (Art. 22 GDPR).</p>\n<h2>8. Cookies</h2>\n<p>See our <a href=\"{{cookies_url}}\">Cookie policy</a>. You can change your choice at any time via “Cookie settings” in the footer.</p>\n<h2>9. Changes</h2>\n<p>This policy may be updated. The current version is always available on this page.</p>'),
+(720,174,'pl','Niezbędne pliki cookies zapewniają działanie strony. Za Twoją zgodą wczytamy też mapę Google i — jeśli są włączone — narzędzia statystyki i marketingu. Możesz zaakceptować, odrzucić lub wybrać kategorie. Zmienisz to w każdej chwili w stopce.'),
+(721,174,'uk','Необхідні cookies забезпечують роботу сайту. За вашою згодою ми також завантажимо карту Google і, якщо увімкнено, інструменти статистики та маркетингу. Можна прийняти, відхилити або вибрати категорії. Змінити вибір можна будь-коли в підвалі сайту.'),
+(722,174,'en','Necessary cookies keep the site working. With your consent we will also load the Google Map and — if enabled — statistics and marketing tools. You can accept, reject or choose categories, and change this any time in the footer.'),
 (723,175,'pl','Akceptuję'),
 (724,175,'uk','Погоджуюсь'),
 (725,175,'en','Accept'),
@@ -2127,7 +2220,118 @@ INSERT INTO `translations` VALUES
 (1484,428,'en','Men’s haircut — NOX barber at work'),
 (1485,429,'pl','Vadzim — fryzjer i barber NOX Beauty Space'),
 (1486,429,'uk','Вадим — перукар і барбер NOX Beauty Space'),
-(1487,429,'en','Vadzim — hairdresser and barber at NOX Beauty Space');
+(1487,429,'en','Vadzim — hairdresser and barber at NOX Beauty Space'),
+(1488,430,'pl','Zadzwoń'),
+(1489,430,'uk','Зателефонувати'),
+(1490,430,'en','Call us'),
+(1491,431,'pl','Trasa'),
+(1492,431,'uk','Маршрут'),
+(1493,431,'en','Directions'),
+(1494,432,'pl','Otwórz w Google Maps'),
+(1495,432,'uk','Відкрити в Google Maps'),
+(1496,432,'en','Open in Google Maps'),
+(1497,433,'pl','Polityka cookies'),
+(1498,433,'uk','Політика cookies'),
+(1499,433,'en','Cookie policy'),
+(1500,434,'pl','Jakie pliki cookies stosuje strona NOX Beauty Space i jak zmienić swoje wybory.'),
+(1501,434,'uk','Які файли cookie використовує сайт NOX Beauty Space і як змінити свій вибір.'),
+(1502,434,'en','Which cookies the NOX Beauty Space website uses and how to change your choices.'),
+(1503,435,'pl','<h2>1. Czym są pliki cookies</h2>\n<p>Pliki cookies to małe pliki tekstowe zapisywane na Twoim urządzeniu. Podobnie działa pamięć przeglądarki (localStorage), z której korzystamy do zapamiętania Twoich wyborów. Poniżej opisujemy obie technologie.</p>\n<h2>2. Zasady</h2>\n<p>Zgodnie z art. 399 Prawa komunikacji elektronicznej niezbędne pliki cookies stosujemy bez zgody, ponieważ bez nich strona nie działałaby prawidłowo. Pozostałe (multimedia zewnętrzne, statystyka, marketing) włączamy wyłącznie po Twojej zgodzie. Domyślnie wszystkie opcjonalne kategorie są wyłączone. Zgodę możesz w każdej chwili zmienić lub wycofać przez link „Ustawienia cookies” w stopce.</p>\n<h2>3. Jakie pliki stosujemy</h2>\n<table>\n<thead><tr><th>Nazwa</th><th>Dostawca</th><th>Cel</th><th>Czas</th><th>Kategoria</th></tr></thead>\n<tbody>\n<tr><td>nox_consent (localStorage)</td><td>NOX (własny)</td><td>Zapamiętanie Twoich wyborów dotyczących cookies</td><td>12 miesięcy</td><td>Niezbędne</td></tr>\n<tr><td>lang_detected</td><td>NOX (własny)</td><td>Zapamiętanie, że język strony został już dobrany (bez ponownego przekierowania)</td><td>Do zamknięcia przeglądarki</td><td>Niezbędne</td></tr>\n<tr><td>PHPSESSID</td><td>NOX (własny)</td><td>Ochrona formularza kontaktowego przed spamem — ustawiany dopiero po wysłaniu formularza</td><td>Do zamknięcia przeglądarki</td><td>Niezbędne</td></tr>\n<tr><td>nox_admin</td><td>NOX (własny)</td><td>Logowanie do panelu administracyjnego (tylko personel)</td><td>Do zamknięcia przeglądarki</td><td>Niezbędne</td></tr>\n<tr><td>NID, AEC, SOCS i inne</td><td>Google Ireland Ltd.</td><td>Wyświetlenie mapy Google z dojazdem do salonu</td><td>Do 13 miesięcy</td><td>Multimedia zewnętrzne (zgoda)</td></tr>\n<tr><td>_ga, _ga_*</td><td>Google Ireland Ltd.</td><td>Anonimowa statystyka odwiedzin (Google Analytics) — tylko jeśli usługa jest włączona</td><td>Do 2 lat</td><td>Analityczne (zgoda)</td></tr>\n<tr><td>_gcl_au</td><td>Google Ireland Ltd.</td><td>Pomiar skuteczności reklam (Google Ads) — tylko jeśli usługa jest włączona</td><td>90 dni</td><td>Marketingowe (zgoda)</td></tr>\n</tbody>\n</table>\n<h2>4. Serwisy zewnętrzne</h2>\n<p>Po przejściu do Booksy, Instagrama lub Google Maps obowiązują zasady cookies tych serwisów. Sam link na naszej stronie nie zapisuje ich plików.</p>\n<h2>5. Ustawienia przeglądarki</h2>\n<p>Pliki cookies możesz też usuwać lub blokować w ustawieniach przeglądarki. Zablokowanie niezbędnych plików może utrudnić korzystanie ze strony.</p>\n<p>Więcej o przetwarzaniu danych: <a href=\"{{privacy_url}}\">Polityka prywatności</a>.</p>'),
+(1504,435,'uk','<p><em>Переклад для зручності. Юридично обов’язковою є польська версія документа.</em></p>\n<h2>1. Що таке cookies</h2>\n<p>Cookies — це невеликі текстові файли на вашому пристрої. Схоже працює пам’ять браузера (localStorage), де ми зберігаємо ваш вибір. Нижче описано обидві технології.</p>\n<h2>2. Правила</h2>\n<p>Згідно зі ст. 399 закону Prawo komunikacji elektronicznej необхідні cookies ми використовуємо без згоди, бо без них сайт не працює коректно. Інші (зовнішні медіа, статистика, маркетинг) вмикаємо лише за вашою згодою. За замовчуванням усі необов’язкові категорії вимкнені. Змінити чи відкликати згоду можна будь-коли через «Налаштування cookies» у підвалі.</p>\n<h2>3. Які файли ми використовуємо</h2>\n<table>\n<thead><tr><th>Назва</th><th>Постачальник</th><th>Мета</th><th>Строк</th><th>Категорія</th></tr></thead>\n<tbody>\n<tr><td>nox_consent (localStorage)</td><td>NOX (власний)</td><td>Запам’ятовує ваш вибір щодо cookies</td><td>12 місяців</td><td>Необхідні</td></tr>\n<tr><td>lang_detected</td><td>NOX (власний)</td><td>Запам’ятовує, що мову сайту вже визначено</td><td>До закриття браузера</td><td>Необхідні</td></tr>\n<tr><td>PHPSESSID</td><td>NOX (власний)</td><td>Захист контактної форми від спаму — лише після відправки форми</td><td>До закриття браузера</td><td>Необхідні</td></tr>\n<tr><td>nox_admin</td><td>NOX (власний)</td><td>Вхід до панелі адміністратора (лише персонал)</td><td>До закриття браузера</td><td>Необхідні</td></tr>\n<tr><td>NID, AEC, SOCS та інші</td><td>Google Ireland Ltd.</td><td>Показ карти Google з маршрутом до салону</td><td>До 13 місяців</td><td>Зовнішні медіа (згода)</td></tr>\n<tr><td>_ga, _ga_*</td><td>Google Ireland Ltd.</td><td>Анонімна статистика відвідувань (Google Analytics), якщо увімкнено</td><td>До 2 років</td><td>Аналітичні (згода)</td></tr>\n<tr><td>_gcl_au</td><td>Google Ireland Ltd.</td><td>Вимірювання ефективності реклами (Google Ads), якщо увімкнено</td><td>90 днів</td><td>Маркетингові (згода)</td></tr>\n</tbody>\n</table>\n<h2>4. Зовнішні сервіси</h2>\n<p>Після переходу на Booksy, Instagram чи Google Maps діють правила cookies цих сервісів. Саме посилання на нашому сайті їхніх файлів не зберігає.</p>\n<h2>5. Налаштування браузера</h2>\n<p>Cookies також можна видаляти чи блокувати в налаштуваннях браузера. Блокування необхідних файлів може порушити роботу сайту.</p>\n<p>Більше про обробку даних: <a href=\"{{privacy_url}}\">Політика конфіденційності</a>.</p>'),
+(1505,435,'en','<p><em>Translation for convenience. The Polish version of this document is legally binding.</em></p>\n<h2>1. What cookies are</h2>\n<p>Cookies are small text files stored on your device. Browser storage (localStorage), which we use to remember your choices, works in a similar way. Both are described below.</p>\n<h2>2. Rules</h2>\n<p>Under Art. 399 of the Polish Electronic Communications Law we use strictly necessary cookies without consent, as the site cannot work properly without them. Everything else (external media, statistics, marketing) is enabled only with your consent. All optional categories are off by default. You can change or withdraw consent at any time via “Cookie settings” in the footer.</p>\n<h2>3. Cookies we use</h2>\n<table>\n<thead><tr><th>Name</th><th>Provider</th><th>Purpose</th><th>Duration</th><th>Category</th></tr></thead>\n<tbody>\n<tr><td>nox_consent (localStorage)</td><td>NOX (first party)</td><td>Remembers your cookie choices</td><td>12 months</td><td>Necessary</td></tr>\n<tr><td>lang_detected</td><td>NOX (first party)</td><td>Remembers that the site language has been set</td><td>Until the browser closes</td><td>Necessary</td></tr>\n<tr><td>PHPSESSID</td><td>NOX (first party)</td><td>Protects the contact form from spam — set only after you send the form</td><td>Until the browser closes</td><td>Necessary</td></tr>\n<tr><td>nox_admin</td><td>NOX (first party)</td><td>Admin panel login (staff only)</td><td>Until the browser closes</td><td>Necessary</td></tr>\n<tr><td>NID, AEC, SOCS and others</td><td>Google Ireland Ltd.</td><td>Showing the Google Map with directions</td><td>Up to 13 months</td><td>External media (consent)</td></tr>\n<tr><td>_ga, _ga_*</td><td>Google Ireland Ltd.</td><td>Anonymous visit statistics (Google Analytics), if enabled</td><td>Up to 2 years</td><td>Analytics (consent)</td></tr>\n<tr><td>_gcl_au</td><td>Google Ireland Ltd.</td><td>Ad performance measurement (Google Ads), if enabled</td><td>90 days</td><td>Marketing (consent)</td></tr>\n</tbody>\n</table>\n<h2>4. External services</h2>\n<p>Once you go to Booksy, Instagram or Google Maps, their cookie rules apply. A link on our site does not store their cookies.</p>\n<h2>5. Browser settings</h2>\n<p>You can also delete or block cookies in your browser settings. Blocking necessary cookies may affect how the site works.</p>\n<p>More about data processing: <a href=\"{{privacy_url}}\">Privacy policy</a>.</p>'),
+(1506,436,'pl','Polityka cookies'),
+(1507,436,'uk','Політика cookies'),
+(1508,436,'en','Cookie policy'),
+(1509,437,'pl','Regulamin strony'),
+(1510,437,'uk','Регламент сайту'),
+(1511,437,'en','Website terms'),
+(1512,438,'pl','Regulamin świadczenia usług drogą elektroniczną na stronie NOX Beauty Space.'),
+(1513,438,'uk','Регламент надання електронних послуг на сайті NOX Beauty Space.'),
+(1514,438,'en','Terms of electronic services on the NOX Beauty Space website.'),
+(1515,439,'pl','<h2>§ 1. Postanowienia ogólne</h2>\n<ol>\n<li>Regulamin określa zasady korzystania ze strony internetowej {{site}} (dalej: Strona), zgodnie z art. 8 ustawy z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną.</li>\n<li>Usługodawcą jest {{company}} (dane powyżej), kontakt: {{email}}, tel. {{phone}}.</li>\n<li>Regulamin jest dostępny bezpłatnie na Stronie w formie, która umożliwia jego pobranie, utrwalenie i wydrukowanie.</li>\n</ol>\n<h2>§ 2. Rodzaje i zakres usług</h2>\n<ol>\n<li>Za pośrednictwem Strony Usługodawca świadczy bezpłatnie: a) udostępnianie informacji o salonie, usługach, cenach i pracach; b) formularz kontaktowy umożliwiający wysłanie wiadomości do salonu.</li>\n<li>Strona zawiera odnośniki do zewnętrznych serwisów (Booksy, Instagram, Google Maps). Korzystanie z nich odbywa się na zasadach określonych przez ich operatorów. Rezerwacja wizyty online odbywa się w serwisie Booksy.</li>\n<li>Strona nie służy do zawierania umów o wykonanie usług kosmetycznych — umowa jest zawierana przy rezerwacji wizyty lub w salonie.</li>\n</ol>\n<h2>§ 3. Wymagania techniczne</h2>\n<p>Do korzystania ze Strony potrzebne jest urządzenie z dostępem do internetu i aktualna przeglądarka internetowa z włączoną obsługą JavaScript. Do wysłania formularza potrzebny jest numer telefonu lub adres e-mail.</p>\n<h2>§ 4. Zasady korzystania</h2>\n<p>Zabronione jest dostarczanie za pośrednictwem Strony treści o charakterze bezprawnym, w tym obraźliwych, naruszających dobra osobiste lub prawa osób trzecich, oraz podejmowanie działań zakłócających działanie Strony.</p>\n<h2>§ 5. Zawarcie i rozwiązanie umowy</h2>\n<ol>\n<li>Umowa o udostępnianie informacji zostaje zawarta z chwilą wejścia na Stronę i rozwiązana z chwilą jej opuszczenia.</li>\n<li>Umowa o korzystanie z formularza kontaktowego zostaje zawarta z chwilą wysłania wiadomości i rozwiązana z chwilą udzielenia odpowiedzi. Użytkownik może zrezygnować w każdej chwili, nie wysyłając formularza.</li>\n</ol>\n<h2>§ 6. Ceny i promocje</h2>\n<ol>\n<li>Ceny na Stronie są podane w złotych polskich i są cenami końcowymi. Mają charakter informacyjny i nie stanowią oferty w rozumieniu art. 66 Kodeksu cywilnego. Ostateczna cena zależy od zakresu usługi (np. długości i stanu paznokci lub włosów) i jest ustalana przy rezerwacji lub przed wykonaniem usługi.</li>\n<li>Rabat −10% dotyczy pierwszej wizyty nowego klienta zarezerwowanej przez Booksy lub Instagram Direct. Szczegółowe warunki promocji przekazujemy przy rezerwacji.</li>\n</ol>\n<h2>§ 7. Opinie klientów</h2>\n<ol>\n<li>Na Stronie prezentujemy wybrane opinie klientów oraz średnią ocenę z serwisu Booksy.</li>\n<li>Opinie z Booksy mogą wystawić wyłącznie osoby, które zarezerwowały wizytę w tym serwisie. Opinie pochodzące z Google i Instagrama publikujemy w oryginalnym brzmieniu (z możliwym tłumaczeniem), ale nie weryfikujemy, czy ich autor skorzystał z usługi.</li>\n<li>Nie zamieszczamy opinii zamówionych ani nie zmieniamy treści opinii.</li>\n</ol>\n<h2>§ 8. Reklamacje</h2>\n<ol>\n<li>Reklamacje dotyczące działania Strony lub wykonanych usług można zgłaszać: {{email}}, telefonicznie ({{phone}}) lub osobiście w salonie. Prosimy o podanie danych kontaktowych i opisu problemu.</li>\n<li>Reklamację rozpatrujemy w ciągu 14 dni od jej otrzymania i informujemy o wyniku w sposób, w jaki została zgłoszona.</li>\n</ol>\n<h2>§ 9. Pozasądowe rozwiązywanie sporów</h2>\n<p>Konsument może skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, m.in. z pomocy miejskiego lub powiatowego rzecznika konsumentów albo mediacji prowadzonej przez Wojewódzki Inspektorat Inspekcji Handlowej. Informacje są dostępne na stronie Urzędu Ochrony Konkurencji i Konsumentów (uokik.gov.pl).</p>\n<h2>§ 10. Dane osobowe i cookies</h2>\n<p>Zasady przetwarzania danych osobowych opisuje <a href=\"{{privacy_url}}\">Polityka prywatności</a>, a zasady stosowania plików cookies — <a href=\"{{cookies_url}}\">Polityka cookies</a>.</p>\n<h2>§ 11. Postanowienia końcowe</h2>\n<ol>\n<li>Usługodawca może zmienić Regulamin z ważnych przyczyn (np. zmiana przepisów lub zakresu usług). Zmiany obowiązują od opublikowania na Stronie.</li>\n<li>W sprawach nieuregulowanych stosuje się przepisy prawa polskiego. Regulamin nie wyłącza ani nie ogranicza uprawnień konsumenta wynikających z bezwzględnie obowiązujących przepisów.</li>\n</ol>'),
+(1516,439,'uk','<p><em>Переклад для зручності. Юридично обов’язковою є польська версія документа.</em></p>\n<h2>§ 1. Загальні положення</h2>\n<ol>\n<li>Регламент визначає правила користування сайтом {{site}} (далі — Сайт) відповідно до ст. 8 закону Польщі про надання послуг електронним шляхом.</li>\n<li>Постачальник послуг — {{company}} (дані вище), контакт: {{email}}, тел. {{phone}}.</li>\n<li>Регламент доступний безкоштовно на Сайті у формі, яку можна завантажити, зберегти й роздрукувати.</li>\n</ol>\n<h2>§ 2. Види та обсяг послуг</h2>\n<ol>\n<li>Через Сайт безкоштовно надається: а) інформація про салон, послуги, ціни та роботи; б) контактна форма для надсилання повідомлення салону.</li>\n<li>Сайт містить посилання на зовнішні сервіси (Booksy, Instagram, Google Maps), які працюють за власними правилами. Онлайн-запис відбувається в Booksy.</li>\n<li>Сайт не призначений для укладення договорів на косметичні послуги — договір укладається під час запису або в салоні.</li>\n</ol>\n<h2>§ 3. Технічні вимоги</h2>\n<p>Потрібен пристрій з доступом до інтернету та сучасний браузер з увімкненим JavaScript. Для відправки форми — номер телефону або e-mail.</p>\n<h2>§ 4. Правила користування</h2>\n<p>Заборонено надсилати через Сайт протиправний вміст, зокрема образливий чи такий, що порушує права інших осіб, а також порушувати роботу Сайту.</p>\n<h2>§ 5. Укладення та припинення договору</h2>\n<ol>\n<li>Договір про надання інформації укладається з моменту входу на Сайт і припиняється з моментом виходу.</li>\n<li>Договір про користування формою укладається з моменту надсилання повідомлення й припиняється з моментом відповіді.</li>\n</ol>\n<h2>§ 6. Ціни та акції</h2>\n<ol>\n<li>Ціни вказано в польських злотих, це кінцеві ціни. Вони мають інформаційний характер і не є офертою (ст. 66 Цивільного кодексу Польщі). Остаточна ціна залежить від обсягу послуги й узгоджується під час запису або перед процедурою.</li>\n<li>Знижка −10% діє на перший візит нового клієнта, записаного через Booksy або Instagram Direct. Детальні умови повідомляємо під час запису.</li>\n</ol>\n<h2>§ 7. Відгуки клієнтів</h2>\n<ol>\n<li>На Сайті показано вибрані відгуки та середню оцінку з Booksy.</li>\n<li>Відгуки в Booksy можуть залишати лише клієнти, які записалися через цей сервіс. Відгуки з Google та Instagram публікуємо в оригінальному формулюванні (можливо, з перекладом), але не перевіряємо, чи автор скористався послугою.</li>\n<li>Ми не публікуємо замовних відгуків і не змінюємо їхній зміст.</li>\n</ol>\n<h2>§ 8. Скарги</h2>\n<ol>\n<li>Скарги щодо роботи Сайту чи наданих послуг: {{email}}, телефоном ({{phone}}) або в салоні.</li>\n<li>Скаргу розглядаємо протягом 14 днів і повідомляємо результат тим самим способом.</li>\n</ol>\n<h2>§ 9. Позасудове вирішення спорів</h2>\n<p>Споживач може звернутися до міського або повітового захисника прав споживачів чи до медіації у Воєводській інспекції торгівлі. Інформація — на сайті UOKiK (uokik.gov.pl).</p>\n<h2>§ 10. Персональні дані та cookies</h2>\n<p>Див. <a href=\"{{privacy_url}}\">Політику конфіденційності</a> та <a href=\"{{cookies_url}}\">Політику cookies</a>.</p>\n<h2>§ 11. Прикінцеві положення</h2>\n<ol>\n<li>Регламент може змінюватися з важливих причин; зміни діють з моменту публікації.</li>\n<li>Застосовується право Польщі. Регламент не обмежує прав споживача, передбачених імперативними нормами.</li>\n</ol>'),
+(1517,439,'en','<p><em>Translation for convenience. The Polish version of this document is legally binding.</em></p>\n<h2>§ 1. General</h2>\n<ol>\n<li>These terms set out the rules for using the website {{site}} (the Site), as required by Art. 8 of the Polish Act on Providing Services by Electronic Means.</li>\n<li>The service provider is {{company}} (details above), contact: {{email}}, phone {{phone}}.</li>\n<li>The terms are available free of charge on the Site in a form that can be downloaded, saved and printed.</li>\n</ol>\n<h2>§ 2. Services</h2>\n<ol>\n<li>The Site provides, free of charge: a) information about the salon, services, prices and work; b) a contact form for sending messages to the salon.</li>\n<li>The Site links to external services (Booksy, Instagram, Google Maps), which operate under their own rules. Online booking takes place on Booksy.</li>\n<li>The Site is not used to conclude contracts for beauty treatments — those are concluded when booking or in the salon.</li>\n</ol>\n<h2>§ 3. Technical requirements</h2>\n<p>A device with internet access and an up-to-date browser with JavaScript enabled. A phone number or e-mail address is needed to send the form.</p>\n<h2>§ 4. Rules of use</h2>\n<p>You may not submit unlawful content through the Site, including offensive content or content infringing third-party rights, or disrupt the Site.</p>\n<h2>§ 5. Conclusion and termination</h2>\n<ol>\n<li>The information service starts when you open the Site and ends when you leave it.</li>\n<li>The contact form service starts when you send a message and ends when we reply.</li>\n</ol>\n<h2>§ 6. Prices and offers</h2>\n<ol>\n<li>Prices are in Polish złoty and are final prices. They are for information only and do not constitute an offer under Art. 66 of the Polish Civil Code. The final price depends on the scope of the service and is agreed when booking or before the treatment.</li>\n<li>The 10% discount applies to a new client’s first visit booked via Booksy or Instagram Direct. Detailed terms are given when booking.</li>\n</ol>\n<h2>§ 7. Customer reviews</h2>\n<ol>\n<li>The Site shows selected reviews and the average rating from Booksy.</li>\n<li>Booksy reviews can only be left by people who booked a visit through Booksy. Reviews from Google and Instagram are published in their original wording (possibly translated), but we do not verify whether the author used the service.</li>\n<li>We do not publish paid reviews or change their content.</li>\n</ol>\n<h2>§ 8. Complaints</h2>\n<ol>\n<li>Complaints about the Site or services: {{email}}, by phone ({{phone}}) or in the salon.</li>\n<li>We handle complaints within 14 days and reply the same way the complaint was made.</li>\n</ol>\n<h2>§ 9. Out-of-court dispute resolution</h2>\n<p>Consumers may seek help from a municipal or district consumer ombudsman or mediation by the Regional Trade Inspection. More at uokik.gov.pl.</p>\n<h2>§ 10. Personal data and cookies</h2>\n<p>See the <a href=\"{{privacy_url}}\">Privacy policy</a> and the <a href=\"{{cookies_url}}\">Cookie policy</a>.</p>\n<h2>§ 11. Final provisions</h2>\n<ol>\n<li>We may change these terms for important reasons; changes apply from publication.</li>\n<li>Polish law applies. These terms do not limit consumer rights under mandatory provisions.</li>\n</ol>'),
+(1518,440,'pl','Regulamin'),
+(1519,440,'uk','Регламент'),
+(1520,440,'en','Terms'),
+(1521,441,'pl','Informacje prawne'),
+(1522,441,'uk','Правова інформація'),
+(1523,441,'en','Legal information'),
+(1524,442,'pl','Obowiązuje od'),
+(1525,442,'uk','Діє з'),
+(1526,442,'en','Effective from'),
+(1527,443,'pl','15.11.2026'),
+(1528,443,'uk','15.11.2026'),
+(1529,443,'en','15.11.2026'),
+(1530,444,'pl','formularz kontaktowy na stronie'),
+(1531,444,'uk','контактна форма на сайті'),
+(1532,444,'en','the contact form on this site'),
+(1533,445,'pl','<strong>Usługodawca i administrator danych</strong><br>{{company_details}}<br>Tel.: {{phone}}'),
+(1534,445,'uk','<strong>Постачальник послуг і адміністратор даних</strong><br>{{company_details}}<br>Тел.: {{phone}}'),
+(1535,445,'en','<strong>Service provider and data controller</strong><br>{{company_details}}<br>Phone: {{phone}}'),
+(1536,446,'pl','Firma'),
+(1537,446,'uk','Фірма'),
+(1538,446,'en','Company'),
+(1539,447,'pl','Adres'),
+(1540,447,'uk','Адреса'),
+(1541,447,'en','Address'),
+(1542,448,'pl','Szanujemy Twoją prywatność'),
+(1543,448,'uk','Ми поважаємо вашу приватність'),
+(1544,448,'en','We respect your privacy'),
+(1545,449,'pl','Akceptuj wszystkie'),
+(1546,449,'uk','Прийняти все'),
+(1547,449,'en','Accept all'),
+(1548,450,'pl','Odrzuć wszystkie'),
+(1549,450,'uk','Відхилити все'),
+(1550,450,'en','Reject all'),
+(1551,451,'pl','Ustawienia'),
+(1552,451,'uk','Налаштування'),
+(1553,451,'en','Settings'),
+(1554,452,'pl','Zapisz wybór'),
+(1555,452,'uk','Зберегти вибір'),
+(1556,452,'en','Save choice'),
+(1557,453,'pl','Ustawienia cookies'),
+(1558,453,'uk','Налаштування cookies'),
+(1559,453,'en','Cookie settings'),
+(1560,454,'pl','Niezbędne (zawsze aktywne)'),
+(1561,454,'uk','Необхідні (завжди активні)'),
+(1562,454,'en','Necessary (always on)'),
+(1563,455,'pl','Zapamiętanie języka i Twoich wyborów, ochrona formularza przed spamem.'),
+(1564,455,'uk','Запам’ятовують мову та ваш вибір, захищають форму від спаму.'),
+(1565,455,'en','Remember your language and choices, protect the form from spam.'),
+(1566,456,'pl','Multimedia zewnętrzne'),
+(1567,456,'uk','Зовнішні медіа'),
+(1568,456,'en','External media'),
+(1569,457,'pl','Mapa Google z dojazdem do salonu. Google może zapisać własne pliki cookies.'),
+(1570,457,'uk','Карта Google з маршрутом до салону. Google може зберегти власні cookies.'),
+(1571,457,'en','Google Map with directions. Google may set its own cookies.'),
+(1572,458,'pl','Analityczne'),
+(1573,458,'uk','Аналітичні'),
+(1574,458,'en','Analytics'),
+(1575,459,'pl','Anonimowa statystyka odwiedzin (Google Analytics), która pomaga ulepszać stronę.'),
+(1576,459,'uk','Анонімна статистика відвідувань (Google Analytics), що допомагає покращувати сайт.'),
+(1577,459,'en','Anonymous visit statistics (Google Analytics) that help us improve the site.'),
+(1578,460,'pl','Marketingowe'),
+(1579,460,'uk','Маркетингові'),
+(1580,460,'en','Marketing'),
+(1581,461,'pl','Pomiar skuteczności reklam Google Ads.'),
+(1582,461,'uk','Вимірювання ефективності реклами Google Ads.'),
+(1583,461,'en','Measuring the performance of Google Ads.'),
+(1584,462,'pl','Mapa Google zostanie wczytana dopiero po Twojej zgodzie — Google może wtedy zapisać pliki cookies.'),
+(1585,462,'uk','Карта Google завантажиться лише після вашої згоди — тоді Google може зберегти cookies.'),
+(1586,462,'en','The Google Map loads only with your consent — Google may then set cookies.'),
+(1587,463,'pl','Pokaż mapę'),
+(1588,463,'uk','Показати карту'),
+(1589,463,'en','Show map'),
+(1590,464,'pl','Administratorem danych z formularza jest {{company}}. Wykorzystamy je wyłącznie, aby odpowiedzieć na Twoją wiadomość (art. 6 ust. 1 lit. f RODO). Masz prawo dostępu do danych, ich sprostowania, usunięcia i inne prawa — szczegóły w <a href=\"{{privacy_url}}\">Polityce prywatności</a>.'),
+(1591,464,'uk','Адміністратор даних із форми — {{company}}. Ми використаємо їх лише для відповіді на ваше повідомлення (ст. 6 ч. 1 п. f RODO). Ви маєте право на доступ, виправлення, видалення даних та інші права — детальніше в <a href=\"{{privacy_url}}\">Політиці конфіденційності</a>.'),
+(1592,464,'en','The controller of the form data is {{company}}. We will use it only to reply to your message (Art. 6(1)(f) GDPR). You have the right to access, rectify and erase your data, among others — see the <a href=\"{{privacy_url}}\">Privacy policy</a>.'),
+(1593,465,'pl','Ceny w złotych (PLN) są cenami końcowymi. Cennik ma charakter informacyjny i nie stanowi oferty w rozumieniu Kodeksu cywilnego.'),
+(1594,465,'uk','Ціни в злотих (PLN) є кінцевими. Прайс має інформаційний характер і не є офертою за Цивільним кодексом Польщі.'),
+(1595,465,'en','Prices in Polish złoty (PLN) are final prices. The price list is for information only and is not an offer under the Polish Civil Code.'),
+(1596,466,'pl','Prezentujemy wybrane opinie. Opinie z Booksy mogą wystawić wyłącznie osoby, które zarezerwowały wizytę w tym serwisie; opinii z Google i Instagrama nie weryfikujemy. Nie publikujemy opinii zamówionych. Więcej w <a href=\"{{terms_url}}\">Regulaminie</a>.'),
+(1597,466,'uk','Показуємо вибрані відгуки. Відгуки в Booksy можуть залишати лише клієнти, які записалися через цей сервіс; відгуки з Google та Instagram ми не перевіряємо. Замовних відгуків не публікуємо. Детальніше в <a href=\"{{terms_url}}\">Регламенті</a>.'),
+(1598,466,'en','We show selected reviews. Booksy reviews can only be left by people who booked through Booksy; reviews from Google and Instagram are not verified by us. We do not publish paid reviews. More in the <a href=\"{{terms_url}}\">Terms</a>.');
 /*!40000 ALTER TABLE `translations` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -2157,7 +2361,7 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
-(1,'admin','$2y$10$eb0PPozs1ninn5sY/vljYO6VQIC0cGXHa5uisq6YAfvFBQ7ztTI2S');
+(1,'admin','$2y$12$9nEJd8BnYVonNog4iNiI1elQIWW0Zusb.eadVTf3v6SSX8EtVyO7y');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -2172,4 +2376,4 @@ SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-11-12 23:44:02
+-- Dump completed on 2026-11-15 21:17:47

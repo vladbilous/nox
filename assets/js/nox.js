@@ -12,7 +12,7 @@
 
     // Analytics events (only sent when Google tag is loaded and the visitor consented)
     function track(name, params) {
-        if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+        if (window.noxTagLoaded && typeof window.gtag === 'function') window.gtag('event', name, params || {});
     }
     document.addEventListener('click', (e) => {
         const a = e.target.closest('a[href]');
@@ -24,21 +24,76 @@
         else if (/google\.[a-z.]+\/maps\/dir/.test(href)) track('directions_click');
     });
 
-    // Cookie consent banner (Consent Mode v2) — shown only when analytics is configured
+    // Cookie consent (PKE art. 399 / RODO): nothing optional runs before the visitor decides.
+    // Stored in localStorage: {v, analytics, marketing, media, date}. Older single-value choices are asked again.
+    const CONSENT_KEY = 'nox_consent';
+    const readConsent = () => {
+        try {
+            const c = JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null');
+            // Ask again after 12 months (as stated in the cookie policy)
+            const fresh = c && c.date && (Date.now() - Date.parse(c.date)) < 365 * 24 * 3600 * 1000;
+            return c && c.v === 2 && fresh ? c : null;
+        } catch (err) { return null; }
+    };
+    const loadMaps = () => document.querySelectorAll('[data-map-consent]').forEach((box) => {
+        if (box.querySelector('iframe')) return;
+        const frame = document.createElement('iframe');
+        frame.src = box.dataset.mapSrc;
+        frame.title = box.dataset.mapTitle || 'Google Maps';
+        frame.loading = 'lazy';
+        frame.referrerPolicy = 'no-referrer-when-downgrade';
+        box.innerHTML = '';
+        box.appendChild(frame);
+        box.classList.add('is-loaded');
+    });
+    const applyConsent = (c) => {
+        if (typeof window.noxApplyTracking === 'function') window.noxApplyTracking(c);
+        if (c.media) loadMaps();
+    };
+    const saveConsent = (c) => {
+        const record = { v: 2, analytics: !!c.analytics, marketing: !!c.marketing, media: !!c.media, date: new Date().toISOString() };
+        try { localStorage.setItem(CONSENT_KEY, JSON.stringify(record)); } catch (err) {}
+        applyConsent(record);
+        return record;
+    };
+
     const banner = document.querySelector('[data-cookie-banner]');
     if (banner) {
-        let choice = null;
-        try { choice = localStorage.getItem('nox_consent'); } catch (err) {}
-        if (!choice) banner.hidden = false;
-        banner.querySelectorAll('[data-cookie-choice]').forEach((btn) => btn.addEventListener('click', () => {
-            const value = btn.dataset.cookieChoice;
-            try { localStorage.setItem('nox_consent', value); } catch (err) {}
-            if (value === 'granted' && typeof window.gtag === 'function') {
-                window.gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
-            }
-            banner.hidden = true;
-        }));
+        const settings = banner.querySelector('[data-cookie-settings]');
+        const boxes = Array.from(banner.querySelectorAll('[data-cookie-cat]'));
+        const btn = (name) => banner.querySelector(`[data-cookie-action="${name}"]`);
+        const openBanner = (showSettings) => {
+            const current = readConsent() || {};
+            boxes.forEach((b) => { b.checked = !!current[b.dataset.cookieCat]; });
+            settings.hidden = !showSettings;
+            btn('settings').hidden = showSettings;
+            btn('save').hidden = !showSettings;
+            banner.hidden = false;
+        };
+        const close = () => { banner.hidden = true; };
+        const all = (value) => ({ analytics: value, marketing: value, media: value });
+
+        btn('accept').addEventListener('click', () => { saveConsent(all(true)); close(); });
+        btn('reject').addEventListener('click', () => { saveConsent(all(false)); close(); });
+        btn('settings').addEventListener('click', () => openBanner(true));
+        btn('save').addEventListener('click', () => {
+            const choice = all(false);
+            boxes.forEach((b) => { choice[b.dataset.cookieCat] = b.checked; });
+            saveConsent(choice);
+            close();
+        });
+        document.querySelectorAll('[data-cookie-open]').forEach((el) => el.addEventListener('click', () => openBanner(true)));
+
+        const stored = readConsent();
+        if (stored) applyConsent(stored); else openBanner(false);
     }
+
+    // "Show map" button: counts as consent for external media only
+    document.querySelectorAll('[data-map-load]').forEach((b) => b.addEventListener('click', () => {
+        const c = readConsent() || { analytics: false, marketing: false };
+        saveConsent(Object.assign({}, c, { media: true }));
+        if (banner) banner.hidden = true;
+    }));
 
     // Header background on scroll
     const header = document.querySelector('[data-header]');
